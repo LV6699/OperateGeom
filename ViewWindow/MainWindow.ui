@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="occQt.qrc">
+    <normaloff>:/Resources/lamp.png</normaloff>:/Resources/lamp.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actPan"/>
+   </widget>
+   <addaction name="menuView"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actPan">
+   <property name="icon">
+    <iconset theme="平移">
+     <normaloff>Icon/Pan.png</normaloff>Icon/Pan.png</iconset>
+   </property>
+   <property name="text">
+    <string>平移</string>
+   </property>
+   <property name="toolTip">
+    <string>平移</string>
+   </property>
+  </action>
+  <action name="actRotate">
+   <property name="icon">
+    <iconset theme="旋转">
+     <normaloff>Icon/rotate.png</normaloff>Icon/rotate.png</iconset>
+   </property>
+   <property name="text">
+    <string>旋转</string>
+   </property>
+   <property name="toolTip">
+    <string>旋转</string>
+   </property>
+  </action>
+  <action name="actReset">
+   <property name="icon">
+    <iconset theme="重置">
+     <normaloff>Icon/reset.png</normaloff>Icon/reset.png</iconset>
+   </property>
+   <property name="text">
+    <string>重置</string>
+   </property>
+   <property name="toolTip">
+    <string>重置</string>
+   </property>
+  </action>
+  <action name="actFitall">
+   <property name="icon">
+    <iconset theme="全局">
+     <normaloff>Icon/fitAll.png</normaloff>Icon/fitAll.png</iconset>
+   </property>
+   <property name="text">
+    <string>全局</string>
+   </property>
+   <property name="toolTip">
+    <string>全局</string>
+   </property>
+  </action>
+  <action name="actImport">
+   <property name="icon">
+    <iconset theme="导入">
+     <normaloff>Icon/import.png</normaloff>Icon/import.png</iconset>
+   </property>
+   <property name="text">
+    <string>导入</string>
+   </property>
+   <property name="toolTip">
+    <string>导入</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="occQt.qrc"/>
+ </resources>
+ <connections/>
+</ui>

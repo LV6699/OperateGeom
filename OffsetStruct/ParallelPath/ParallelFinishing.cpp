@@ -1,0 +1,367 @@
+#include "ParallelFinishing.h"
+#include "../../../../offset2D/ToolTrajectoryAlg/EquidisCurve/GeometryFitting/
+CreateFitting.h"
+#include "LineCutPath/CreateLineCut.h"
+#include "ParallelLogic.h"
+#include "CntLinePath.h"
+#include "CntLinePathAux.h"
+#include <ShapeAnalysis_FreeBounds.hxx>
+#include "../../string_conver.h"
+using namespace std;
+using namespace oft;
+#if 0
+#pragma optimize("", off)
+#pragma GCC optimize("O0")
+#endif
+#define _StaTime_ 0
+namespace JLC_Opera {
+JLC_Opera::ParallelFinishing::ParallelFinishing(ParallelFinishingParam *param,
+                                                const string &operateName)
+    : Operation(param, operateName), _pathParam(*param)
+{
+}
+void JLC_Opera::ParallelFinishing::WiresToGeomArea(const vector<JLC_Wire> 
+                                                   &wires,
+                                                   vector<GeomArea> &areas)
+{
+#if _StaTime_
+    auto st = std::chrono::high_resolution_clock::now();
+#endif
+    gp_Pnt minPt = Operation::stock->min, maxPt = Operation::stock->max;
+    double minx = minPt.X(),maxx = maxPt.X(),miny = minPt.Y(),maxy = maxPt.Y();
+    if(minx > maxx){std::swap(minx,maxx);}
+    if(miny > maxy){std::swap(miny,maxy);}
+    Point p0(minx,miny),p1(minx,maxy),p2(maxx,maxy),p3(maxx,miny);
+    DefElem e0(LINETYPE,DefSeg(p0,p1)),e1(LINETYPE,DefSeg(p1,p2)),
+            e2(LINETYPE,DefSeg(p2,p3)),e3(LINETYPE,DefSeg(p3,p0));
+    _blankLoop.SetElem(vector<DefElem>{e0,e1,e2,e3});
+    if(wires.empty()){
+        areas.push_back(GeomArea(_blankLoop));
+        areas[0].SetOriBndLoop(_blankLoop);
+        return;
+    }
+    vector<DefLoop> loops;
+    LoopDirection lodir;ElemCalculate elecal;
+    CreateFitting fitt;MultipleInclude mulinc;
+    for (size_t i = 0; i < wires.size(); i++) {
+        DefLoop l = JLC_Curve::ConvertJLCurveToLoopData(wires[i].vCurveList);
+#if 0
+        string s = OperateOftString().LoopElementString(l);
+        std::cout << s << endl;
+#endif
+        if (!elecal.IsCloseLoop(l, PreErr5_8) ||
+                !elecal.IsLegalCurveNumber(l))
+            continue;
+        DefCircle circle;
+        elecal.LoopMinCircumcircle(l,true,4,circle);
+        if (circle._cirR < PreErr5_1)            continue;
+        if (lodir.LoopRotateDirection(l) != CLOCKWISE) {
+            elecal.ReverseLoopDirection(l);
+        }
+        /// fitt.LoopGeometryFitting(l,loop);
+        loops.emplace_back(l);
+    }
+#if 0
+    string str = OperateOftString().ArrayLoopString(loops);
+    std::cout << str << endl;
+#endif
+    CreatePathRange(loops);
+#if 0
+    string str1 = OperateOftString().ArrayLoopString(loops);
+    std::cout << str1 << endl;
+#endif
+    vector<GeomArea>areas_;
+    double intPre = PreErr5_6,coinPre = PreErr5_6,incPre = PreErr5_6;
+    mulinc.OrganizeLoopToArea(loops,intPre,coinPre,incPre,areas_);
+    for (size_t i = 0; i < areas_.size(); i++) {
+#if 0
+        string str2 = OperateOftString().BndIslLoopString(areas_[i]);
+        std::cout << str2 << endl;
+#endif
+        DefLoop &bloop = areas_[i]._bndLoop;
+        bloop._id = -1;
+        bloop.SetLoopType(OUTSIDEPROFILE);
+        vector<DefLoop> &ls = areas_[i]._vIslLoop;
+        for (size_t l = 0; l < ls.size(); ++l) {
+            ls[l]._id = static_cast<int>(l);
+            ls[l].SetLoopType(WITHINPROFILE);
+        }
+        GeomArea t = GeomArea(bloop, ls);
+        t.SetOriBndLoop(bloop);
+        t.SetOriIslLoop(ls);
+        areas.emplace_back(t);
+    }
+#if _StaTime_
+    auto et = std::chrono::high_resolution_clock::now();
+    double exet = std::chrono::duration<double>(et - st).count()*1000;
+    std::cout<<" 平行精加工,对输入数据进行预处理所花时间 :"<<exet<<endl;
+#endif
+}
+void JLC_Opera::ParallelFinishing::CreatePathRange(vector<DefLoop>& loops)
+{
+    vector<DefLoop>loops_;
+    GeomContain gocont;LoopBoolSubtract lsubt;
+    double intPre = PreErr5_8,coinPre = PreErr5_8,incPre = PreErr5_8;
+    for (size_t i = 0; i < loops.size(); i++){
+#if 0
+        vector<DefLoop>ls{_blankLoop,loops[i]};
+        string str = OperateOftString().LoopElementString(_blankLoop);
+        string str1 = OperateOftString().LoopElementString(loops[i]);
+        string str2 = OperateOftString().ArrayLoopString(ls);
+        std::cout<<str<<str<<str2<<endl;
+#endif
+        bool isContain = false;
+        gocont.IsLoopContainLoop(_blankLoop,loops[i],intPre,coinPre,
+                                 incPre,isContain);
+        if(isContain){            loops_.emplace_back(loops[i]);
+        }else{
+            vector<DefLoop>ls{loops[i]},lres;
+            lsubt.LoopGeomBoolSubtract(_blankLoop,ls,lres);
+            for(auto& d : lres){
+                loops_.emplace_back(d);
+            }
+        }
+    }
+    loops = loops_;
+}
+bool JLC_Opera::ParallelFinishing::CheckMachiningParam()
+{
+    try {
+        Operation::CheckMachiningParam();
+        Connect::connect cntParam = this->link;
+        if(this->link.safe_plane.rapidHeight - 0.1 <
+                this->link.safe_plane.plungeHeight){
+            EXCEPT(" 平行精加工:绝对安全平面相对下切高度较低 ,已终止刀路生成.");
+        }
+        if (_wires.empty()) {
+            ECHO(" 平行精加工边界曲线为空 ,将使用毛坯生成刀路!");
+        }
+        if (Operation::pTool == nullptr ||
+                Operation::pTool->geom.diameter < PreErr5_1) {
+            EXCEPT(" 没有创建刀具或刀具直径过小 ");
+        }
+        if (_pathParam.stepOver < PreErr5_3) {
+            EXCEPT(" 平行精加工刀路生成发生错误 ,刀路行距过小：%d",
+                   _pathParam.stepOver);
+        }
+        _curveModel = partManager->topShape();
+        if (_curveModel.IsNull()) {
+            EXCEPT(" 平行精加工刀路生成发生错误 ,输入无效模型!");
+        }
+    } catch (exception &e) {
+        EXCEPT("CheckMachiningParam error ：%s", e.what());
+    } catch (Standard_Failure &ex) {
+        EXCEPT("CheckMachiningParam error ：%s", ex.GetMessageString());
+    }
+    return true;
+}
+bool JLC_Opera::ParallelFinishing::InitialParameters()
+{
+    if (!CheckMachiningParam())
+        return false;
+    WiresToGeomArea(_wires, _areas);/**
+    if(_curveModel.IsNull()){
+        _curveModel = partManager->topShape();
+    }*/
+#if 1
+    double axisLeft = _pathParam.axialMargin;
+    double radianLeft = _pathParam.radialMargin;
+    _clsTool = get_tool(pTool, radianLeft, axisLeft);
+    cls::err_setting err = get_cls_err_setting();
+    cls_model_contour_builder mb = cls_model_contour_builder(
+                _curveModel,_clsTool,err,comp_thick,true);
+    _clsModel = mb.get_cls_model();
+    ///double z = cls::get_cutter_location(rmath::vec2(-23.946, -
+    0.146),*(mb.get_cls_model()));
+    this->cls_model = mb.get_cls_model();#else
+    checkCls();
+    _clsModel = this->cls_model;
+#endif
+    return true;
+}
+JLC_Opera::JLC_ToolPath *JLC_Opera::ParallelFinishing::CreateToolPath()
+{
+    try {
+        if (!InitialParameters()) {
+            EXCEPT(" 平行精加工初始化参数发生错误 !");
+            return nullptr;
+        }
+        if (cls_model == nullptr || _clsModel == nullptr) {
+            EXCEPT(" 平行精加工无法创建刀位面模型 !");
+            return nullptr;
+        }
+        GenerateToolPaths();
+        ECHO(">>> ParallelFinishing::CreateToolPath --finish");
+    } catch (std::exception &e) {
+        EXCEPT("### CreateToolPath : %s", e.what());
+    } catch (Standard_Failure &ex) {
+        EXCEPT("### CreateToolPath : %s", ex.GetMessageString());
+    }
+    return topToolPath;
+}
+void JLC_Opera::ParallelFinishing::AnalysisPathToAllMachiningArea(
+        const std::vector<std::vector<DefLoop>>&loopss)
+{
+    int id = 0;
+    std::vector<shared_ptr<JLC_MachiningArea>> proAreas;
+    for(const auto& d : loopss){
+        for(const auto& l : d){
+            vector<JLC_Curve*>curves = JLC_Curve::LoopToJLC_Curves(l);
+            if(curves.empty())
+                continue;
+            JLC_Wire* paths = new JLC_Wire(curves);
+            ToolPathNode* node = new ToolPathNode(paths,nullptr,nullptr,id);
+            shared_ptr<JLC_MachiningArea>proArea =
+                    std::make_shared<JLC_MachiningArea>();
+            proArea->vOutputToolPath.push_back(new JLC_ToolPath(node));
+            proAreas.push_back(proArea);
+            id ++;
+        }
+    }
+    vAllMachiningAreaList.push_back(proAreas);
+}
+void JLC_Opera::ParallelFinishing::GenerateToolPaths()
+{
+#if _StaTime_
+    double ti = 0, ti1 = 0;
+#endif
+    try {
+        ECHO(">>> 开始生成平行精加工刀路 ,区域数量为:%d", _areas.size());
+        CreateLineCut lcut;ParallelLogic lg;
+        double dist = _pathParam.stepOver,agl = 0;
+        if(_pathParam._isAglDir){agl = _pathParam._agl;}
+        bool isOneDir = _pathParam._isOneDir;
+        ///vector<std::shared_ptr<OffsetNode>> nodes;
+        vector<vector<DefLoop>>loopss;        for (size_t i = 0; i < _areas.size(); i++) {
+            vector<DefLoop> loops;
+            const GeomArea &area = _areas[i];
+#if 0
+            string str = OperateOftString().BndIslLoopString(area);
+            std::cout << str << endl;
+#endif
+#if _StaTime_
+            auto st = std::chrono::high_resolution_clock::now();
+#endif
+            lcut.CreateLineCutPath(area, isOneDir, dist, agl, loops);
+#if _StaTime_
+            auto et = std::chrono::high_resolution_clock::now();
+            ti += std::chrono::duration<double>(et - st).count()*1000;
+#endif
+#if 0
+            DefLoop loop_;
+            for(auto& d : loops){
+                for(auto& e : d.m_vElem){loop_.PushBackElem(e);}
+            }
+            string str1 = OperateOftString().ArrayLoopString(loops);
+            string str1_ = OperateOftString().LoopElementString(loop_);
+            std::cout << str1 << str1_ << endl;
+#endif
+#if _StaTime_
+            auto st1 = std::chrono::high_resolution_clock::now();
+#endif
+            lg.SetLoopsZCoord(_clsModel,loops);
+#if _StaTime_
+            auto et1 = std::chrono::high_resolution_clock::now();
+            ti1 += std::chrono::duration<double>(et1-st1).count()*1000;
+#endif
+#if 0
+            DefLoop loop2_;
+            for(auto& d : loops){
+                for(auto& e : d.m_vElem){loop2_.PushBackElem(e);}
+            }
+            string str2 = OperateOftString().ArrayLoopString(loops);
+            string str2_ = OperateOftString().LoopElementString(loop2_);
+            std::cout << str2 << str2_ << endl;
+#endif
+            if(!loops.empty()){
+                loopss.emplace_back(loops);
+            }
+        }
+        {
+            AnalysisPathToAllMachiningArea(loopss);
+            check_collision_timer();
+            double lenth = suggest_cutting_length;
+            if(lenth > PreErr5_3){
+                ECHO(" 注意:平行精加工刀路检测出碰撞 ,建议装刀长度:%d",lenth);
+            }
+        }
+#if 0
+        ConnectToolPath_Parallel();
+#else
+        topToolPath = new JLC_ToolPath();
+        ConnectLinePath(loopss,topToolPath);
+#endif
+    } catch (exception &e) {
+        EXCEPT("GenerateToolPaths error ：%s", e.what());
+    } catch (Standard_Failure &ex) {
+        EXCEPT("GenerateToolPaths error ：%s", ex.GetMessageString());    }
+#if _StaTime_
+    std::cout<<" 平行精加工计算刀路部分整体消耗时间 :"<<ti+ti1<<",计算平行刀路时间:"
+            <<ti<<","<<" 用刀位面计算Z值时间:"<<ti1<<endl;
+#endif
+}
+void 
+JLC_Opera::ParallelFinishing::ConnectLinePath(vector<vector<DefLoop>>&loopss,
+                                              JLC_ToolPath*& tpath)
+{
+    vector<DefLoop>loops;
+    for(auto& ls : loopss){
+        for(auto& l : ls){
+            if(l.IsEmpty()){continue;}
+            l.SetMoveType(OffsetEnum::CutPathType);
+            loops.emplace_back(l);
+        }
+    }
+    if(loops.empty()){return;}
+#if 0
+    DefLoop l;
+    for(auto& d : loops){
+        for(auto& e : d.m_vElem){
+            l.PushBackElem(e);
+        }
+    }
+    string str = OperateOftString().LoopElementString(l);
+    std::cout << str << endl;
+#endif
+    ElemCalculate elecal;CntLinePath cntp;CntLinePathAux caux;
+    JLC_Leads::ModelProtect modelp;
+    modelp.cls_model = _clsModel;
+    Connect::connect cntParam = this->link;
+    std::vector<JLC_Leads::LeadBase*>paramsIn = leadIns,
+            paramsOut = leadOuts;
+    Point scntPt,ecntPt;
+    std::vector<std::vector<JLC_Wire>>wiress;
+    for (size_t i = 0; i < loops.size(); i++){
+#if 0
+        string str = OperateOftString().LoopElementString(loops[i]);
+        std::cout<<str<<endl;
+        Point p(14.894499786943195,-5.123099982738495,5.119098663330078);
+        if(FindInformation().IsPointInLoop(loops[i],PreErr5_6,false,0,p)){
+            std::cout<<loops[i].ElemNum()<<endl;///3905
+        }
+        ///if(i > 0){break;}
+#endif
+        std::vector<JLC_Wire>paths;
+        cntp.AddLoopSteerPath(paramsIn,paramsOut,modelp,loops[i],paths);
+        wiress.emplace_back(paths);
+    }
+#if 0
+    std::vector<DefLoop>loops_;
+    for(auto& d : wiress
+        for(auto& w : d){
+        DefLoop l = JLC_Curve::ConvertJLCurveToLoopData(w.vCurveList);
+        if(!l.IsEmpty()){loops_.push_back(l);}
+}
+}
+        string str1 = OperateOftString().ArrayLoopString(loops_);
+        std::cout<<str1<<endl;
+    #endif        if(!caux.IsSafeDownUpLocation(wiress,_clsModel,cntParam)){
+        EXCEPT(" 平行精加工:绝对安全平面或下切高度有过切风险 ,已终止刀路生成.");
+}
+        cntp.CreatePathNodeConnect(cntParam,modelp,wiress,tpath);
+    #if 0
+        int tem = tpath->loopCount;
+        std::cout<<tem<<endl;
+    #endif
+}
+} // namespace JLC_Opera

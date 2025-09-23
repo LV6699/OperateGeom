@@ -1,0 +1,74 @@
+# CMake generation dependency list for this directory.
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEApplicationFrameworkTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEApplicationFrameworkTargets.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADECompileDefinitionsAndFlags-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEConfig.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEConfigVersion.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEDEToolsTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEDEToolsTargets.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEDataExchangeTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEDataExchangeTargets.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEDrawTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEDrawTargets.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEFoundationClassesTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEFoundationClassesTargets.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEModelingAlgorithmsTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEModelingAlgorithmsTargets.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEModelingDataTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEModelingDataTargets.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEVisualizationTargets-debug.cmake
+C:/Program Files (x86)/OCCT/cmake/OpenCASCADEVisualizationTargets.cmake
+C:/Users/lvd/Desktop/GeomOperate/CMakeLists.txt
+C:/Users/lvd/Desktop/GeomOperate/ViewWindow/occQt.qrc
+C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeCXXCompiler.cmake
+C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeRCCompiler.cmake
+C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeSystem.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCXXInformation.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeGenericSystem.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeParseArguments.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeRCInformation.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/MSVC-CXX.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/MSVC.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-MSVC-CXX.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-MSVC.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5Config.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5ModuleLocation.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QVirtualKeyboardPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWebGLIntegrationPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWindowsDirect2DIntegrationPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWindowsIntegrationPlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake
+D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5Widgets_QWindowsVistaStylePlugin.cmake

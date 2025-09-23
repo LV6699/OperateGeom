@@ -1,0 +1,14 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run VS Vars All",
+            "type": "shell",
+            //"command": "call \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat\" ; cmake -B build",
+            "command": "call \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat\"; cmake -B build",
+            //"command": "call \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat\"; cmake -B C:\\Users\\ld\\Desktop\\build\\CamView\\build_",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

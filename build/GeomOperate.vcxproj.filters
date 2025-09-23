@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\mocs_compilation_Debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\ViewWindow\MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\ViewWindow\OccView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\ViewWindow\OcctWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\OperateView\DisplayGeom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\OperateView\GeomToShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\DiscreteModel\DiscreteModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Common\ClStruct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Common\ViewData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\GridStruct\CreateGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\CutterLocationZ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\OperTriaCl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\PKQ4FSLXU6\qrc_occQt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\mocs_compilation_Release.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\mocs_compilation_MinSizeRel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\mocs_compilation_RelWithDebInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\include_Debug\ViewWindow\ui_MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\include_Release\ViewWindow\ui_MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\include_MinSizeRel\ViewWindow\ui_MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\include_RelWithDebInfo\ViewWindow\ui_MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\lvd\Desktop\GeomOperate\build\CMakeFiles\718bc85e4d772a4b47daacfd33a26a33\autouic_(CONFIG).stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\lvd\Desktop\GeomOperate\build\CMakeFiles\2c36bd822ae8a09258ec9c955c79d723\qrc_occQt.cpp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\lvd\Desktop\GeomOperate\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\lvd\Desktop\GeomOperate\ViewWindow\MainWindow.ui" />
+    <None Include="C:\Users\lvd\Desktop\GeomOperate\ViewWindow\occQt.qrc" />
+    <None Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\autouic_Debug.stamp" />
+    <None Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\autouic_Release.stamp" />
+    <None Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\autouic_MinSizeRel.stamp" />
+    <None Include="C:\Users\lvd\Desktop\GeomOperate\build\GeomOperate_autogen\autouic_RelWithDebInfo.stamp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1565573F-28F1-3956-AA64-DF94423F51E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{DA1A33F2-9283-346D-BACE-04AB5768A9C8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1D833E02-CE1F-3745-9DE5-CF01AA9B1E5A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

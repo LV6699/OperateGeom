@@ -43,9 +43,22 @@ public:
         double x = std::max(_p0.X(),_p1.X());
         return x >= _p2.X() ? x : _p2.X();
     }
-    bool IsInXYRange(const oft::Point& p)const{
-        return MinX() <= p.X() && MaxX() >= p.X() &&
-                MinY() <= p.Y() && MaxY() >= p.Y();
+    bool IsVertical(double e = PreErr_8)const{
+        return std::abs(_p0.Z()-_p1.Z()) < e &&
+                std::abs(_p0.Z()-_p2.Z()) < e;
+    }
+    bool IsInRange(const oft::Point& p,double e = PreErr_12)const{
+        if(MinX() > p.X() || MaxX() < p.X() ||
+                MinY() > p.Y() || MaxY() < p.Y()){return false;}
+        double denom = ((_p1.Y() - _p2.Y()) * (_p0.X() - _p2.X()) +
+                        (_p2.X() - _p1.X()) * (_p0.Y() - _p2.Y()));
+        if (std::abs(denom) < e) {return false;}
+        double alpha = ((_p1.Y() - _p2.Y()) * (p.X() - _p2.X()) +
+                        (_p2.X() - _p1.X()) * (p.Y() - _p2.Y())) / denom;
+        double beta = ((_p2.Y() - _p0.Y()) * (p.X() - _p2.X()) +
+                       (_p0.X() - _p2.X()) * (p.Y() - _p2.Y())) / denom;
+        double gamma = 1.0 - alpha - beta;
+        return (alpha >= -e) && (beta >= -e) && (gamma >= -e);
     }
 
 public:

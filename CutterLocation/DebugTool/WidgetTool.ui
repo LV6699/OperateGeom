@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WidgetTool</class>
+ <widget class="QWidget" name="WidgetTool">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>353</width>
+    <height>298</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>341</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(200, 210, 220);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QCheckBox" name="cheOriModel">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>5</y>
+      <width>87</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>原始模型</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheDiscTria">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>5</y>
+      <width>102</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>离散三角形</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chePtProtect">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>35</y>
+      <width>87</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>点保护面</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheEdgProtect">
+    <property name="geometry">
+     <rect>
+      <x>103</x>
+      <y>35</y>
+      <width>102</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>边保护面</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>220</y>
+     <width>341</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(200, 210, 220);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>5</y>
+      <width>55</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>点坐标:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="douPtXCoord">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>5</y>
+      <width>120</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="douPtYCoord">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>5</y>
+      <width>120</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btCalInt">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>35</y>
+      <width>93</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>计算</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

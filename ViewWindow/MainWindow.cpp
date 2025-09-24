@@ -22,6 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    _subWind = new WidgetTool(this);
+    _subWind->show();
+    _subWind->move(this->geometry().right() + 10, this->geometry().top()-50);
+
     myOccView = new OccView(this);
     _mainwind = this;
     //myOccView->myView->SetProj(V3d_Zpos);
@@ -87,9 +91,7 @@ void MainWindow::on_actImportModel_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this,tr("Open STEP File"), "",
                                                     tr("STEP Files (*.stp *.step)"));
-    if (fileName.isEmpty()) {
-        return;
-    }
+    if (fileName.isEmpty()) {return;}
     try {
         STEPControl_Reader reader;
         IFSelect_ReturnStatus status = reader.ReadFile(fileName.toUtf8().constData());
@@ -97,12 +99,9 @@ void MainWindow::on_actImportModel_triggered()
             QMessageBox::warning(this, "Error", "Failed to read STEP file");
             return;
         }
-        // 转移所有根实体
         reader.TransferRoots();
-        // 获取形状数量
         int nbShapes = reader.NbShapes();
         if (nbShapes > 0) {
-            // 获取第一个形状
             TopoDS_Shape shape = reader.Shape(1);
             if (!shape.IsNull()) {
                 myOccView->myRemoveall();

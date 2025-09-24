@@ -8,6 +8,7 @@
 #include<string>
 #include<cstring>
 #include"OccView.h"
+#include"../CutterLocation/DebugTool/WidgetTool.h"
 
 #include "../OperateView/DisplayGeom.h"
 
@@ -22,6 +23,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    WidgetTool *_subWind;
     TopoDS_Shape PathMode(string path);
 
 protected:

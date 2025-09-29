@@ -45,6 +45,7 @@
 #include <OpenGl_GraphicDriver.hxx>
 #include <V3d_Viewer.hxx>
 #include <BRepBndLib.hxx>
+#include <AIS_TextLabel.hxx>
 //#include <X11/Xlib.h>
 //#include <X11/Xatom.h>
 #include <iostream>

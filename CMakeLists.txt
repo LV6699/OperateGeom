@@ -36,7 +36,7 @@ aux_source_directory(./CutterLocation/Solution SRC_DIR)
 aux_source_directory(./CutterLocation/DebugTool SRC_DIR)
 
 set(forms ./ViewWindow/MainWindow.ui ./CutterLocation/DebugTool/WidgetTool.ui)
-set(user_source ./ViewWindow/occQt.qrc)
+set(user_source ./ViewWindow/Image.qrc)
 add_executable(GeomOperate ${SRC_DIR} ${forms} ${user_source})
 
 target_link_libraries(GeomOperate PRIVATE Qt${QT_VERSION_MAJOR}::Widgets

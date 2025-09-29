@@ -1,30 +1,51 @@
 #include "WidgetTool.h"
 #include "ui_WidgetTool.h"
-#include <QMouseEvent>
+#include "../../OperateView/DisplayGeom.h"
+
+#include<iostream>
+using namespace std;
 
 WidgetTool::WidgetTool(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::WidgetTool)
+    QDialog(parent),
+    sub_ui(new Ui::WidgetTool)
 {
-    ui->setupUi(this);
+
+    //connect(sub_ui->douPtXCoord, SIGNAL(valueChanged(double)),
+            //this, SLOT(ReDrawPosLine(double)));
+    sub_ui->setupUi(this);
 }
 
 WidgetTool::~WidgetTool()
 {
-    delete ui;
+    delete sub_ui;
 }
-void WidgetTool::mousePressEvent(QMouseEvent *event)
+void WidgetTool::ConnectConnect()
 {
-    if (event->button() == Qt::LeftButton) {
-        m_dragPos = event->globalPos() - frameGeometry().topLeft();
-        event->accept();
-    }
+    //connect(sub_ui->douPtXCoord, SIGNAL(valueChanged(double)),
+            //this, SLOT(ReDrawPosLine(double)));
+}
+void WidgetTool::on_douPtXCoord_valueChanged()
+{
+    ReDrawPosLine();
+}
+void WidgetTool::on_douPtYCoord_valueChanged()
+{
+    ReDrawPosLine();
+}
+void WidgetTool::ReDrawPosLine()
+{
+    double x = sub_ui->douPtXCoord->text().toDouble();
+    double y = sub_ui->douPtYCoord->text().toDouble();
+    if(!_posLine.IsNull()){_mainwind->myOccView->getContext()->Remove(_posLine,true);}
+    TopoDS_Edge e = BRepBuilderAPI_MakeEdge(gp_Pnt(x,y,-100),gp_Pnt(x,y,100));
+    _posLine = new AIS_Shape(e);
+    _posLine->SetColor(Quantity_Color(1,0.3,0.3,Quantity_TOC_RGB));
+    _mainwind->myOccView->getContext()->Display(_posLine,true);
+    _mainwind->myOccView->fitAll();
 }
 
-void WidgetTool::mouseMoveEvent(QMouseEvent *event)
+void WidgetTool::on_btLineInt_clicked()
 {
-    if (event->buttons() & Qt::LeftButton) {
-        move(event->globalPos() - m_dragPos);
-        event->accept();
-    }
+
 }
+

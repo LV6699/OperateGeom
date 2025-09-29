@@ -12,7 +12,7 @@
 
 using namespace std;
 using namespace grm;
-MeshMap meshMap;
+MeshMap _meshMap;
 
 #pragma optimize("", off)
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     w.resize(1100,900);
     string path = "C:\\Users\\lvd\\Desktop\\GeomOperate\\part\\STEP2.stp";
-    meshMap._model._shape = w.PathMode(path);
+    _meshMap._model._shape = w.PathMode(path);
     FunTest();
 
     return a.exec();
@@ -40,36 +40,36 @@ void FunTest()
 {
     CutterLocationZ cl;
     TrianRes result ;
-    meshMap._tool = DefTool(4,1);
+    _meshMap._tool = DefTool(4,1);
     Quantity_Color c(0.3,0.35,0.35,Quantity_TOC_RGB);
     Quantity_Color c1(0.1,0.1,0.1,Quantity_TOC_RGB);
-    ///DisplayGeom().DisplayShape(meshMap.Shape(),c,1);
-    Handle(AIS_Shape) as = DisplayGeom().ShapeToAis(meshMap.Shape(),c,1);
+    ///DisplayGeom().DisplayShape(_meshMap.Shape(),c,1);
+    Handle(AIS_Shape) as = DisplayGeom().ShapeToAis(_meshMap.Shape(),c,1);
      as->SetTransparency(0.3);
     DisplayGeom().DisplayAShape(as);
 
-    DiscreteModel().ModelTriangulation(meshMap.Shape(),result);
-    meshMap._triRes = result;
+    DiscreteModel().ModelTriangulation(_meshMap.Shape(),result);
+    _meshMap._triRes = result;
     std::cout<<"vertexs:"<<result.Vertexs().size()
             <<",triangls:"<<result.Triangles().size()<<endl;
 
-    meshMap.IniTriangles();
-    meshMap.IniTrisNor();
-    meshMap.CreateModelGrid(5);
-    meshMap.InitialEdge();
+    _meshMap.IniTriangles();
+    _meshMap.IniTrisNor();
+    _meshMap.CreateModelGrid(5);
+    _meshMap.InitialEdge();
 
     OperTriaCl ocl;
-    ocl.CalTrianglesCl(meshMap);
-    ///DisplayGeom().DisplayTriangles(meshMap._trisCl,_colors[1],1);
-    cl.GetPointCl(meshMap);
+    ocl.CalTrianglesCl(_meshMap);
+    ///DisplayGeom().DisplayTriangles(_meshMap._trisCl,_colors[1],1);
+    cl.CutterLocation(_meshMap);
 
 #if 1
     TopoDS_Shape eshape;
-    ViewData::EdgesToShape(meshMap._xEdges,eshape);
+    ViewData::EdgesToShape(_meshMap._xEdges,eshape);
     DisplayGeom().DisplayShape(eshape,_colors[2],1);
 #endif
 
-    std::cout<<"hhh"<<meshMap._clPts.size()<<","<<meshMap._clPts[0].size()<<endl;
+    std::cout<<"hhh"<<_meshMap._clPts.size()<<","<<_meshMap._clPts[0].size()<<endl;
 
     ///DisplayGeom().DisplayModelDescrete(result,c1);
 

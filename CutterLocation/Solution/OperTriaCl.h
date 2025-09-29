@@ -20,11 +20,13 @@ public:
         double z = p.Z() + v * ti.Nxy().Z() + t._cr * ti.N().Z();
         return oft::Point(x,y,z);
     }
-    Triangle CalTriangleCl(const DefTool& t,const Triangle& ti){
+    Triangle CalTriangleCl(const DefTool& t,Triangle& ti){
         auto p0 = CalVertexCl(t,ti,ti.P0());
         auto p1 = CalVertexCl(t,ti,ti.P1());
         auto p2 = CalVertexCl(t,ti,ti.P2());
-        return Triangle(p0,p1,p2);
+        Triangle tcl(p0,p1,p2);
+        tcl.IniOrigin(ti);
+        return tcl;
     }
     void CalTrianglesCl(MeshMap& m){
         const auto& tool = m.Tool();
@@ -33,6 +35,7 @@ public:
         tscl.reserve(ts.size());
 
         for(size_t i = 0;i < ts.size();++i){
+            auto tcl = CalTriangleCl(tool,ts[i]);
             tscl.emplace_back(CalTriangleCl(tool,ts[i]));
         }
         std::cout<<"ts.size():"<<ts.size()<<endl;

@@ -281,6 +281,11 @@ public:
         _arcCp(c),_arcRot(r){
         IniArcRadius();
     }
+    DefArc(const Point& s,const Point& e,const Point& c,
+           bool isCW):_arcSp(s),_arcEp(e),_arcCp(c){
+        _arcRot = isCW ? CLOCKWISE : ANTICLOCKWISE;
+        IniArcRadius();
+    }
     DefArc(const Point& S,const Point& E,const Point& C,double radius,RotDir r):
         _arcSp(S),_arcEp(E),_arcCp(C),_arcR(radius),_arcRot(r){}
     void SetArcStartPt(const Point& P){_arcSp = P;}

@@ -21,5 +21,9 @@
         <file>Resources/torus.png</file>
         <file>Resources/wedge.png</file>
         <file>Resources/Zoom.png</file>
+        <file>Resources/flatsteep.png</file>
+        <file>Resources/import.png</file>
+        <file>Resources/reset.png</file>
+        <file>Resources/rotate.png</file>
     </qresource>
 </RCC>

@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="occQt.qrc">
+   <iconset>
     <normaloff>:/Resources/lamp.png</normaloff>:/Resources/lamp.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget"/>
@@ -39,8 +39,8 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actPan">
    <property name="icon">
-    <iconset theme="平移">
-     <normaloff>Icon/Pan.png</normaloff>Icon/Pan.png</iconset>
+    <iconset theme="平移" resource="Image.qrc">
+     <normaloff>:/new/img/Resources/FitAll.png</normaloff>:/new/img/Resources/FitAll.png</iconset>
    </property>
    <property name="text">
     <string>平移</string>
@@ -51,8 +51,8 @@
   </action>
   <action name="actRotate">
    <property name="icon">
-    <iconset theme="旋转">
-     <normaloff>Icon/rotate.png</normaloff>Icon/rotate.png</iconset>
+    <iconset theme="旋转" resource="Image.qrc">
+     <normaloff>:/new/img/Resources/Rotate.png</normaloff>:/new/img/Resources/Rotate.png</iconset>
    </property>
    <property name="text">
     <string>旋转</string>
@@ -63,8 +63,8 @@
   </action>
   <action name="actReset">
    <property name="icon">
-    <iconset theme="重置">
-     <normaloff>Icon/reset.png</normaloff>Icon/reset.png</iconset>
+    <iconset theme="重置" resource="Image.qrc">
+     <normaloff>:/new/img/Resources/reset.png</normaloff>:/new/img/Resources/reset.png</iconset>
    </property>
    <property name="text">
     <string>重置</string>
@@ -75,8 +75,8 @@
   </action>
   <action name="actFitall">
    <property name="icon">
-    <iconset theme="全局">
-     <normaloff>Icon/fitAll.png</normaloff>Icon/fitAll.png</iconset>
+    <iconset theme="全局" resource="Image.qrc">
+     <normaloff>:/new/img/Resources/FitAll.png</normaloff>:/new/img/Resources/FitAll.png</iconset>
    </property>
    <property name="text">
     <string>全局</string>
@@ -87,8 +87,8 @@
   </action>
   <action name="actImport">
    <property name="icon">
-    <iconset theme="导入">
-     <normaloff>Icon/import.png</normaloff>Icon/import.png</iconset>
+    <iconset theme="导入" resource="Image.qrc">
+     <normaloff>:/new/img/Resources/import.png</normaloff>:/new/img/Resources/import.png</iconset>
    </property>
    <property name="text">
     <string>导入</string>
@@ -100,7 +100,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="occQt.qrc"/>
+  <include location="Image.qrc"/>
  </resources>
  <connections/>
 </ui>

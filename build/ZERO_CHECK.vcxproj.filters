@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\lvd\Desktop\GeomOperate\build\CMakeFiles\7c5071356004a9d83e6fe3e67b7f892a\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1565573F-28F1-3956-AA64-DF94423F51E0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

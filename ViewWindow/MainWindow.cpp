@@ -22,9 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    _subWind = new WidgetTool(this);
-    _subWind->show();
-    _subWind->move(this->geometry().right() + 10, this->geometry().top()-50);
 
     myOccView = new OccView(this);
     _mainwind = this;
@@ -51,6 +48,11 @@ MainWindow::MainWindow(QWidget *parent)
     for(auto& d : _colors){_colors.emplace_back(d);}
     for(auto& d : _colors){_colors.emplace_back(d);}
     for(auto& d : _colors){_colors.emplace_back(d);}
+
+    _subWind = new WidgetTool(this);
+    _subWind->show();
+    _subWind->ConnectConnect();
+
 }
 MainWindow::~MainWindow(){delete ui;}
 void MainWindow::createActions( void )
@@ -63,7 +65,7 @@ void MainWindow::createActions( void )
 }
 void MainWindow::createToolBars( void )
 {
-    QToolBar* aToolBar = addToolBar(tr("&Navigate"));
+    QToolBar* aToolBar = addToolBar("Navigate");
     aToolBar->addAction(ui->actPan);
     aToolBar->addAction(ui->actRotate);
     aToolBar->addAction(ui->actReset);

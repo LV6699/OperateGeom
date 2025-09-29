@@ -19,6 +19,11 @@ Handle(AIS_Shape) DisplayGeom::ShapeToAis(const AIS_Shape& s,
     aShape->SetWidth(w);
     return aShape;
 }
+void DisplayGeom::RemoveAShape(Handle(AIS_Shape)& a){
+    _mainwind->myOccView->getContext()->Erase(a,true);
+    Handle(AIS_Shape) a_;a = a_;
+}
+
 void DisplayGeom::DisplayAShape(const Handle(AIS_Shape)&aShape,bool isClear)
 {
     if(isClear){_mainwind->myOccView->getContext()->RemoveAll(isClear);}
@@ -169,6 +174,13 @@ void DisplayGeom::DisplayOffsetResult(const GeomArea& area,
 {
     DisplayGeomArea(area,isClear);
     DisplayPathNode(pathNode,false,isClassify);
+}
+
+void DisplayGeom::DisplayTriangle(const grm::Triangle& t,
+                                  Quantity_Color &c,double w,bool isClear)
+{
+    auto s = GeomToShape().TriangleToShape(t);
+    DisplayShape(s,c,w,isClear);
 }
 
 void DisplayGeom::DisplayModelDescrete(const TrianRes& tris,Quantity_Color c)

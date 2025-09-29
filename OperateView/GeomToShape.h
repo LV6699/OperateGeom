@@ -21,8 +21,7 @@ public:
     void SegmentToShape(const oft::Point& sp,const oft::Point& ep,
                         TopoDS_Shape &shape)
     {
-        if(sp.IsSameCoord3D(ep,PreErr5_8))
-            return;
+        if(sp.IsSameCoord3D(ep,PreErr5_8)){return;}
         TopoDS_Edge e = BRepBuilderAPI_MakeEdge(ToOccPt(sp),ToOccPt(ep));
         shape = e;
     }

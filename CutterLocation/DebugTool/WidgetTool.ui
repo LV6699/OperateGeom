@@ -124,6 +124,18 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(220, 220, 220);</string>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
    </widget>
    <widget class="QDoubleSpinBox" name="douPtYCoord">
     <property name="geometry">
@@ -134,8 +146,20 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(220, 220, 220);</string>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="minimum">
+     <double>-1000.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QPushButton" name="btCalInt">
+   <widget class="QPushButton" name="btLineInt">
     <property name="geometry">
      <rect>
       <x>5</x>

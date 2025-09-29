@@ -20,7 +20,10 @@ public:
         _n = _n.Normalize();
     }
     void CalNorProj(){
-        _nxy = _n;_n.SetZ(0);_nxy.Normalize();
+        _nxy = _n;_nxy.SetZ(0);_nxy.Normalize();
+    }
+    void IniOrigin(Triangle& t){
+        _op0 = &t._p0;_op1 = &t._p1;_op2 = &t._p2;
     }
     const oft::Point& P0()const{return _p0;}
     const oft::Point& P1()const{return _p1;}
@@ -60,10 +63,17 @@ public:
         double gamma = 1.0 - alpha - beta;
         return (alpha >= -e) && (beta >= -e) && (gamma >= -e);
     }
+    bool IsVertex(const oft::Point& p,double e = PreErr_8){
+        return p.IsSameCoord3D(_p0,e) || p.IsSameCoord3D(_p1,e) ||
+                p.IsSameCoord3D(_p2,e);
+    }
 
 public:
-    oft::Point _p0,_p1,_p2;
     oft::Point _n,_nxy;
+    oft::Point _p0,_p1,_p2;
+    oft::Point* _op0 = nullptr;
+    oft::Point* _op1 = nullptr;
+    oft::Point* _op2 = nullptr;
 
 };
 
@@ -83,7 +93,13 @@ public:
     void InitialEdge();
     void IniTriangles();
     void CreateModelGrid(double step);
-    void IniTrisNor(){
+    void IniTrisNor(){/**
+        for(size_t i = 0;i < _tris.size();++i){
+            if(i == 997){
+                int tem = 1;
+            }
+            _tris[i].CalNormal();_tris[i].CalNorProj();
+        }*/
         for(auto& t : _tris){t.CalNormal();t.CalNorProj();}
     }
 

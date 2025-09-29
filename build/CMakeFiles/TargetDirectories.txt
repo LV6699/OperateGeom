@@ -1,0 +1,3 @@
+C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/GeomOperate.dir
+C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/ZERO_CHECK.dir

@@ -2,6 +2,8 @@
 #define CUTTERLOCATIONZ_H
 
 #include "OperTriaCl.h"
+#pragma optimize("", off)
+#pragma GCC optimize ("o0")
 
 namespace grm{
 class CutterLocationZ
@@ -12,6 +14,8 @@ public:
     double PointClZ(const MeshMap& m,const oft::Point& p);
 
     double CutterLocation(const Triangle& t,const oft::Point& p){
+        double z = Min_Val;
+#if 0
         ///需要保证点在t的xy平面内
         if(t.IsVertical()){return p.Z();}
         /// 计算三角形所在平面的方程：Ax + By + Cz + D = 0
@@ -23,34 +27,35 @@ public:
         double A = normal.X(),B = normal.Y(),C = normal.Z(),
                 D = -A * t._p0.X() - B * t._p0.Y() - C * t._p0.Z();
         double z = (-D - A * p.X() - B * p.Y()) / C;
+#else
+        double t1 = t.N().X() * (t.P0().X() - p.X());
+        double t2 = t.N().Y() * (t.P0().Y() - p.Y());
+        z = t.P0().Z() + (t1 + t2) / t.N().Z();
+#endif
         return z;
     }
 
-    double ClBaseTrias(const MeshMap& m,const oft::Point& p)
+    double CutterLocation(const MeshMap& m,const oft::Point& p)
     {
         OperTriaCl ot;
-        double z = p.Z(),z_ = p.Z(),t1 = 0,t2 = 0;
+        double z = p.Z(),z_ = p.Z();
 
         for(size_t i = 0;i < m.TrianglesCl().size();++i){
             const auto& t = m._tris[i];
-            if(!t.IsInRange(p)){continue;}
+            if(!t.IsInRange(p) || t.N().Z() < PreErr_8){continue;}
             z_ = CutterLocation(t,p);
             if(z < z_){z = z_;}
-            /*
-            t1 = t.N().X() * (t.P0().X() - p.X());
-            t2 = t.N().Y() * (t.P0().Y() - p.Y());
-            if(t.P0().Z() + t1 + t2 > z){
-                z = t.P0().Z() + t1 + t2;
-            }*/
         }
         return z;
     }
-    void GetPointCl(MeshMap& m)
+    void CutterLocation(MeshMap& m)
     {
+        double z = 0;
         auto& pts = m._clPts;
         for(size_t i = 0;i < pts.size();++i){
             for(size_t j = 0;j < pts[i].size();++j){
-                pts[i][j].SetZ(ClBaseTrias(m,pts[i][j]));
+                z = CutterLocation(m,pts[i][j]);
+                pts[i][j].SetZ(z);
             }
         }
 

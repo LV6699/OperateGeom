@@ -6,10 +6,12 @@
 
 namespace grm{
 
-class ViewData
+class ToOcc
 {
 public:
-    ViewData(){}
+    ToOcc(){}
+
+    gp_Pnt OccPt(const oft::Point& p){return gp_Pnt(p.X(),p.Y(),p.Z());}
 
     static TopoDS_Shape EdgeToShape(const ClEdge& e){
         if(e._sp == nullptr || e._ep == nullptr){return TopoDS_Shape();};
@@ -18,8 +20,8 @@ public:
         return s;
 
     }
-    static void EdgesToShape(const std::vector<std::vector<ClEdge>>&es,
-                             TopoDS_Shape& shape){
+    static TopoDS_Shape EdgesToShape(const std::vector<std::vector<ClEdge>>&es){
+        TopoDS_Shape s;
         std::vector<TopoDS_Shape>shapes;
         shapes.reserve(es.size());
         for(const auto& d : es){
@@ -27,9 +29,31 @@ public:
                 shapes.emplace_back(EdgeToShape(e));
             }
         }
-        GeomToShape().ShapesToShape(shapes,shape);
+        GeomToShape().ShapesToShape(shapes,s);
+        return s;
     }
-
+    static TopoDS_Shape TriangleToShape(const Triangle& t)
+    {
+        GeomToShape gt;
+        TopoDS_Shape s,s0,s1,s2;
+        gt.SegmentToShape(t.P0(),t.P1(),s0);
+        gt.SegmentToShape(t.P1(),t.P2(),s1);
+        gt.SegmentToShape(t.P2(),t.P0(),s2);
+        gt.ShapesToShape(std::vector<TopoDS_Shape>{s0,s1,s2},s);
+        return s;
+    }
+    static TopoDS_Shape TrianglesToShape(const vector<Triangle>& ts)
+    {
+        vector<TopoDS_Shape>shapes;
+        shapes.resize(ts.size());
+        GeomToShape gs;
+        for(const auto& t : ts){
+            shapes.push_back(TriangleToShape(t));
+        }
+        TopoDS_Shape s;
+        gs.ShapesToShape(shapes,s);
+        return s;
+    }
 
 };
 

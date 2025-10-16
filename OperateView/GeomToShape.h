@@ -1,9 +1,10 @@
 #ifndef GEOMTOSHAPE_H
 #define GEOMTOSHAPE_H
 
-#include"../OffsetStruct/CommonFile/DataStructure.h"
-#include"../ViewWindow/MainWindow.h"
-#include"../CutterLocation/Solution/CutterLocationZ.h"
+#include "../ViewWindow/OccHeader.h"
+#include "../OffsetStruct/CommonFile/DataStructure.h"
+//#include"../ViewWindow/MainWindow.h"
+//#include"../CutterLocation/Solution/CutterLocationZ.h"
 
 class GeomToShape
 {
@@ -117,6 +118,7 @@ public:
     void LoopsToShape(const std::vector<oft::DefLoop> &loops, TopoDS_Shape &shape);
     void GeomAreaToShape(const oft::GeomArea& area,TopoDS_Shape& shape);
 
+    /*
     TopoDS_Shape TriangleToShape(const grm::Triangle& t)
     {
         TopoDS_Shape s,s0,s1,s2;
@@ -125,7 +127,7 @@ public:
         SegmentToShape(t.P2(),t.P0(),s2);
         ShapesToShape(std::vector<TopoDS_Shape>{s0,s1,s2},s);
         return s;
-    }
+    }*/
 
 
 

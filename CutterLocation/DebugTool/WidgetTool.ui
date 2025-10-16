@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>353</width>
-    <height>298</height>
+    <width>345</width>
+    <height>295</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,7 +73,7 @@
    <widget class="QCheckBox" name="cheEdgProtect">
     <property name="geometry">
      <rect>
-      <x>103</x>
+      <x>100</x>
       <y>35</y>
       <width>102</width>
       <height>19</height>
@@ -81,6 +81,68 @@
     </property>
     <property name="text">
      <string>边保护面</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheTrisCl">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>5</y>
+      <width>87</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>偏移三角形</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheClPt">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>90</y>
+      <width>71</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>刀位点</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="che_xEdge">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>60</y>
+      <width>71</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>x_edge</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="che_yEdge">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>60</y>
+      <width>71</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>y_edge</string>
     </property>
    </widget>
   </widget>
@@ -162,14 +224,27 @@
    <widget class="QPushButton" name="btLineInt">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>35</y>
-      <width>93</width>
+      <x>120</x>
+      <y>38</y>
+      <width>90</width>
       <height>30</height>
      </rect>
     </property>
     <property name="text">
      <string>计算</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheFindInt">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>38</y>
+      <width>80</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>查找相交</string>
     </property>
    </widget>
   </widget>

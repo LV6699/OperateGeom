@@ -12,7 +12,10 @@
 
 using namespace std;
 using namespace grm;
+using namespace ViewObj;
+
 MeshMap _meshMap;
+OpeViewItem _opeItem;
 
 #pragma optimize("", off)
 
@@ -36,6 +39,19 @@ int main(int argc, char *argv[])
 #include <string>
 #include <vector>
 #include <algorithm>
+void DisplayOperItem(ViewObj::ViewItem& item)
+{
+    if(!item._hasInitial){return;}
+    _mainwind->myOccView->getContext()->Display(item._ashape,true);
+    item.SetHasDisplay();
+}
+void RemoveOperItem(ViewObj::ViewItem& item)
+{
+    if(!item._hasInitial){return;}
+    _mainwind->myOccView->getContext()->Erase(item._ashape,true);
+    item.SetHasDisplay();
+}
+
 void FunTest()
 {
     CutterLocationZ cl;
@@ -43,30 +59,37 @@ void FunTest()
     _meshMap._tool = DefTool(4,1);
     Quantity_Color c(0.3,0.35,0.35,Quantity_TOC_RGB);
     Quantity_Color c1(0.1,0.1,0.1,Quantity_TOC_RGB);
-    ///DisplayGeom().DisplayShape(_meshMap.Shape(),c,1);
-    Handle(AIS_Shape) as = DisplayGeom().ShapeToAis(_meshMap.Shape(),c,1);
-     as->SetTransparency(0.3);
-    DisplayGeom().DisplayAShape(as);
+#if 1
+    _opeItem.IniModelItem(_meshMap._model._shape,c,1);
+    _opeItem._model._ashape->SetTransparency(0.3);
+    DisplayOperItem(_opeItem._model);
+#endif
 
     DiscreteModel().ModelTriangulation(_meshMap.Shape(),result);
     _meshMap._triRes = result;
     std::cout<<"vertexs:"<<result.Vertexs().size()
             <<",triangls:"<<result.Triangles().size()<<endl;
-
     _meshMap.IniTriangles();
     _meshMap.IniTrisNor();
     _meshMap.CreateModelGrid(5);
     _meshMap.InitialEdge();
-
+#if 1
+    _opeItem.IniTrisItem(ToOcc::TrianglesToShape(
+                             _meshMap._tris),false,c1,1);
+    DisplayOperItem(_opeItem._modTris);
+#endif
     OperTriaCl ocl;
     ocl.CalTrianglesCl(_meshMap);
-    ///DisplayGeom().DisplayTriangles(_meshMap._trisCl,_colors[1],1);
+#if 1
+    _opeItem.IniTrisItem(ToOcc::TrianglesToShape(
+                             _meshMap._trisCl),true,_colors[1],1);
+    DisplayOperItem(_opeItem._trisCl);
+#endif
     cl.CutterLocation(_meshMap);
 
 #if 1
-    TopoDS_Shape eshape;
-    ViewData::EdgesToShape(_meshMap._xEdges,eshape);
-    DisplayGeom().DisplayShape(eshape,_colors[2],1);
+    _opeItem.IniEdgesItem(ToOcc::EdgesToShape(_meshMap._xEdges),true,_colors[2],1);
+    DisplayOperItem(_opeItem._xEdges);
 #endif
 
     std::cout<<"hhh"<<_meshMap._clPts.size()<<","<<_meshMap._clPts[0].size()<<endl;

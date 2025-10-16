@@ -10,6 +10,8 @@
 #include"OccView.h"
 #include "../OperateView/DisplayGeom.h"
 #include"../CutterLocation/DebugTool/WidgetTool.h"
+#include"../CutterLocation/Common/ClStruct.h"
+///#include"../CutterLocation/DebugTool/OperateItem.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,7 +43,7 @@ public:
 public slots:
 
 };
-
+//extern ViewObj::OpeViewItem _vieItem;
 extern grm::MeshMap _meshMap;
 extern MainWindow* _mainwind;
 extern TopoDS_Shape _gShape;

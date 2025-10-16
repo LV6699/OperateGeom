@@ -17,6 +17,8 @@
 #include <V3d_View.hxx>
 #include <Aspect_Handle.hxx>
 #include <Aspect_DisplayConnection.hxx>
+#include "../CutterLocation/DebugTool/OperateObject.h"
+
 #pragma optimize("", off)
 #ifdef WNT
 #include <WNT_Window.hxx>
@@ -234,6 +236,7 @@ void OccView::onLButtonDown( const int /*theFlags*/, const QPoint thePoint )
     myYmin = thePoint.y();
     myXmax = thePoint.x();
     myYmax = thePoint.y();
+    OperateObject().FindSelItem();
 }
 void OccView::onMButtonDown( const int /*theFlags*/, const QPoint thePoint )
 {

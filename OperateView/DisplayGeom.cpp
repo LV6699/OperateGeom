@@ -2,9 +2,9 @@
 #include "DisplayGeom.h"
 #include "GeomToShape.h"
 #include <AIS_Line.hxx>
+#include "../ViewWindow/MainWindow.h"
 
 using namespace std;
-using namespace grm;
 using namespace oft;
 
 #pragma optimize("", off)
@@ -20,7 +20,7 @@ Handle(AIS_Shape) DisplayGeom::ShapeToAis(const AIS_Shape& s,
     return aShape;
 }
 void DisplayGeom::RemoveAShape(Handle(AIS_Shape)& a){
-    _mainwind->myOccView->getContext()->Erase(a,true);
+    _mainwind->myOccView->getContext()->Remove(a,true);
     Handle(AIS_Shape) a_;a = a_;
 }
 
@@ -175,14 +175,13 @@ void DisplayGeom::DisplayOffsetResult(const GeomArea& area,
     DisplayGeomArea(area,isClear);
     DisplayPathNode(pathNode,false,isClassify);
 }
-
+/*
 void DisplayGeom::DisplayTriangle(const grm::Triangle& t,
                                   Quantity_Color &c,double w,bool isClear)
 {
     auto s = GeomToShape().TriangleToShape(t);
     DisplayShape(s,c,w,isClear);
 }
-
 void DisplayGeom::DisplayModelDescrete(const TrianRes& tris,Quantity_Color c)
 {
     vector<TopoDS_Shape>shapes;
@@ -207,20 +206,7 @@ void DisplayGeom::DisplayModelDescrete(const TrianRes& tris,Quantity_Color c)
     DisplayShape(shape,c,1,false);
 }
 
-void DisplayGeom::DisplayTriangles(const vector<Triangle>& ts,Quantity_Color &c,
-                                   double w,bool isClear)
-{
-    vector<TopoDS_Shape>shapes;
-    shapes.reserve(ts.size());
-    GeomToShape gs;
-    for(const auto& t : ts){
-        shapes.push_back(gs.TriangleToShape(t));
-    }
-    TopoDS_Shape shape;
-    gs.ShapesToShape(shapes,shape);
-    DisplayShape(shape,c,w,isClear);
-}
-
+*/
 
 
 

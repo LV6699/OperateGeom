@@ -1,6 +1,7 @@
 #include "OperateObject.h"
 #include "ui_OperateObject.h"
 #include<StdSelect_BRepOwner.hxx>
+#include"../Common/ViewData.h"
 
 #pragma optimize("", off)
 #pragma GCC optimize ("O0")
@@ -54,7 +55,7 @@ void OperateObject::CreateInfo()
 
 void OperateObject::FindSelectObject()
 {
-    auto context = _mainwind->myOccView->getContext();
+    const auto& context = _mainwind->myOccView->getContext();
     ClearAllLabel();
     if(context.IsNull()){return;}
 
@@ -64,7 +65,7 @@ void OperateObject::FindSelectObject()
     _hasUiFind = false;
     bool hasFound = false,isVetex = false,isLine = false;
 
-    for (context->InitSelected();context->MoreSelected(); context->NextSelected()){
+    for(context->InitSelected();context->MoreSelected(); context->NextSelected()){
         Handle(SelectMgr_EntityOwner) sel = context->SelectedOwner();
         if (sel.IsNull()){continue;}
 
@@ -93,8 +94,9 @@ void OperateObject::FindSelectObject()
         Handle(Geom_TrimmedCurve) trimmedCurve = Handle(Geom_TrimmedCurve)::DownCast(curve);
         if (!trimmedCurve.IsNull()) {
             curve = trimmedCurve->BasisCurve();
-        }
-        if (curve->DynamicType() == STANDARD_TYPE(Geom_Circle)) {
+        }/*
+        auto type = curve->DynamicType();
+        if (type == STANDARD_TYPE(Geom_Circle)) {
             Handle(Geom_Circle) circle = Handle(Geom_Circle)::DownCast(curve);
             const gp_Circ& circ = circle->Circ();
             cp = ToPoint(circ.Location());
@@ -102,7 +104,7 @@ void OperateObject::FindSelectObject()
             std::cout<<"已拾取到圆弧...\n";
         }else{
             std::cout<<"已拾取到线段...\n";
-        }
+        }*/
         hasFound = true;
     }
     if (!hasFound){
@@ -122,18 +124,20 @@ void OperateObject::FindSelectObject()
 
 }
 
-void OperateObject::FindTriageCutterLocate()
+void OperateObject::FindTrianges()
 {
     if(!_hasUiFind || _isPoint){std::cout<<"No data found!"<<endl;return;}
     DisplayGeom dg;GeomToShape gts;Handle(AIS_Shape) a;
-    if(!_trisCl_as.IsNull()){dg.RemoveAShape(_trisCl_as);}
-    if(!_tris_as.IsNull()){dg.RemoveAShape(_tris_as);}
+    if(_hasDispCl){dg.RemoveAShape(_trisCl_as);}
+    if(_hasDispCl){dg.RemoveAShape(_tris_as);}
+    _hasDispCl = false;
     _hasFind = false;
-    const auto& sp = _selObj.StarPt();
     grm::Triangle tri,tri1;
+    const auto& sp = _selObj.StarPt();
     const auto& ep = _selObj.EndPt();
-    for(auto& t : _meshMap._trisCl){
-        if(t.IsVertex(sp) || t.IsVertex(ep)){
+    for(size_t i = 0;i < _meshMap._trisCl.size();++i) {
+        const auto& t = _meshMap._trisCl[i];
+        if(t.IsVertex(sp) && t.IsVertex(ep)){
             tri = t;
             tri1 = grm::Triangle(*t._op0,*t._op1,*t._op2);
             _hasFind = true;
@@ -142,17 +146,48 @@ void OperateObject::FindTriageCutterLocate()
     }
     if(!_hasFind){std::cout<<"No data found!"<<endl;return;}
     Quantity_Color c(0.3,0.35,0.35,Quantity_TOC_RGB);
-
-    TopoDS_Shape shape = gts.TriangleToShape(tri);
-    TopoDS_Shape shape1 = gts.TriangleToShape(tri1);
-    _trisCl_as = dg.ShapeToAis(shape,_colors[1],1);
-    _tris_as = dg.ShapeToAis(shape1,c,2);
+    TopoDS_Shape shape = grm::ToOcc::TriangleToShape(tri);
+    TopoDS_Shape shape1 = grm::ToOcc::TriangleToShape(tri1);
+    _trisCl_as = dg.ShapeToAis(shape,_colors[6],2);
+    _tris_as = dg.ShapeToAis(shape1,_colors[4],2);
 
     dg.DisplayAShape(_trisCl_as,false);
     dg.DisplayAShape(_tris_as,false);
+    _hasDispCl = true;
 }
 
+void OperateObject::FindSelItem()
+{
+    FindSelectObject();
+    FindTrianges();
+}
 
+void OperateObject::FindIntBasePoint(const oft::Point& p)
+{
+    ///pian查找偏置面相交信息
+    GeomToShape gts;DisplayGeom dg;
+    if(!_trisCl_as.IsNull()){dg.RemoveAShape(_trisCl_as);}
+    _hasFind = false;
+    vector<grm::Triangle>ts;
+    grm::Triangle tri;
+    for (size_t i = 0;i < _meshMap._trisCl.size();++i) {
+        if(_meshMap._trisCl[i].IsInRange(p)){
+            ts.push_back(_meshMap._trisCl[i]);
+            _hasFind = true;
+        }
+    }
+    if(!_hasFind){std::cout<<"No data found!"<<endl;return;}
+    Quantity_Color c(0.4,0.4,0,Quantity_TOC_RGB);
+    vector<TopoDS_Shape>shapes;
+    for(auto& t : ts){
+        TopoDS_Shape s = grm::ToOcc::TriangleToShape(t);
+        shapes.push_back(s);
+    }
+    TopoDS_Shape shape;
+    gts.ShapesToShape(shapes,shape);
+    _intFig_as = dg.ShapeToAis(shape,c,2);
+    dg.DisplayAShape(_trisCl_as,false);
+}
 
 
 

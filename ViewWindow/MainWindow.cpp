@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     Quantity_Color brown(0.5,0.2,0.0,Quantity_TOC_RGB);///7
     Quantity_Color black(0,0,0,Quantity_TOC_RGB);///8
     vector<Quantity_Color>colors{green,blue,red,purple,
-                yellow,orange,cyan,brown,black};
+                yellow,cyan,orange,brown,black};
     _colors = colors;
     for(auto& d : _colors){_colors.emplace_back(d);}
     for(auto& d : _colors){_colors.emplace_back(d);}
@@ -51,8 +51,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     _subWind = new WidgetTool(this);
     _subWind->show();
-    _subWind->ConnectConnect();
-
 }
 MainWindow::~MainWindow(){delete ui;}
 void MainWindow::createActions( void )

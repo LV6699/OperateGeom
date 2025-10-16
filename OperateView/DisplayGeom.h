@@ -2,10 +2,11 @@
 #ifndef DISPLAYGEOM_H
 #define DISPLAYGEOM_H
 
-#include"../CommonFile/ModelStruct.h"
-#include"../ViewWindow/MainWindow.h"
+//#include"../CommonFile/ModelStruct.h"
+//#include"../ViewWindow/MainWindow.h"
+#include"../ViewWindow/OccHeader.h"
 #include"../OffsetStruct/CommonFile/DataStructure.h"
-#include"../CutterLocation/Solution/CutterLocationZ.h"
+//#include"../CutterLocation/Solution/CutterLocationZ.h"
 
 class DisplayGeom
 {
@@ -54,14 +55,6 @@ public:
                              const std::shared_ptr<oft::OffsetNode>& pathNode,
                              bool isClear = false,
                              bool isClassify = false);
-
-    void DisplayTriangle(const grm::Triangle& t,Quantity_Color &c,
-                         double w,bool isClear = false);
-
-    void DisplayModelDescrete(const grm::TrianRes& tris, Quantity_Color c);
-
-    void DisplayTriangles(const vector<grm::Triangle>& ts,Quantity_Color &c,
-                          double w,bool isClear = false);
 
 };
 

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "../../OperateView/DisplayGeom.h"
 #include "../../OperateView/GeomToShape.h"
+#include "../../ViewWindow/MainWindow.h"
 
 namespace Ui {
 class OperateObject;
@@ -26,8 +27,9 @@ public:
     void ClearAllLabel();
     void UpdateLabel(OperateObject::Label&label);
     void FindSelectObject();
-
-    void FindTriageCutterLocate();
+    void FindTrianges();
+    void FindSelItem();
+    void FindIntBasePoint(const oft::Point& p);
 
 private:
     oft::Point _p,_mp;
@@ -37,6 +39,8 @@ private:
     TCollection_ExtendedString _info;
 
     Handle(AIS_Shape) _trisCl_as,_tris_as;
+    bool _hasDispCl = false;
+    Handle(AIS_Shape) _intFig_as;
 
     Ui::OperateObject *ui;
     std::vector<Label>_labels;

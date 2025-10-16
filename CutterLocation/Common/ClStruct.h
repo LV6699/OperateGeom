@@ -63,7 +63,7 @@ public:
         double gamma = 1.0 - alpha - beta;
         return (alpha >= -e) && (beta >= -e) && (gamma >= -e);
     }
-    bool IsVertex(const oft::Point& p,double e = PreErr_8){
+    bool IsVertex(const oft::Point& p,double e = PreErr_8)const{
         return p.IsSameCoord3D(_p0,e) || p.IsSameCoord3D(_p1,e) ||
                 p.IsSameCoord3D(_p2,e);
     }

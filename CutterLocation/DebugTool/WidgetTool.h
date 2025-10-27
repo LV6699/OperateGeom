@@ -22,6 +22,7 @@ public:
 
     void DisplayOperItem(ViewObj::ViewItem& item);
     void RemoveOperItem(ViewObj::ViewItem& item);
+    void FindSelItem();
 
 private  slots:
     void on_douPtXCoord_valueChanged();

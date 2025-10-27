@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     Quantity_Color purple(0.6,0,0.6,Quantity_TOC_RGB);///3
     Quantity_Color yellow(0.6,0.6,0,Quantity_TOC_RGB);///4
     Quantity_Color cyan(0,0.5,0.5,Quantity_TOC_RGB);///5
-    Quantity_Color orange(0.9,0.1,0,Quantity_TOC_RGB);///6
+    Quantity_Color orange(0.8,0.2,0,Quantity_TOC_RGB);///6
     Quantity_Color brown(0.5,0.2,0.0,Quantity_TOC_RGB);///7
     Quantity_Color black(0,0,0,Quantity_TOC_RGB);///8
     vector<Quantity_Color>colors{green,blue,red,purple,

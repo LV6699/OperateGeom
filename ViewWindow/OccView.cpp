@@ -181,12 +181,12 @@ void OccView::fitAll( void )
     myView->ZFitAll();
     myView->Redraw();
 }
-void OccView::reset( void ){myView->Reset();}
-void OccView::pan( void )
+void OccView::reset(void){myView->Reset();}
+void OccView::pan(void)
 {myCurrentMode = CurAction3d_DynamicPanning;}
-void OccView::zoom( void )
+void OccView::zoom(void)
 { myCurrentMode = CurAction3d_DynamicZooming;}
-void OccView::rotate( void )
+void OccView::rotate(void)
 { myCurrentMode = CurAction3d_DynamicRotation;}
 //#include"../ViewHeader.h"
 void OccView::mousePressEvent( QMouseEvent* theEvent )
@@ -236,7 +236,7 @@ void OccView::onLButtonDown( const int /*theFlags*/, const QPoint thePoint )
     myYmin = thePoint.y();
     myXmax = thePoint.x();
     myYmax = thePoint.y();
-    OperateObject().FindSelItem();
+    ///OperateObject().FindSelItem();
 }
 void OccView::onMButtonDown( const int /*theFlags*/, const QPoint thePoint )
 {
@@ -297,6 +297,7 @@ void OccView::onLButtonUp( const int theFlags, const QPoint thePoint )
             inputEvent(thePoint.x(), thePoint.y());
         }
     }
+    WidgetTool().FindSelItem();
 }
 void OccView::onMButtonUp( const int /*theFlags*/, const QPoint thePoint )
 {

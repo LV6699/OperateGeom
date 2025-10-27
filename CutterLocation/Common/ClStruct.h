@@ -1,6 +1,7 @@
 #ifndef CLSTRUCT_H
 #define CLSTRUCT_H
 
+#include "PureNumStruct.h"
 #include "../../OffsetStruct/CommonFile/DataStructure.h"
 #include "../../CommonFile/ModelStruct.h"
 #include "../../CommonFile/OperaParam.h"
@@ -8,6 +9,19 @@
 
 namespace grm{
 
+class LimVal{
+public:
+    LimVal(){}
+    static double ThreeMin(double v1,double v2,double v3){
+        return std::min(v1,v2) < v3 ? std::min(v1,v2) : v3;
+    }
+    static double ThreeMax(double v1,double v2,double v3){
+        return std::max(v1,v2) > v3 ? std::max(v1,v2) : v3;
+    }
+    LimVal(double x,double x1,double y,double y1) :
+        _minx(x),_maxx(x1),_miny(y),_maxy(y1){}
+    double _minx,_maxx,_miny,_maxy;
+};
 class Triangle{
 public:
     Triangle(){}
@@ -20,37 +34,33 @@ public:
         _n = _n.Normalize();
     }
     void CalNorProj(){
-        _nxy = _n;_nxy.SetZ(0);_nxy.Normalize();
+        _nxy = _n;_nxy.SetZ(0);///_nxy.Normalize();
     }
     void IniOrigin(Triangle& t){
         _op0 = &t._p0;_op1 = &t._p1;_op2 = &t._p2;
+    }
+    void IniLimtVal(){
+        double x = LimVal::ThreeMin(_p0.X(),_p1.X(),_p2.X());
+        double x1 = LimVal::ThreeMax(_p0.X(),_p1.X(),_p2.X());
+        double y = LimVal::ThreeMin(_p0.Y(),_p1.Y(),_p2.Y());
+        double y1 = LimVal::ThreeMax(_p0.Y(),_p1.Y(),_p2.Y());
+        _limVal = LimVal(x,x1,y,y1);
     }
     const oft::Point& P0()const{return _p0;}
     const oft::Point& P1()const{return _p1;}
     const oft::Point& P2()const{return _p2;}
     const oft::Point& N()const{return _n;}
     const oft::Point& Nxy()const{return _nxy;}
-    double MinX()const{
-        double x = std::min(_p0.X(),_p1.X());
-        return x <= _p2.X() ? x : _p2.X();
-    }
-    double MaxX()const{
-        double x = std::max(_p0.X(),_p1.X());
-        return x >= _p2.X() ? x : _p2.X();
-    }
-    double MinY()const{
-        double y = std::min(_p0.Y(),_p1.Y());
-        return y <= _p2.Y() ? y : _p2.Y();
-    }
-    double MaxY()const{
-        double x = std::max(_p0.X(),_p1.X());
-        return x >= _p2.X() ? x : _p2.X();
-    }
+    double MinX()const{return _limVal._minx;}
+    double MaxX()const{return _limVal._maxx;}
+    double MinY()const{return _limVal._miny;}
+    double MaxY()const{return _limVal._maxy;}
     bool IsVertical(double e = PreErr_8)const{
         return std::abs(_p0.Z()-_p1.Z()) < e &&
                 std::abs(_p0.Z()-_p2.Z()) < e;
     }
     bool IsInRange(const oft::Point& p,double e = PreErr_12)const{
+        ///auto x = MinX(),x1 = MaxX(),y = MinY(),y1 = MaxY();
         if(MinX() > p.X() || MaxX() < p.X() ||
                 MinY() > p.Y() || MaxY() < p.Y()){return false;}
         double denom = ((_p1.Y() - _p2.Y()) * (_p0.X() - _p2.X()) +
@@ -69,6 +79,7 @@ public:
     }
 
 public:
+    LimVal _limVal;
     oft::Point _n,_nxy;
     oft::Point _p0,_p1,_p2;
     oft::Point* _op0 = nullptr;
@@ -93,6 +104,10 @@ public:
     void InitialEdge();
     void IniTriangles();
     void CreateModelGrid(double step);
+    void IniTrisLimVal(bool iscl){
+        if(iscl){for(auto& t : _trisCl){t.IniLimtVal();}}
+        else{for(auto& t : _tris){t.IniLimtVal();}}
+    }
     void IniTrisNor(){/**
         for(size_t i = 0;i < _tris.size();++i){
             if(i == 997){
@@ -101,6 +116,15 @@ public:
             _tris[i].CalNormal();_tris[i].CalNorProj();
         }*/
         for(auto& t : _tris){t.CalNormal();t.CalNorProj();}
+    }
+    void IniClTrisNor(){
+        for(auto& t : _trisCl){t.CalNormal();t.CalNorProj();}/**
+        for(size_t i = 0;i < _trisCl.size();++i){
+            if(i == 588){
+                int tem = 0;
+            }
+            _trisCl[i].CalNormal();_trisCl[i].CalNorProj();
+        }*/
     }
 
     const DefTool& Tool()const{return _tool;}

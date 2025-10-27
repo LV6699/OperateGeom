@@ -54,6 +54,22 @@ public:
         gs.ShapesToShape(shapes,s);
         return s;
     }
+    static TopoDS_Shape PointsToShape(const vector<vector<oft::Point>>& pts)
+    {
+        vector<TopoDS_Shape>shapes;
+        shapes.resize(pts.size());
+
+        for(auto& a : pts){
+            for(auto& p : a){
+                BRepBuilderAPI_MakeVertex v(gp_Pnt(p.X(),p.Y(),p.Z()));
+                TopoDS_Shape s = v;
+                shapes.emplace_back(s);
+            }
+        }
+        TopoDS_Shape s;
+        GeomToShape().ShapesToShape(shapes,s);
+        return s;
+    }
 
 };
 

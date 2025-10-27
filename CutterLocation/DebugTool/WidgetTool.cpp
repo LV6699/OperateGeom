@@ -55,6 +55,8 @@ void WidgetTool::DisplayOperItem(ViewObj::ViewItem& item)
     item.SetHasDisplay();
     _mainwind->myOccView->getContext()->Activate(
                 AIS_Shape::SelectionMode(TopAbs_EDGE));
+    _mainwind->myOccView->getContext()->Activate(
+                AIS_Shape::SelectionMode(TopAbs_VERTEX));
 }
 void WidgetTool::on_cheOriModel_clicked()
 {
@@ -88,7 +90,13 @@ void WidgetTool::on_cheClPt_clicked()
 {
     DisplayOperItem(_opeItem._clPts);
 }
-
+void WidgetTool::FindSelItem()
+{
+    if(sub_ui->cheExeSel->isChecked()){
+        OperateObject().FindSelectObject();
+        OperateObject().FindTrianges();
+    }
+}
 
 
 

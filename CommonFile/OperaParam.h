@@ -2,17 +2,27 @@
 #define OPERAPARAM_H
 
 namespace grm{
+
+enum class ToolType{
+    PlaneEnd = 0,
+    RoundNoseEnd,
+    BallNoseEnd,
+    V_Cutter
+};
+
 class  DefTool{
 public:
     DefTool(){}
     DefTool(double R,double cr):_R(R),_cr(cr){}
-    void SetRadius(double r){_R = r;}
-    void SetCornerR(double r){_cr = r;}
+    void SetR(double r){_R = r;}
+    void SetCR(double r){_cr = r;}
 
-    double Radius()const{return _R;}
-    double CornerR()const{return _cr;}
+    double R()const{return _R;}
+    double CR()const{return _cr;}
+    double RadSub()const{return _R - _cr;}
 
 public:
+    ToolType _type;
     double _R = 0;
     double _cr = 0;
 

@@ -86,9 +86,9 @@
    <widget class="QCheckBox" name="cheTrisCl">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>205</x>
       <y>5</y>
-      <width>87</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -245,6 +245,19 @@
     </property>
     <property name="text">
      <string>查找相交</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheExeSel">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>38</y>
+      <width>85</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>执行选择</string>
     </property>
    </widget>
   </widget>

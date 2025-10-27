@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
     w.show();
 
     w.resize(1100,900);
-    string path = "C:\\Users\\lvd\\Desktop\\GeomOperate\\part\\STEP2.stp";
+    ///string path = "C:\\Users\\lvd\\Desktop\\GeomOperate\\part\\STEP2.stp";
+    string path = "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\lineOffset3DSimple2.step";
     _meshMap._model._shape = w.PathMode(path);
     FunTest();
 
@@ -56,7 +57,8 @@ void FunTest()
 {
     CutterLocationZ cl;
     TrianRes result ;
-    _meshMap._tool = DefTool(4,1);
+    _meshMap._tool = DefTool(4,0);
+    _meshMap._tool._type = grm::ToolType::PlaneEnd;
     Quantity_Color c(0.3,0.35,0.35,Quantity_TOC_RGB);
     Quantity_Color c1(0.1,0.1,0.1,Quantity_TOC_RGB);
 #if 1
@@ -64,32 +66,36 @@ void FunTest()
     _opeItem._model._ashape->SetTransparency(0.3);
     DisplayOperItem(_opeItem._model);
 #endif
-
     DiscreteModel().ModelTriangulation(_meshMap.Shape(),result);
     _meshMap._triRes = result;
     std::cout<<"vertexs:"<<result.Vertexs().size()
             <<",triangls:"<<result.Triangles().size()<<endl;
     _meshMap.IniTriangles();
     _meshMap.IniTrisNor();
-    _meshMap.CreateModelGrid(5);
+    _meshMap.CreateModelGrid(1);
     _meshMap.InitialEdge();
 #if 1
     _opeItem.IniTrisItem(ToOcc::TrianglesToShape(
                              _meshMap._tris),false,c1,1);
-    DisplayOperItem(_opeItem._modTris);
+    ///DisplayOperItem(_opeItem._modTris);
 #endif
     OperTriaCl ocl;
     ocl.CalTrianglesCl(_meshMap);
+    _meshMap.IniClTrisNor();
+    _meshMap.IniTrisLimVal(true);
 #if 1
     _opeItem.IniTrisItem(ToOcc::TrianglesToShape(
                              _meshMap._trisCl),true,_colors[1],1);
-    DisplayOperItem(_opeItem._trisCl);
+    ///DisplayOperItem(_opeItem._trisCl);
 #endif
     cl.CutterLocation(_meshMap);
 
 #if 1
     _opeItem.IniEdgesItem(ToOcc::EdgesToShape(_meshMap._xEdges),true,_colors[2],1);
     DisplayOperItem(_opeItem._xEdges);
+#endif
+#if 1
+    _opeItem.IniPointsItem(ToOcc::PointsToShape(_meshMap._clPts),_colors[4]);
 #endif
 
     std::cout<<"hhh"<<_meshMap._clPts.size()<<","<<_meshMap._clPts[0].size()<<endl;

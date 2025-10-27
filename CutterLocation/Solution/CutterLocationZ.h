@@ -1,7 +1,7 @@
 #ifndef CUTTERLOCATIONZ_H
 #define CUTTERLOCATIONZ_H
 
-#include "OperTriaCl.h"
+#include "IntEdgeProt.h"
 #pragma optimize("", off)
 #pragma GCC optimize ("o0")
 
@@ -10,43 +10,86 @@ class CutterLocationZ
 {
 public:
     CutterLocationZ(){}
-
-    double PointClZ(const MeshMap& m,const oft::Point& p);
-
-    double CutterLocation(const Triangle& t,const oft::Point& p){
+    double OftTriangleCase(const Triangle& t,const oft::Point& p){
         double z = Min_Val;
-#if 0
-        ///需要保证点在t的xy平面内
-        if(t.IsVertical()){return p.Z();}
-        /// 计算三角形所在平面的方程：Ax + By + Cz + D = 0
-        oft::Point ab = oft::Point(t._p1.X() - t._p0.X(),t._p1.Y() -
-                                   t._p0.Y(),t._p1.Z() - t._p0.Z());
-        oft::Point ac = oft::Point(t._p2.X() - t._p0.X(),t._p2.Y() -
-                                   t._p0.Y(),t._p2.Z() - t._p0.Z());
-        oft::Point normal = ab.Cross(ac);
-        double A = normal.X(),B = normal.Y(),C = normal.Z(),
-                D = -A * t._p0.X() - B * t._p0.Y() - C * t._p0.Z();
-        double z = (-D - A * p.X() - B * p.Y()) / C;
-#else
         double t1 = t.N().X() * (t.P0().X() - p.X());
         double t2 = t.N().Y() * (t.P0().Y() - p.Y());
         z = t.P0().Z() + (t1 + t2) / t.N().Z();
-#endif
         return z;
     }
+    double VertexProtectCase(const DefTool& T,const oft::Point& v,
+                             const oft::Point& p)
+    {
+        ///if(v.DistSquare2D(p) < 14){
+        ///int tem = 1 ;
+        ///}
+        double RR = T._R * T._R;
+        double dd = std::pow(p.X()-v.X(),2) + std::pow(p.Y()-v.Y(),2);
+        if(dd > RR){return Min_Val;}
+        double h = std::sqrt(RR - dd);
+        double zq = Min_Val;
+        switch (T._type) {
+        case ToolType::PlaneEnd:{
+            zq = v.Z();break;
+        }
+        case ToolType::BallNoseEnd:{
+            zq = v.Z() + h;break;
+        }
+        case ToolType::RoundNoseEnd:{
+            double d = std::sqrt(dd);
+            if(dd <= T.RadSub()*T.RadSub()){
+                zq = v.Z();
+            }else if(pnum::RightInc2(T.RadSub(),d,T.R())){
+                double rr = T._cr*T._cr;
+                double t = d - T.R() + T.CR();
+                double t1 = std::sqrt(rr - t*t);
+                zq = v.Z() + t1;
+            }
+            break;
+        }
+        default: break;
+        }
+        ///if(zq > 0){
+        ///int tem = 1;
+        ///}
+        return zq;
+    }
 
+    double TriangleVertexCase(const DefTool& T,const Triangle& t,
+                              const oft::Point& p){
+        double z = VertexProtectCase(T,t.P0(),p);
+        double z1 = VertexProtectCase(T,t.P1(),p);
+        double z2 = VertexProtectCase(T,t.P2(),p);
+        return LimVal::ThreeMax(z,z1,z2);
+    }
     double CutterLocation(const MeshMap& m,const oft::Point& p)
     {
         OperTriaCl ot;
-        double z = p.Z(),z_ = p.Z();
-
-        for(size_t i = 0;i < m.TrianglesCl().size();++i){
-            const auto& t = m._tris[i];
-            if(!t.IsInRange(p) || t.N().Z() < PreErr_8){continue;}
-            z_ = CutterLocation(t,p);
-            if(z < z_){z = z_;}
+        double oz = p.Z(),oz_,vz = p.Z(),vz_ = p.Z(),
+                ez = p.Z(),ez_ = p.Z();
+        const auto& ts = m._trisCl;
+        ///oft::Point op(-32,14);
+        for(size_t i = 0;i < ts.size();++i){/***/
+            if(/**p.IsSamePoint2D(op,PreErr_4) &&*/ i == 386){
+                int tem = 1;
+            }
+            const auto& t = ts[i];
+            if(t.IsInRange(p) && t.N().Z() > PreErr_8){
+                oz_ = OftTriangleCase(t,p);
+                if(oz_ > oz){
+                    oz = oz_;
+                }
+            }
+            vz_ = TriangleVertexCase(m.Tool(),t,p);
+            if(vz_ > vz){
+                vz = vz_;
+            }
+            ez_ = IntEdgeProt::TriangleEdgeCase(m.Tool(),t,p);
+            if(ez_ > ez){
+                ez = ez_;
+            }
         }
-        return z;
+        return LimVal::ThreeMax(oz,vz,ez);
     }
     void CutterLocation(MeshMap& m)
     {
@@ -61,7 +104,6 @@ public:
 
     }
 
-    double ClZ(const MeshMap& m,const oft::Point& p);
 
 
 

@@ -33,7 +33,7 @@ public:
 
     void IniModelItem(const TopoDS_Shape& s,Quantity_Color c =
             Quantity_Color (0.1,0.1,0.1,Quantity_TOC_RGB),
-             double w = 1){
+                      double w = 1){
         _model = ViewItem(s,c,w);
     }
     void IniTrisItem(const TopoDS_Shape& s,bool iscl = false,
@@ -48,6 +48,11 @@ public:
         if(isXEdge){_xEdges = ViewItem(s,c,w);}
         else{_yEdges = ViewItem(s,c,w);}
     }
+    void IniPointsItem(const TopoDS_Shape& s,
+                       Quantity_Color c = Quantity_Color (
+                0.1,0.1,0.1,Quantity_TOC_RGB)){
+        _clPts = ViewItem(s,c);
+    }
 
 public:
     ViewItem _model;
@@ -58,6 +63,9 @@ public:
     ViewItem _xEdges;
     ViewItem _yEdges;
     ViewItem _clPts;
+    ViewItem _sel_ts;
+    ViewItem _sel_clts;
+    ViewItem _int_clts;
 
 };
 

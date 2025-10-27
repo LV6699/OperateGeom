@@ -36,7 +36,7 @@ public:
 
         for(size_t i = 0;i < ts.size();++i){
             auto tcl = CalTriangleCl(tool,ts[i]);
-            tscl.emplace_back(CalTriangleCl(tool,ts[i]));
+            tscl.emplace_back(tcl);
         }
         std::cout<<"ts.size():"<<ts.size()<<endl;
     }

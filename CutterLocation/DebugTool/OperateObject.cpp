@@ -1,6 +1,7 @@
 #include "OperateObject.h"
 #include "ui_OperateObject.h"
 #include<StdSelect_BRepOwner.hxx>
+#include "WidgetTool.h"
 #include"../Common/ViewData.h"
 
 #pragma optimize("", off)
@@ -76,36 +77,25 @@ void OperateObject::FindSelectObject()
         TopoDS_Shape shape = brepSel->Shape();
         if(shape.ShapeType() != TopAbs_VERTEX &&
                 shape.ShapeType() != TopAbs_EDGE){continue;}
-
-        Standard_Real first,last;
-        TopoDS_Edge edge = TopoDS::Edge(shape);
-        Handle(Geom_Curve) curve = BRep_Tool::Curve(edge, first, last);
+        hasFound = true;
         if(shape.ShapeType() == TopAbs_VERTEX){
             TopoDS_Vertex myvertex = TopoDS::Vertex(shape);
             v = ToPoint(BRep_Tool::Pnt(myvertex));
-            std::cout<<"已拾取到点...\n";
+            std::cout<<"已拾取到点:"<<v.X()<<","<<v.Y()<<std::endl;
             isVetex = true;
-            hasFound = true;
             break;
         }
+        Standard_Real first,last;
+        TopoDS_Edge edge = TopoDS::Edge(shape);
+        Handle(Geom_Curve) curve = BRep_Tool::Curve(edge, first, last);
         sp = ToPoint(curve->Value(first));
         ep = ToPoint(curve->Value(last));
         ///gp_Pnt mp = curve->Value((first+last)/2);
         Handle(Geom_TrimmedCurve) trimmedCurve = Handle(Geom_TrimmedCurve)::DownCast(curve);
         if (!trimmedCurve.IsNull()) {
             curve = trimmedCurve->BasisCurve();
-        }/*
-        auto type = curve->DynamicType();
-        if (type == STANDARD_TYPE(Geom_Circle)) {
-            Handle(Geom_Circle) circle = Handle(Geom_Circle)::DownCast(curve);
-            const gp_Circ& circ = circle->Circ();
-            cp = ToPoint(circ.Location());
-            isLine = true;
-            std::cout<<"已拾取到圆弧...\n";
-        }else{
-            std::cout<<"已拾取到线段...\n";
-        }*/
-        hasFound = true;
+        }
+        break;
     }
     if (!hasFound){
         std::cout<<"未拾取到任何期望目标...\n";
@@ -118,42 +108,40 @@ void OperateObject::FindSelectObject()
         else{_selObj = oft::DefElem(ARCTYPE,oft::DefArc(sp,ep,cp,true));}
     }
     _isPoint = isVetex;
-
     _hasUiFind = true;
-
-
 }
 
 void OperateObject::FindTrianges()
 {
-    if(!_hasUiFind || _isPoint){std::cout<<"No data found!"<<endl;return;}
+    if(_isPoint){return;}
+    WidgetTool().DisplayOperItem(_opeItem._sel_ts);
+    WidgetTool().DisplayOperItem(_opeItem._sel_clts);
+    _opeItem._sel_ts = ViewObj::ViewItem();
+    _opeItem._sel_clts = ViewObj::ViewItem();
     DisplayGeom dg;GeomToShape gts;Handle(AIS_Shape) a;
-    if(_hasDispCl){dg.RemoveAShape(_trisCl_as);}
-    if(_hasDispCl){dg.RemoveAShape(_tris_as);}
-    _hasDispCl = false;
-    _hasFind = false;
-    grm::Triangle tri,tri1;
+
+    bool hasFind = false;
+    grm::Triangle clt,tri;
     const auto& sp = _selObj.StarPt();
     const auto& ep = _selObj.EndPt();
     for(size_t i = 0;i < _meshMap._trisCl.size();++i) {
         const auto& t = _meshMap._trisCl[i];
         if(t.IsVertex(sp) && t.IsVertex(ep)){
-            tri = t;
-            tri1 = grm::Triangle(*t._op0,*t._op1,*t._op2);
-            _hasFind = true;
+            clt = t;
+            tri = grm::Triangle(*t._op0,*t._op1,*t._op2);
+            hasFind = true;
+            std::cout<<"偏置三角形索引:"<<i<<std::endl;
             break;
         }
     }
-    if(!_hasFind){std::cout<<"No data found!"<<endl;return;}
-    Quantity_Color c(0.3,0.35,0.35,Quantity_TOC_RGB);
-    TopoDS_Shape shape = grm::ToOcc::TriangleToShape(tri);
-    TopoDS_Shape shape1 = grm::ToOcc::TriangleToShape(tri1);
-    _trisCl_as = dg.ShapeToAis(shape,_colors[6],2);
-    _tris_as = dg.ShapeToAis(shape1,_colors[4],2);
+    if(!hasFind){std::cout<<"No data found!"<<endl;return;}
+    TopoDS_Shape shape = grm::ToOcc::TriangleToShape(clt);
+    TopoDS_Shape shape1 = grm::ToOcc::TriangleToShape(tri);
+    _opeItem._sel_ts = ViewObj::ViewItem(shape,_colors[6],2);
+    _opeItem._sel_clts = ViewObj::ViewItem(shape1,_colors[4],1);
 
-    dg.DisplayAShape(_trisCl_as,false);
-    dg.DisplayAShape(_tris_as,false);
-    _hasDispCl = true;
+    WidgetTool().DisplayOperItem(_opeItem._sel_ts);
+    WidgetTool().DisplayOperItem(_opeItem._sel_clts);
 }
 
 void OperateObject::FindSelItem()
@@ -164,19 +152,20 @@ void OperateObject::FindSelItem()
 
 void OperateObject::FindIntBasePoint(const oft::Point& p)
 {
-    ///pian查找偏置面相交信息
+    ///查找偏置面相交信息
     GeomToShape gts;DisplayGeom dg;
-    if(!_trisCl_as.IsNull()){dg.RemoveAShape(_trisCl_as);}
-    _hasFind = false;
+    WidgetTool().DisplayOperItem(_opeItem._int_clts);
+    _opeItem._int_clts = ViewObj::ViewItem();
+    bool hasFind = false;
+
     vector<grm::Triangle>ts;
-    grm::Triangle tri;
     for (size_t i = 0;i < _meshMap._trisCl.size();++i) {
         if(_meshMap._trisCl[i].IsInRange(p)){
             ts.push_back(_meshMap._trisCl[i]);
-            _hasFind = true;
+            hasFind = true;
         }
     }
-    if(!_hasFind){std::cout<<"No data found!"<<endl;return;}
+    if(!hasFind){std::cout<<"No data found!"<<endl;return;}
     Quantity_Color c(0.4,0.4,0,Quantity_TOC_RGB);
     vector<TopoDS_Shape>shapes;
     for(auto& t : ts){
@@ -185,8 +174,9 @@ void OperateObject::FindIntBasePoint(const oft::Point& p)
     }
     TopoDS_Shape shape;
     gts.ShapesToShape(shapes,shape);
-    _intFig_as = dg.ShapeToAis(shape,c,2);
-    dg.DisplayAShape(_trisCl_as,false);
+    _opeItem._int_clts = ViewObj::ViewItem(shape,_colors[5],2);
+    WidgetTool().DisplayOperItem(_opeItem._int_clts);
+
 }
 
 

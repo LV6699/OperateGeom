@@ -12,8 +12,17 @@ void grm::MeshMap::InitialEdge()
         std::vector<ClEdge>v;
         v.reserve(d.size());
         for(size_t i = 0;i < d.size()-1;++i){
-            v.emplace_back(ClEdge(d[i],d[i+1]));}
+            v.emplace_back(ClEdge(d[i],d[i+1]));
+        }
         _xEdges.emplace_back(v);
+    }
+    for(size_t j = 0;j < _clPts[0].size()-1;++j){
+        std::vector<ClEdge>v;
+        v.reserve(_clPts[0].size());
+        for(size_t i = 0;i < _clPts.size();++i){
+            v.emplace_back(ClEdge(_clPts[i][j],_clPts[i][j+1]));
+        }
+        _yEdges.emplace_back(v);
     }
 }
 
@@ -39,6 +48,7 @@ void grm::MeshMap::IniTriangles()
 {
     auto& vs = _triRes._vertexs;
     auto& ts = _triRes.Triangles();
+    _tris.reserve(ts.size());
     for(auto& d : ts){
         auto& p0 = vs[d[0]],p1 = vs[d[1]],p2 = vs[d[2]];
         _tris.emplace_back(Triangle(p0,p1,p2));

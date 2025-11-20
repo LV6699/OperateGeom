@@ -6,7 +6,7 @@
 //#include"../ViewWindow/MainWindow.h"
 #include"../ViewWindow/OccHeader.h"
 #include"../OffsetStruct/CommonFile/DataStructure.h"
-//#include"../CutterLocation/Solution/CutterLocationZ.h"
+//#include"../CutterLocation/Solution/CutLocateZ.h"
 
 class DisplayGeom
 {

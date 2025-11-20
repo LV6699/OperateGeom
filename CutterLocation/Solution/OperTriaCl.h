@@ -1,7 +1,7 @@
 #ifndef OPERTRIACL_H
 #define OPERTRIACL_H
 
-#include "../Common/ClStruct.h"
+#include "../Common/ViewTool.h"
 
 #pragma optimize("", off)
 
@@ -12,15 +12,30 @@ class OperTriaCl
 public:
     OperTriaCl(){}
 
-    const oft::Point CalVertexCl(const DefTool& t,const Triangle& ti,
+    oft::Point CalVertexCl(const DefTool& t,const Triangle& ti,
                                  const oft::Point& p){
+        const auto& nor_xy = ti.Nxy();
+//        oft::Point rp;
+//        switch (t._type) {
+//        case ToolType::PlaneEnd:{
+
+//        }
+//        case ToolType::PlaneEnd:{
+
+//        }
+//        case ToolType::PlaneEnd:{
+
+//        }
+//        default:break;
+
+//        }
         double v = t._R - t._cr;
-        double x = p.X() + v * ti.Nxy().X() + t._cr * ti.N().X();
-        double y = p.Y() + v * ti.Nxy().Y() + t._cr * ti.N().Y();
-        double z = p.Z() + v * ti.Nxy().Z() + t._cr * ti.N().Z();
+        double x = p.X() + v * nor_xy.X() + t._cr * ti.N().X();
+        double y = p.Y() + v * nor_xy.Y() + t._cr * ti.N().Y();
+        double z = p.Z() + v * nor_xy.Z() + t._cr * ti.N().Z();
         return oft::Point(x,y,z);
     }
-    Triangle CalTriangleCl(const DefTool& t,Triangle& ti){
+    Triangle CalTriangleCl(const DefTool& t,const Triangle& ti){
         auto p0 = CalVertexCl(t,ti,ti.P0());
         auto p1 = CalVertexCl(t,ti,ti.P1());
         auto p2 = CalVertexCl(t,ti,ti.P2());
@@ -30,11 +45,14 @@ public:
     }
     void CalTrianglesCl(MeshMap& m){
         const auto& tool = m.Tool();
-        auto& ts = m._tris;
+        const auto& ts = m.Triangles();
         auto& tscl = m._trisCl;
         tscl.reserve(ts.size());
 
         for(size_t i = 0;i < ts.size();++i){
+            //if(i ==589){
+                //int tem = 1;
+            //}
             auto tcl = CalTriangleCl(tool,ts[i]);
             tscl.emplace_back(tcl);
         }

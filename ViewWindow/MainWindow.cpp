@@ -13,8 +13,7 @@
 ///#pragma optimize("", off)
 
 using namespace std;
-MainWindow* _mainwind = nullptr;
-vector<Quantity_Color>_colors;
+MainWindow* _mainwind = nullptr;vector<Quantity_Color>_colors;
 TopoDS_Shape _gShape = TopoDS_Shape();
 
 MainWindow::MainWindow(QWidget *parent)

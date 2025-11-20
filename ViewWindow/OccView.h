@@ -28,14 +28,14 @@ public:
     void myRemoveall();
     void CreateViewDir();
 signals:
-    void selectionChanged(void);
+    void selectionChanged();
 public slots:
     //! operations for the view.
-    void pan(void);
-    void fitAll(void);
-    void reset(void);
-    void zoom(void);
-    void rotate(void);
+    void pan();
+    void fitAll();
+    void reset();
+    void zoom();
+    void rotate();
 protected:
     virtual QPaintEngine* paintEngine() const;
     // Paint events.
@@ -87,5 +87,6 @@ public:
     Standard_Boolean myDegenerateModeIsOn;
     //! rubber rectangle for the mouse selection.
     QRubberBand* myRectBand;
+    QPoint m_lastMousePos;
 };
 #endif // _OCCVIEW_H_

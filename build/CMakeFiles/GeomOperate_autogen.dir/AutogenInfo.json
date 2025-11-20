@@ -8,61 +8,9 @@
 	"CMAKE_LIST_FILES" : 
 	[
 		"C:/Users/lvd/Desktop/GeomOperate/CMakeLists.txt",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeSystem.cmake.in",
 		"C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeSystem.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-Determine-CXX.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CompilerId/VS-10.vcxproj.in",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in",
 		"C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeCXXCompiler.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeGenericSystem.cmake",
@@ -76,25 +24,9 @@
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-MSVC-CXX.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-MSVC.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDetermineRCCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeRCCompiler.cmake.in",
 		"C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeRCCompiler.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeRCInformation.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeTestRCCompiler.cmake",
 		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake",
-		"D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in",
-		"C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeCXXCompiler.cmake",
 		"D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake",
 		"D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5Config.cmake",
 		"D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake",
@@ -165,9 +97,27 @@
 			null
 		],
 		[
-			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/ViewData.h",
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/OperateItem.h",
 			"MU",
-			"YUAPPVPWML/moc_ViewData.cpp",
+			"YUAPPVPWML/moc_OperateItem.cpp",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/ViewTool.h",
+			"MU",
+			"YUAPPVPWML/moc_ViewTool.cpp",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/DebugTool/ExicuteCalc.h",
+			"MU",
+			"USR47U3GIC/moc_ExicuteCalc.cpp",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/DebugTool/OperateObject.h",
+			"MU",
+			"USR47U3GIC/moc_OperateObject.cpp",
 			null
 		],
 		[
@@ -183,9 +133,21 @@
 			null
 		],
 		[
-			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutterLocationZ.h",
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/BaseCalc.h",
 			"MU",
-			"YHUYOVPJQZ/moc_CutterLocationZ.cpp",
+			"YHUYOVPJQZ/moc_BaseCalc.cpp",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutLocateZ.h",
+			"MU",
+			"YHUYOVPJQZ/moc_CutLocateZ.cpp",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/IntEdgeProt.h",
+			"MU",
+			"YHUYOVPJQZ/moc_IntEdgeProt.cpp",
 			null
 		],
 		[
@@ -347,7 +309,22 @@
 			null
 		],
 		[
-			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/ViewData.cpp",
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/OperateItem.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/ViewTool.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/DebugTool/ExicuteCalc.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/DebugTool/OperateObject.cpp",
 			"MU",
 			null
 		],
@@ -362,7 +339,17 @@
 			null
 		],
 		[
-			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutterLocationZ.cpp",
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/BaseCalc.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutLocateZ.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/IntEdgeProt.cpp",
 			"MU",
 			null
 		],

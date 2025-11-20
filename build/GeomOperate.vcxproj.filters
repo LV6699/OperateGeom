@@ -28,16 +28,31 @@
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Common\ClStruct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Common\ViewData.cpp">
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Common\OperateItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Common\ViewTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\GridStruct\CreateGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\CutterLocationZ.cpp">
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\BaseCalc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\CutLocateZ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\IntEdgeProt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\OperTriaCl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\DebugTool\ExicuteCalc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\DebugTool\OperateObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\DebugTool\WidgetTool.cpp">

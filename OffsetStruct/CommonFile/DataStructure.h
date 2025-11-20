@@ -82,6 +82,14 @@ public:
     std::shared_ptr<DefPlane>_plan = nullptr;  ///所在曲线的平面.
     std::shared_ptr<DefPlane>_nplan = nullptr; ///所在曲线的法平面.
 };
+
+class ClLable{
+public:
+    ClLable(){}
+    OffsetEnum::PtClType _clType;
+    size_t _id;
+};
+
 class CAMALGORITHM_EXPORT  Point
 {
 public:
@@ -105,6 +113,11 @@ public:
     void SetNPlan(const std::shared_ptr<DefPlane>& p){_lable._nplan = p;}
     void SetCnt(const Point& p){
         _lable._cnt = std::make_shared<Point>(p.X(),p.Y(),p.Z());
+    }
+    void Normalize(){
+        double l = Length();
+        if(std::abs(l) < PreErr_15){_x = 0;_y = 0;_z = 0;return;}
+        _x = _x / l;_y = _y / l;_z = _z / l;
     }
     PntLable PointLable()const{return _lable;}
     oft::Point operator+(const oft::Point &p) const{
@@ -134,6 +147,9 @@ public:
     double Dot(const oft::Point& v) const {
         return _x * v.X() + _y * v.Y() + _z * v.Z();
     }
+    double Dot2D(const oft::Point& v) const {
+        return _x * v.X() + _y * v.Y();
+    }
     oft::Point Cross(const oft::Point &v) const{
         return {_y * v.Z() - _z * v.Y(), _z * v.X() - _x * v.Z(),
                     _x * v.Y() - _y * v.X()};
@@ -141,7 +157,7 @@ public:
     double Cross2D(const Point& p) const {
         return _x * p.Y() - _y * p.X();
     }
-    oft::Point Normalize() const {
+    oft::Point Normalized()const {
         double l = Length();
         if(std::abs(l) < PreErr5_10)
             return {_x, _y, _z};
@@ -230,6 +246,7 @@ public:
     double _y;
     double _z = 0;
     PntLable _lable;
+    ClLable _clLable;
 };
 class CAMALGORITHM_EXPORT  DefSeg
 {

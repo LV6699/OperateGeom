@@ -2,9 +2,8 @@
 #define OPERATEOBJECT_H
 
 #include <QDialog>
-#include "../../OperateView/DisplayGeom.h"
-#include "../../OperateView/GeomToShape.h"
-#include "../../ViewWindow/MainWindow.h"
+#include "../../OffsetStruct/CommonFile/DataStructure.h"
+#include "../../ViewWindow/OccHeader.h"
 
 namespace Ui {
 class OperateObject;
@@ -31,7 +30,9 @@ public:
     void FindSelItem();
     void FindIntBasePoint(const oft::Point& p);
 
-private:
+    void GetSelPointIndex();
+
+public:
     oft::Point _p,_mp;
     oft::DefElem _selObj;
     bool _isPoint = false;

@@ -1,11 +1,15 @@
 #include "WidgetTool.h"
 #include "ui_WidgetTool.h"
-#include "../../OperateView/DisplayGeom.h"
-#include"../../ViewWindow/MainWindow.h"
-#include "OperateObject.h"
 #include<iostream>
 
-using namespace std;
+#include "OperateObject.h"
+#include"../../ViewWindow/MainWindow.h"
+#include"../Common/ViewTool.h"
+#include "../Solution/CutLocateZ.h"
+
+
+using std::vector;
+using std::string;
 
 #pragma optimize("", off)
 #pragma GCC optimize ("o0")
@@ -42,15 +46,20 @@ void WidgetTool::ReDrawPosLine()
 
 void WidgetTool::on_btLineInt_clicked()
 {
-
 }
 void WidgetTool::DisplayOperItem(ViewObj::ViewItem& item)
 {
     if(!item._hasInitial){return;}
     if(!item._hasDisplay){
+        if(!item._texAspe.IsNull()){
+            _mainwind->myOccView->getContext()->Display(item._texAspe,true);
+        }
         _mainwind->myOccView->getContext()->Display(item._ashape,true);
     }else{
         _mainwind->myOccView->getContext()->Erase(item._ashape,true);
+        if(!item._texAspe.IsNull()){
+            _mainwind->myOccView->getContext()->Erase(item._texAspe,true);
+        }
     }
     item.SetHasDisplay();
     _mainwind->myOccView->getContext()->Activate(
@@ -92,32 +101,38 @@ void WidgetTool::on_cheClPt_clicked()
 }
 void WidgetTool::FindSelItem()
 {
-    if(sub_ui->cheExeSel->isChecked()){
-        OperateObject().FindSelectObject();
-        OperateObject().FindTrianges();
-    }
+    OperateObject().FindSelItem();
 }
+void WidgetTool::on_btSelPtAllZ_clicked()
+{
+    for(auto& d : _clRelItems){
+        DisplayOperItem(d._vieItem);
+    }
+    OperateObject opo;
+    opo.FindSelectObject();
+    if(!opo._hasUiFind || !opo._isPoint){return;}
+    const auto& p = opo._p;
+    grm::GetPtAllLocation(_meshMap,p,_clRelItems);
+    for(auto& d : _clRelItems){
+        grm::ClRelItemToShape(d);
+    }
+    for(auto& d : _clRelItems){
+        DisplayOperItem(d._vieItem);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+void WidgetTool::on_btVieIdTria_clicked()
+{
+    DisplayOperItem(_idTria);
+    int id = sub_ui->spinTriaId->text().toInt();
+    if(id > _meshMap._trisCl.size() - 1){
+        std::cout<<"无效三角形索引"<<std::endl;return;
+    }
+    const auto& t = _meshMap._trisCl[id];
+    auto shape = ViewTool::TriangleToShape(t);
+    _idTria = ViewObj::ViewItem(shape,_colors[5],2);
+    _idTria._hasInitial = true;
+    DisplayOperItem(_idTria);
+    std::cout<<"已显示索引三角形"<<std::endl;
+}
 

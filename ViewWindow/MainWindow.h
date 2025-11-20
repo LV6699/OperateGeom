@@ -8,10 +8,8 @@
 #include<string>
 #include<cstring>
 #include"OccView.h"
-#include "../OperateView/DisplayGeom.h"
 #include"../CutterLocation/DebugTool/WidgetTool.h"
-#include"../CutterLocation/Common/ClStruct.h"
-///#include"../CutterLocation/DebugTool/OperateItem.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,7 +22,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    TopoDS_Shape PathMode(string path);
+    TopoDS_Shape PathMode(std::string path);
 
 protected:
     //! create all the actions.
@@ -43,11 +41,9 @@ public:
 public slots:
 
 };
-//extern ViewObj::OpeViewItem _vieItem;
-extern grm::MeshMap _meshMap;
 extern MainWindow* _mainwind;
 extern TopoDS_Shape _gShape;
-extern std::vector<Quantity_Color>_colors;
+
 
 #endif // MAINWINDOW_H
 

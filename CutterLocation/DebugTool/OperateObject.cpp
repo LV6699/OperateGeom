@@ -2,7 +2,10 @@
 #include "ui_OperateObject.h"
 #include<StdSelect_BRepOwner.hxx>
 #include "WidgetTool.h"
-#include"../Common/ViewData.h"
+#include"../Common/ViewTool.h"
+#include "../../OperateView/DisplayGeom.h"
+#include "../../OperateView/GeomToShape.h"
+#include "../../ViewWindow/MainWindow.h"
 
 #pragma optimize("", off)
 #pragma GCC optimize ("O0")
@@ -128,15 +131,27 @@ void OperateObject::FindTrianges()
         const auto& t = _meshMap._trisCl[i];
         if(t.IsVertex(sp) && t.IsVertex(ep)){
             clt = t;
-            tri = grm::Triangle(*t._op0,*t._op1,*t._op2);
+            ///tri = grm::Triangle(*t._op0,*t._op1,*t._op2);
             hasFind = true;
             std::cout<<"偏置三角形索引:"<<i<<std::endl;
             break;
         }
     }
+    if(!hasFind){
+        for(size_t i = 0;i < _meshMap.Triangles().size();++i) {
+            const auto& t = _meshMap._tris[i];
+            if(t.IsVertex(sp) && t.IsVertex(ep)){
+                clt = t;
+                ///tri = grm::Triangle(*t._op0,*t._op1,*t._op2);
+                hasFind = true;
+                std::cout<<"离散三角形索引:"<<i<<std::endl;
+                break;
+            }
+        }
+    }
     if(!hasFind){std::cout<<"No data found!"<<endl;return;}
-    TopoDS_Shape shape = grm::ToOcc::TriangleToShape(clt);
-    TopoDS_Shape shape1 = grm::ToOcc::TriangleToShape(tri);
+    TopoDS_Shape shape = ViewTool::TriangleToShape(clt);
+    TopoDS_Shape shape1 = ViewTool::TriangleToShape(tri);
     _opeItem._sel_ts = ViewObj::ViewItem(shape,_colors[6],2);
     _opeItem._sel_clts = ViewObj::ViewItem(shape1,_colors[4],1);
 
@@ -147,7 +162,9 @@ void OperateObject::FindTrianges()
 void OperateObject::FindSelItem()
 {
     FindSelectObject();
-    FindTrianges();
+    if(!_hasUiFind){return;}
+    if(_isPoint){GetSelPointIndex();}
+    else{FindTrianges();}
 }
 
 void OperateObject::FindIntBasePoint(const oft::Point& p)
@@ -169,7 +186,7 @@ void OperateObject::FindIntBasePoint(const oft::Point& p)
     Quantity_Color c(0.4,0.4,0,Quantity_TOC_RGB);
     vector<TopoDS_Shape>shapes;
     for(auto& t : ts){
-        TopoDS_Shape s = grm::ToOcc::TriangleToShape(t);
+        TopoDS_Shape s = ViewTool::TriangleToShape(t);
         shapes.push_back(s);
     }
     TopoDS_Shape shape;
@@ -179,7 +196,21 @@ void OperateObject::FindIntBasePoint(const oft::Point& p)
 
 }
 
-
+void OperateObject::GetSelPointIndex()
+{
+    for (size_t i = 0;i < _meshMap._clPts.size();++i) {
+        const auto& ps = _meshMap._clPts[i];
+        for (size_t j = 0;j < ps.size();++j) {
+            if(_p.IsSameCoord2D(ps[j],PreErr5_4)){
+                const auto& p = ps[j];
+                std::cout<<"刀位点:("<<p.X()<<","<<p.Y()<<","
+                        <<p.Z()<<"),索引:"<<i<<","<<j<<std::endl;
+                return;
+            }
+        }
+    }
+    std::cout<<"未找到有效刀位点."<<std::endl;
+}
 
 
 

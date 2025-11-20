@@ -2,10 +2,7 @@
 #define WIDGETTOOL_H
 
 #include <QDialog>
-#include "../../ViewWindow/OccHeader.h"
-#include "OperateItem.h"
-
-extern ViewObj::OpeViewItem _opeItem;
+#include "../Common/OperateItem.h"
 
 namespace Ui {
 class WidgetTool;
@@ -46,6 +43,10 @@ private  slots:
 
     void on_che_yEdge_clicked();
 
+    void on_btSelPtAllZ_clicked();
+
+    void on_btVieIdTria_clicked();
+
 public:
     bool isIniL = false;
     Handle(AIS_Shape) _posLine = nullptr;
@@ -55,3 +56,25 @@ public:
 };
 
 #endif // WIDGETTOOL_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,8 +2,7 @@
 #define MODELSTRUCT_H
 
 #include "TranStruct.h"
-//#include "DataStructure.h"
-//#include "../ViewWindow/OccHeader.h"
+#include "OperaParam.h"
 
 namespace grm{
 

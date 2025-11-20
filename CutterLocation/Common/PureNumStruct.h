@@ -22,6 +22,19 @@ static bool RightInc2(const double& v0,const double& v1,const double& v2)
 static bool RightInc12(const double& v0,const double& v1,const double& v2)
 {return v0 <= v1 && v1 <= v2;}
 
+static void ResetZ(double cur,double& t,double& res){
+    if(cur > t){
+        t = cur;
+        if(cur > res){
+            res = cur;
+        }
+    }
+}
+static bool IsInRange(double v,double min,double max,double e){
+    return v + e >= min && v - e <= max;
+
+}
+
 
 
 }

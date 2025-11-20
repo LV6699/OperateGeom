@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>345</width>
-    <height>295</height>
+    <width>349</width>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -152,7 +152,7 @@
      <x>0</x>
      <y>220</y>
      <width>341</width>
-     <height>71</height>
+     <height>121</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -221,25 +221,12 @@
      <double>1000.000000000000000</double>
     </property>
    </widget>
-   <widget class="QPushButton" name="btLineInt">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>38</y>
-      <width>90</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>计算</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="cheFindInt">
     <property name="geometry">
      <rect>
       <x>5</x>
       <y>38</y>
-      <width>80</width>
+      <width>85</width>
       <height>30</height>
      </rect>
     </property>
@@ -250,14 +237,69 @@
    <widget class="QCheckBox" name="cheExeSel">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>100</x>
       <y>38</y>
-      <width>85</width>
-      <height>19</height>
+      <width>90</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
      <string>执行选择</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btLineInt">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>38</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>计算偏置Z</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btSelPtAllZ">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>70</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>计算Z</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinTriaId">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>70</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(220, 220, 220);</string>
+    </property>
+    <property name="maximum">
+     <number>99999</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btVieIdTria">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>70</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>索引三角形</string>
     </property>
    </widget>
   </widget>

@@ -6,7 +6,7 @@ C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/ViewData.h
 C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/OperTriaCl.h
 C:/Users/lvd/Desktop/GeomOperate/CutterLocation/GridStruct/CreateGrid.h
 C:/Users/lvd/Desktop/GeomOperate/DiscreteModel/DiscreteModel.h
-C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutterLocationZ.h
+C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutLocateZ.h
 C:/Users/lvd/Desktop/GeomOperate/OperateView/DisplayGeom.h
 C:/Users/lvd/Desktop/GeomOperate/OperateView/GeomToShape.h
 C:/Users/lvd/Desktop/GeomOperate/ViewWindow/MainWindow.h
@@ -20,7 +20,7 @@ C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Common/ViewData.cpp
 C:/Users/lvd/Desktop/GeomOperate/CutterLocation/DebugTool/WidgetTool.cpp
  uic:ui_WidgetTool.h
 C:/Users/lvd/Desktop/GeomOperate/CutterLocation/GridStruct/CreateGrid.cpp
-C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutterLocationZ.cpp
+C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/CutLocateZ.cpp
 C:/Users/lvd/Desktop/GeomOperate/DiscreteModel/DiscreteModel.cpp
 C:/Users/lvd/Desktop/GeomOperate/OperateView/DisplayGeom.cpp
 C:/Users/lvd/Desktop/GeomOperate/OperateView/GeomToShape.cpp

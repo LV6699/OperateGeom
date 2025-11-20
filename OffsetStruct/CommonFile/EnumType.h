@@ -250,7 +250,19 @@ enum MovePathType{
     SkimPathType,       /// 跳过曲线
     UnknownPathType     /// 未知类型曲线
 };
+
+enum PtClType{
+    OftTrai = 0,
+    PtProt,
+    EdgePro
+};
+
+
+
+
 }
+
+namespace Ofte = OffsetEnum;
 
 #endif // ENUMTYPE_H
 

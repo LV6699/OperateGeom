@@ -3,7 +3,7 @@
 
 void ExicuteCalc::LineTriangleClInt(const oft::Point& p)
 {
-    grm::CutterLocationZ cl;
+    grm::CutLocateZ cl;
     const auto& ts = _meshMap.TrianglesCl();
     vector<grm::Triangle>ts_;
     for(auto& t : ts){
@@ -16,6 +16,12 @@ void ExicuteCalc::LineTriangleClInt(const oft::Point& p)
         double z_ = cl.OftTriangleCase(t,p);
         if(z < z_){z = z_;}
     }
+
+
+}
+void ExicuteCalc::GetRelaTris(double x,double y,
+                              std::vector<grm::Triangle>& ts)
+{
 
 
 }

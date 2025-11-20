@@ -4,7 +4,7 @@
 #include "../ViewWindow/OccHeader.h"
 #include "../OffsetStruct/CommonFile/DataStructure.h"
 //#include"../ViewWindow/MainWindow.h"
-//#include"../CutterLocation/Solution/CutterLocationZ.h"
+//#include"../CutterLocation/Solution/CutLocateZ.h"
 
 class GeomToShape
 {
@@ -128,6 +128,7 @@ public:
         ShapesToShape(std::vector<TopoDS_Shape>{s0,s1,s2},s);
         return s;
     }*/
+
 
 
 

@@ -3,8 +3,7 @@
 
 #pragma optimize("", off)
 
-namespace grm{
-
-
+namespace grm
+{
 
 }

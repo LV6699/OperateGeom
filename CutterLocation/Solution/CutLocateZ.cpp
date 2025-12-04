@@ -4,6 +4,7 @@ using std::vector;
 using namespace oft;
 
 typedef grm::CutLocateZ clz;
+typedef grm::IntVertProt ivp;
 typedef grm::IntEdgeProt iep;
 
 #pragma optimize("", off)
@@ -13,7 +14,7 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
                       vector<ClRelItem>& rels)
 {
     OperTriaCl ot;
-    const auto& ts = m._trisCl;
+    const auto& ts = m.Triangles();
     const auto& T = m.Tool();
 
     for(size_t i = 0;i < ts.size();++i){/***/
@@ -22,14 +23,14 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
         }
         const auto& t = ts[i];
         if(t.IsInRange(p) && t.N().Z() > PreErr5_10){
-            double z = clz::OftTriangleCase(t,p);
+            double z = clz::OftTriangleCase(_meshMap.Tool(),t,p);
             rels.push_back(ClRelItem(ClRelType::OftTriangle,t,i,z));
         }
         {
             double z0 = Min_Val,z1 = Min_Val,z2 = Min_Val;
-            z0 = clz::VertexProtectCase(T,t.P0(),p);
-            z1 = clz::VertexProtectCase(T,t.P1(),p);
-            z2 = clz::VertexProtectCase(T,t.P2(),p);
+            z0 = ivp::VertexProtectZ(T,t.P0(),p);
+            z1 = ivp::VertexProtectZ(T,t.P1(),p);
+            z2 = ivp::VertexProtectZ(T,t.P2(),p);
             if(z0 != Min_Val){
                 rels.push_back(ClRelItem(ClRelType::PtProtect,t.P0(),i,z0));
             }

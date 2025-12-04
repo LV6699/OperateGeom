@@ -8,6 +8,14 @@
             "command": "call \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat\"; cmake -B build",
             //"command": "call \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat\"; cmake -B C:\\Users\\ld\\Desktop\\build\\CamView\\build_",
             "group": "build",
+            "problemMatcher": [],
+            "label": "removeSpacesInBraces",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Get-Content ${file} | ForEach-Object { $_ -replace '\\}\\s+else\\s*\\{', '}else{' -replace '\\}\\s+else if\\s*\\(', '}else if(' -replace '\\}\\s+catch\\s*\\(', '}catch(' -replace '\\}\\s+finally\\s*\\{', '}finally{' } | Set-Content ${file}"
+            ],
             "problemMatcher": []
         }
     ]

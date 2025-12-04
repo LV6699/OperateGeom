@@ -2,25 +2,36 @@
 #include "ClStruct.h"
 
 #pragma optimize("", off)
+#pragma GCC optimize ("o0")
 
 namespace grm{
 
 void grm::MeshMap::InitialEdge()
 {
-    _xEdges.reserve(_clPts.size());
-    for(auto& d : _clPts){
-        std::vector<ClEdge>v;
-        v.reserve(d.size());
-        for(size_t i = 0;i < d.size()-1;++i){
-            v.emplace_back(ClEdge(d[i],d[i+1]));
+    auto& pts = _clPts;
+    auto HandleEdges = [](vector<vector<oft::Point>>& pts,
+            std::vector<std::vector<ClEdge>>& es){
+        es.reserve(pts.size());
+        for(auto& d : pts){
+            std::vector<ClEdge>v;
+            v.reserve(d.size());
+            for(size_t i = 0;i < d.size()-1;++i){
+                ClEdge e(d[i],d[i+1]);
+                v.emplace_back(e);
+            }
+            es.emplace_back(v);
         }
-        _xEdges.emplace_back(v);
-    }
-    for(size_t j = 0;j < _clPts[0].size()-1;++j){
+    };
+    HandleEdges(pts,_xEdges);
+    ///return;
+    _yEdges.reserve(pts[0].size());
+
+    for(size_t j = 0; j < pts[0].size(); j++) {
         std::vector<ClEdge>v;
-        v.reserve(_clPts[0].size());
-        for(size_t i = 0;i < _clPts.size();++i){
-            v.emplace_back(ClEdge(_clPts[i][j],_clPts[i][j+1]));
+        v.reserve(pts.size());
+        for(size_t i = 0; i < pts.size()-1; i++) {
+            ClEdge e(pts[i][j], pts[i+1][j]);
+            v.emplace_back(e);
         }
         _yEdges.emplace_back(v);
     }

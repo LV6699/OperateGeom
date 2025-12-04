@@ -151,6 +151,12 @@
 			null
 		],
 		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/IntVertexProt.h",
+			"MU",
+			"YHUYOVPJQZ/moc_IntVertexProt.cpp",
+			null
+		],
+		[
 			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/OperTriaCl.h",
 			"MU",
 			"YHUYOVPJQZ/moc_OperTriaCl.cpp",
@@ -350,6 +356,11 @@
 		],
 		[
 			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/IntEdgeProt.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/lvd/Desktop/GeomOperate/CutterLocation/Solution/IntVertexProt.cpp",
 			"MU",
 			null
 		],

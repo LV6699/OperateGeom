@@ -6,6 +6,9 @@
 #include"../../ViewWindow/MainWindow.h"
 #include"../Common/ClStruct.h"
 
+#pragma optimize("", off)
+#pragma GCC optimize ("o0")
+
 class ViewTool
 {
 public:
@@ -69,7 +72,14 @@ public:
     static TopoDS_Shape EdgesToShape(const std::vector<std::vector<grm::ClEdge>>&es){
         TopoDS_Shape s;
         std::vector<TopoDS_Shape>shapes;
-        shapes.reserve(es.size());
+        shapes.reserve(es.size());/**
+        for(int i = 0;i < es.size();i++){
+            for(int j = 0;j < es[i].size();j++){
+                ///auto& e = es[i][j];
+                ///shapes.emplace_back(EdgeToShape(e));
+                ///std::cout<<i<<","<<j<<std::endl;
+            }
+        }*/
         for(const auto& d : es){
             for(const auto& e : d){
                 shapes.emplace_back(EdgeToShape(e));

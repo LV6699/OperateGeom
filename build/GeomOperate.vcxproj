@@ -581,6 +581,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\BaseCalc.cpp" />
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\CutLocateZ.cpp" />
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\IntEdgeProt.cpp" />
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\IntVertexProt.cpp" />
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\OperTriaCl.cpp" />
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\DebugTool\ExicuteCalc.cpp" />
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\DebugTool\OperateObject.cpp" />

@@ -175,17 +175,13 @@ void OccView::fitAll( void )
 }
 void OccView::reset(){myView->Reset();}
 void OccView::pan(){
-    if(myCurrentMode != CurAction3d_DynamicPanning){
-        myCurrentMode = CurAction3d_DynamicPanning;
-    }
+    myCurrentMode = CurAction3d_DynamicPanning;
 }
 void OccView::zoom(){
     myCurrentMode = CurAction3d_DynamicZooming;
 }
 void OccView::rotate(){
-    if(myCurrentMode != CurAction3d_DynamicRotation){
-        myCurrentMode = CurAction3d_DynamicRotation;
-    }
+    myCurrentMode = CurAction3d_DynamicRotation;
 }
 //#include"../ViewHeader.h"
 void OccView::mousePressEvent( QMouseEvent* theEvent )
@@ -292,14 +288,11 @@ void OccView::onMouseMove( const int theFlags, const QPoint thePoint )
 {
     // Draw the rubber band.
     if (theFlags & Qt::LeftButton){
-        //myCurrentMode = CurAction3d_DynamicRotation;
         int dx = thePoint.x() - m_lastMousePos.x();
         int dy = thePoint.y() - m_lastMousePos.y();
-        //myView->Rotation(thePoint.x(), thePoint.y());
-        myView->Rotation(dx, dy);
+        myView->Rotation(dx,dy);
+        ///myCurrentMode = CurAction3d_DynamicRotation;
         myView->Redraw();
-        //drawRubberBand(myXmin, myYmin, thePoint.x(), thePoint.y());
-        //dragEvent(thePoint.x(), thePoint.y());
     }
     if(theFlags & Qt::ControlModifier){
         multiMoveEvent(thePoint.x(), thePoint.y());

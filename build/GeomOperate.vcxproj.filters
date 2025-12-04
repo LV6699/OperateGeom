@@ -46,6 +46,9 @@
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\IntEdgeProt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\IntVertexProt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\lvd\Desktop\GeomOperate\CutterLocation\Solution\OperTriaCl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

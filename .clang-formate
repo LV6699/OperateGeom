@@ -1,0 +1,62 @@
+# .clang-format
+Language: Cpp
+BasedOnStyle: Google # 或 LLVM / Chromium / Mozilla 等，根据你偏好调整
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 0 # 不限制行宽
+# 大括号样式 - 关键字后大括号在同一行
+BreakBeforeBraces: Stroustrup #如果为 Attach,则函数名后大括号与函数名也在同一行
+BraceWrapping:
+ AfterFunction: true
+ AfterClass: false # 类定义后通常不换行
+ AfterControlStatement: false # if/for/while 等控制语句后通常不换行
+ AfterEnum: false
+ AfterNamespace: false
+ AfterObjCDeclaration: false
+ AfterStruct: false # 结构体定义后通常不换行
+ AfterUnion: false
+ BeforeCatch: false
+ BeforeElse: false
+ IndentBraces: false
+# 空格设置 - 关键字和括号之间无空格
+SpaceBeforeParens: Never
+SpaceAfterCStyleCast: false
+SpacesInCStyleCastParentheses: false
+# 关键配置 - 引用和指针的放置位置
+PointerAlignment: Left
+ReferenceAlignment: Left
+# 核心设置：消除括号内的所有空格
+SpacesInParentheses: false # 圆括号 ( ) 内部
+SpacesInSquareBrackets: false # 方括号 [ ] 内部
+SpacesInAngles: false # 尖括号 < > 内部（用于模板）
+# 额外相关设置：确保一致性 Cpp11BracedListStyle: true
+# 控制容器字面量（如数组、对象）内是否加空格
+SpacesInContainerLiterals: false
+# 控制 C++11 风格初始化列表的大括号内是否加空格
+Cpp11BracedListStyle: false
+# 控制函数名、if/for 等关键字与后面圆括号之间是否加空格
+# 其他空格设置
+SpaceBeforeAssignmentOperators: true
+#SpaceBeforeColon: false
+SpaceBeforeRangeBasedForLoopColon: false
+# 缩进设置
+IndentCaseLabels: true
+IndentPPDirectives: None
+ContinuationIndentWidth: 4
+# 其他格式化选项
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+SpacesInConditionalStatement: false # 条件语句括号内无空格
+SpaceInEmptyBlock: false # 空块内无空格
+# 其他常用设置（可选）
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+DerivePointerAlignment: false
+PointerAlignment: Left
+# 保留最多 2 个连续空行
+MaxEmptyLinesToKeep: 100
+# 保留代码块起始处的空行
+KeepEmptyLinesAtTheStartOfBlocks: true
+InsertNewlineAtEOF: true

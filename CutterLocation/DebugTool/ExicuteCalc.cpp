@@ -1,7 +1,7 @@
 #include "ExicuteCalc.h"
 #include "../../ViewWindow/MainWindow.h"
 
-void ExicuteCalc::LineTriangleClInt(const oft::Point& p)
+void ExicuteCalc::LineTriangleClInt(const ofts::Point& p)
 {
     grm::CutLocateZ cl;
     const auto& ts = _meshMap.TrianglesCl();
@@ -13,7 +13,7 @@ void ExicuteCalc::LineTriangleClInt(const oft::Point& p)
     double z = Min_Val;
     for(size_t i = 0;i < ts_.size();++i){
         const auto& t = ts_[i];
-        double z_ = cl.OftTriangleCase(_meshMap.Tool(),t,p);
+        double z_ = cl.ProtectFaceZ(_meshMap.Tool(),t,p);
         if(z < z_){z = z_;}
     }
 

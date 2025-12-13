@@ -65,7 +65,7 @@ void OperateObject::FindSelectObject()
 
     context->InitSelected();
     if (context->NbSelected() == 0){return;}
-    oft::Point v,sp,ep,cp;
+    ofts::Point v,sp,ep,cp;
     _hasUiFind = false;
     bool hasFound = false,isVetex = false,isLine = false;
 
@@ -107,8 +107,8 @@ void OperateObject::FindSelectObject()
     if(isVetex){
         _p = v;
     }else{
-        if(isLine){_selObj = oft::DefElem(LINETYPE,oft::DefSeg(sp,ep));}
-        else{_selObj = oft::DefElem(ARCTYPE,oft::DefArc(sp,ep,cp,true));}
+        if(isLine){_selObj = ofts::DefElem(LINETYPE,ofts::DefSeg(sp,ep));}
+        else{_selObj = ofts::DefElem(ARCTYPE,ofts::DefArc(sp,ep,cp,true));}
     }
     _isPoint = isVetex;
     _hasUiFind = true;
@@ -124,6 +124,7 @@ void OperateObject::FindTrianges()
     DisplayGeom dg;GeomToShape gts;Handle(AIS_Shape) a;
 
     bool hasFind = false;
+    bool isorigin = false;
     grm::Triangle clt,tri;
     const auto& sp = _selObj.StarPt();
     const auto& ep = _selObj.EndPt();
@@ -131,19 +132,19 @@ void OperateObject::FindTrianges()
         const auto& t = _meshMap._trisCl[i];
         if(t.IsVertex(sp) && t.IsVertex(ep)){
             clt = t;
-            ///tri = grm::Triangle(*t._op0,*t._op1,*t._op2);
+            tri = grm::Triangle(t._ot->P0(),t._ot->P1(),t._ot->P2());
             hasFind = true;
             std::cout<<"偏置三角形索引:"<<i<<std::endl;
             break;
         }
     }
     if(!hasFind){
-        for(size_t i = 0;i < _meshMap.Triangles().size();++i) {
+        const auto& tris = _meshMap.Triangles();
+        for(size_t i = 0;i < tris.size();++i) {
             const auto& t = _meshMap._tris[i];
             if(t.IsVertex(sp) && t.IsVertex(ep)){
                 clt = t;
-                ///tri = grm::Triangle(*t._op0,*t._op1,*t._op2);
-                hasFind = true;
+                hasFind = true;isorigin = true;
                 std::cout<<"离散三角形索引:"<<i<<std::endl;
                 break;
             }
@@ -159,15 +160,47 @@ void OperateObject::FindTrianges()
     WidgetTool().DisplayOperItem(_opeItem._sel_clts);
 }
 
+void OperateObject::FindDiscreteEdge()
+{
+    size_t id = 0;
+    bool hasFind = false;
+    
+    const auto& sp = _selObj.StarPt();
+    const auto& ep = _selObj.EndPt();
+    const auto& edges = _meshMap.GetTEdges();
+
+    for (size_t i = 0; i < edges.size(); i++) {
+      if ((edges[i]._p0.IsSameCoord3D(sp, PreErr5_6) &&
+           edges[i]._p1.IsSameCoord3D(ep, PreErr5_6))) {
+            std::cout<<"离散边索引:"<<i<<std::endl;
+            hasFind = true;
+            break;
+      }
+      if ((edges[i]._p0.IsSameCoord3D(sp, PreErr5_6) &&
+           edges[i]._p1.IsSameCoord3D(ep, PreErr5_6))) {
+            std::cout<<"离散边索引:"<<i<<std::endl;
+            hasFind = true;
+            break;
+      }
+    }
+    if(!hasFind){std::cout<<"No data found!"<<endl;return;}
+    auto shape = ViewTool::SegmentToShape(edges[id]._p0,edges[id]._p1);
+    _opeItem._oriEdge = ViewObj::ViewItem(shape,_colors[1],2);
+    WidgetTool().DisplayOperItem(_opeItem._sel_ts);
+}
+
 void OperateObject::FindSelItem()
 {
     FindSelectObject();
     if(!_hasUiFind){return;}
-    if(_isPoint){GetSelPointIndex();}
-    else{FindTrianges();}
+    if(_isPoint){GetSelPointIndex();
+    } else {
+      //FindTrianges();
+      FindDiscreteEdge();
+    }
 }
 
-void OperateObject::FindIntBasePoint(const oft::Point& p)
+void OperateObject::FindIntBasePoint(const ofts::Point& p)
 {
     ///查找偏置面相交信息
     GeomToShape gts;DisplayGeom dg;

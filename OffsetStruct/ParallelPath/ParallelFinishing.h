@@ -17,11 +17,11 @@ public:
 class ParallelFinishing : public Operation
 {
 public:
-    gp_Pnt ToPnt(const oft::Point& p){
+    gp_Pnt ToPnt(const ofts::Point& p){
         return gp_Pnt(p.X(),p.Y(),p.Z());
     }
-    oft::Point ToPt(const gp_Pnt& p){
-        return oft::Point(p.X(),p.Y(),p.Z());
+    ofts::Point ToPt(const gp_Pnt& p){
+        return ofts::Point(p.X(),p.Y(),p.Z());
     }
     ParallelFinishing(ParallelFinishingParam* param,
                       const string& operateName);
@@ -46,7 +46,7 @@ public:
     std::shared_ptr<cls::model> _clsModel = nullptr;
     std::vector<JLC_Wire>_wires;
     DefLoop _blankLoop;
-    std::vector<oft::GeomArea>_areas;
+    std::vector<ofts::GeomArea>_areas;
 };
 }
 #endif // PARALLELFINISHING_H

@@ -1,14 +1,14 @@
 # .clang-format
 Language: Cpp
-BasedOnStyle: Google # 或 LLVM / Chromium / Mozilla 等，根据你偏好调整
+BasedOnStyle: LLVM # 或 LLVM / Chromium / Mozilla 等，根据你偏好调整
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
 ColumnLimit: 0 # 不限制行宽
 # 大括号样式 - 关键字后大括号在同一行
-BreakBeforeBraces: Stroustrup #如果为 Attach,则函数名后大括号与函数名也在同一行
+BreakBeforeBraces: Attach #Stroustrup#如果为 Attach,则函数名后大括号与函数名也在同
+一行
 BraceWrapping:
- AfterFunction: true
  AfterClass: false # 类定义后通常不换行
  AfterControlStatement: false # if/for/while 等控制语句后通常不换行
  AfterEnum: false
@@ -19,13 +19,11 @@ BraceWrapping:
  BeforeCatch: false
  BeforeElse: false
  IndentBraces: false
+ AfterFunction: true
 # 空格设置 - 关键字和括号之间无空格
 SpaceBeforeParens: Never
 SpaceAfterCStyleCast: false
 SpacesInCStyleCastParentheses: false
-# 关键配置 - 引用和指针的放置位置
-PointerAlignment: Left
-ReferenceAlignment: Left
 # 核心设置：消除括号内的所有空格
 SpacesInParentheses: false # 圆括号 ( ) 内部
 SpacesInSquareBrackets: false # 方括号 [ ] 内部
@@ -37,8 +35,7 @@ SpacesInContainerLiterals: false
 Cpp11BracedListStyle: false
 # 控制函数名、if/for 等关键字与后面圆括号之间是否加空格
 # 其他空格设置
-SpaceBeforeAssignmentOperators: true
-#SpaceBeforeColon: false
+#SpaceBeforeAssignmentOperators: true
 SpaceBeforeRangeBasedForLoopColon: false
 # 缩进设置
 IndentCaseLabels: true
@@ -59,4 +56,4 @@ PointerAlignment: Left
 MaxEmptyLinesToKeep: 100
 # 保留代码块起始处的空行
 KeepEmptyLinesAtTheStartOfBlocks: true
-InsertNewlineAtEOF: true
+InsertNewlineAtEOF: false

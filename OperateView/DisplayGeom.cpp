@@ -5,7 +5,7 @@
 #include "../ViewWindow/MainWindow.h"
 
 using namespace std;
-using namespace oft;
+using namespace ofts;
 
 #pragma optimize("", off)
 #pragma GCC optimize ("O0")

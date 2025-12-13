@@ -107,6 +107,7 @@ public:
     ViewItem _sel_clts;    ///选择的偏置三角形
     ViewItem _int_clts;    ///相交三角形
     ViewItem _selPt;       ///选择的点
+    ViewItem _oriEdge;     ///离散三角形边
     std::vector<ViewItem> _clRelItems;  ///刀位点相关来源对象
 
 };

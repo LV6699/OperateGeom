@@ -1,7 +1,7 @@
 #include "CreateGrid.h"
 
 using namespace std;
-using namespace oft;
+using namespace ofts;
 
 #pragma optimize("", off)
 

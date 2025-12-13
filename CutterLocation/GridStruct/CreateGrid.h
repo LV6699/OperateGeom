@@ -13,7 +13,7 @@ public:
 
     void CreateModelGrid(grm::ClModel& m,
                          double step,
-                         std::vector<std::vector<oft::Point>>&_clmesh);
+                         std::vector<std::vector<ofts::Point>>&_clmesh);
 
 
 

@@ -32,8 +32,9 @@ static void ResetZ(double cur,double& t,double& res){
 }
 static bool IsInRange(double v,double min,double max,double e){
     return v + e >= min && v - e <= max;
-
 }
+
+static double Square(double v) {return v * v;}
 
 
 

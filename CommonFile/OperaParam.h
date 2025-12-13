@@ -4,18 +4,19 @@
 namespace grm{
 
 enum class ToolType{
-    PlaneEnd = 0,
-    RoundNoseEnd,
-    BallNoseEnd,
-    V_Cutter
+    PlaneEnd = 0,  ///平底刀
+    BallNoseEnd,   ///圆笔刀
+    RoundNoseEnd,  ///球刀
+    V_Cutter       ///v刀
 };
 
 class  DefTool{
 public:
     DefTool(){}
     DefTool(ToolType t,double R,double cr):_type(t),_R(R),_cr(cr){
-        if(t == ToolType::RoundNoseEnd){cr = R;}
-        else if(t == ToolType::PlaneEnd){cr = 0;}
+        if(t == ToolType::PlaneEnd){cr = 0;}
+        else if(t == ToolType::BallNoseEnd){cr = R;}
+        else if(t == ToolType::V_Cutter){cr = 0;}
     }
     void SetR(double r){_R = r;}
     void SetCR(double r){_cr = r;}

@@ -13,27 +13,27 @@ public:
     void GetShapeColor(bool isClassify,bool isOriProf,
                        ToolPathType pathType,double &width,
                        Quantity_Color& color);
-    gp_Pnt ToOccPt(const oft::Point& p){return gp_Pnt (p.X(),p.Y(),p.Z());}
-    void PointToShape(const oft::Point& p,TopoDS_Shape &shape)
+    gp_Pnt ToOccPt(const ofts::Point& p){return gp_Pnt (p.X(),p.Y(),p.Z());}
+    void PointToShape(const ofts::Point& p,TopoDS_Shape &shape)
     {
         BRepBuilderAPI_MakeVertex v(ToOccPt(p));
         shape = v;
     }
-    void SegmentToShape(const oft::Point& sp,const oft::Point& ep,
+    void SegmentToShape(const ofts::Point& sp,const ofts::Point& ep,
                         TopoDS_Shape &shape)
     {
         if(sp.IsSameCoord3D(ep,PreErr5_8)){return;}
         TopoDS_Edge e = BRepBuilderAPI_MakeEdge(ToOccPt(sp),ToOccPt(ep));
         shape = e;
     }
-    void ArcToShape(const oft::DefArc& arc_,
+    void ArcToShape(const ofts::DefArc& arc_,
                     TopoDS_Shape &shape)
     {
         auto arc = arc_;
         arc.ChoiceSetRadius(PreErr5_2);
-        const oft::Point& sp = arc._arcSp;
-        const oft::Point& ep = arc._arcEp;
-        const oft::Point& cp = arc._arcCp;
+        const ofts::Point& sp = arc._arcSp;
+        const ofts::Point& ep = arc._arcEp;
+        const ofts::Point& cp = arc._arcCp;
         if(sp.IsSameCoord3D(ep,PreErr5_8) ||
                 sp.IsSameCoord3D(cp,PreErr5_8))
             return;
@@ -77,7 +77,7 @@ public:
 #endif
         shape = edge;
     }
-    void CircleToShape(const oft::DefCircle& circle,
+    void CircleToShape(const ofts::DefCircle& circle,
                        TopoDS_Shape &shape)
     {
         double r = circle._cirR;
@@ -87,7 +87,7 @@ public:
         TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(geomCircle);
         shape = edge;
     }
-    void ElementToShape(const oft::DefElem& ele,
+    void ElementToShape(const ofts::DefElem& ele,
                         TopoDS_Shape &shape)
     {
         switch (ele.ElemeType()) {
@@ -114,9 +114,9 @@ public:
         }
         shape = comp;
     }
-    void LoopToShape(const oft::DefLoop& loop,TopoDS_Shape &shape);
-    void LoopsToShape(const std::vector<oft::DefLoop> &loops, TopoDS_Shape &shape);
-    void GeomAreaToShape(const oft::GeomArea& area,TopoDS_Shape& shape);
+    void LoopToShape(const ofts::DefLoop& loop,TopoDS_Shape &shape);
+    void LoopsToShape(const std::vector<ofts::DefLoop> &loops, TopoDS_Shape &shape);
+    void GeomAreaToShape(const ofts::GeomArea& area,TopoDS_Shape& shape);
 
     /*
     TopoDS_Shape TriangleToShape(const grm::Triangle& t)

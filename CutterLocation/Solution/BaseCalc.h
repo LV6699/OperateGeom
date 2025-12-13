@@ -10,9 +10,9 @@ public:
 
 
 
-    static grm::ProjRes GetProjPoint(const oft::Point& p,
-                                     const oft::Point& sp,
-                                     const oft::Point& ep){
+    static grm::ProjRes GetProjPoint(const ofts::Point& p,
+                                     const ofts::Point& sp,
+                                     const ofts::Point& ep){
         if(p.IsSameCoord2D(sp,PreErr_10)){
             return grm::ProjRes(sp,0);
         }
@@ -23,8 +23,8 @@ public:
         return grm::ProjRes(pr,num);
     }
 
-    static bool InSegRangle(const oft::Point& p,const oft::Point& sp,
-                            const oft::Point& ep,double e){
+    static bool InSegRangle(const ofts::Point& p,const ofts::Point& sp,
+                            const ofts::Point& ep,double e){
 
     }
 

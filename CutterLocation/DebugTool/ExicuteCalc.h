@@ -8,7 +8,7 @@ class ExicuteCalc
 public:
     ExicuteCalc(){}
 
-    void LineTriangleClInt(const oft::Point& p);
+    void LineTriangleClInt(const ofts::Point& p);
 
     void GetRelaTris(double x,double y,std::vector<grm::Triangle>& ts);
 

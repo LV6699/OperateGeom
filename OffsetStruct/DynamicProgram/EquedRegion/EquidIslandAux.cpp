@@ -1,9 +1,9 @@
 #include "EquidIslandAux.h"
 #include"../../CommonFile/Header.h"
 using namespace std;
-using namespace oft;
+using namespace ofts;
 void EquidIslandAux::AddDeleteIslNode(vector<LoopNode>&iNodes,int i,
-                                      oft::NodeForm& nodeForm)
+                                      ofts::NodeForm& nodeForm)
 {
     if(!iNodes[i]._offsetNode->_vLoopData.empty() ||
             !iNodes[i]._offsetNode->_vOffsetNode.empty()){
@@ -48,7 +48,7 @@ void EquidIslandAux::DeleteInsidedOutLoop(vector<LoopNode>& iNodes,
 void EquidIslandAux::OperateEquidOutLoop(const vector<DefLoop>& inloops,
                                          vector<DefLoop>& outloops,
                                          vector<LoopNode>& iNodes,
-                                         oft::NodeForm& nodeForm,
+                                         ofts::NodeForm& nodeForm,
                                          vector<GeomArea>& regions)
 {
     int i = 0;
@@ -115,7 +115,7 @@ void EquidIslandAux::OperateEquidOutLoop(const vector<DefLoop>& inloops,
 }
 void EquidIslandAux::DeleteInsideIslNode(const vector<DefLoop>& inloops,
                                          vector<LoopNode>& iNodes,
-                                         oft::NodeForm& nodeForm)
+                                         ofts::NodeForm& nodeForm)
 {
     ///对于iNodes中的环,如果其被包含在vOftPair中的m_inloops环中,则其应该被
     ///删除,除此以外，当其被包含在 iNodes中的其他环内,也应该被删除.    int i = 0;GeomContain gocon;

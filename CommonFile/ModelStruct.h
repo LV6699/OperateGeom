@@ -6,25 +6,25 @@
 
 namespace grm{
 
-//oft::Point ToPt(const gp_Pnt& p){return oft::Point(p.X(),p.Y(),p.Z());}
-//gp_Pnt ToOccPt(const oft::Point& p){return gp_Pnt(p.X(),p.Y(),p.Z());}
+//ofts::Point ToPt(const gp_Pnt& p){return ofts::Point(p.X(),p.Y(),p.Z());}
+//gp_Pnt ToOccPt(const ofts::Point& p){return gp_Pnt(p.X(),p.Y(),p.Z());}
 
 class TrianRes {
 public:
     TrianRes(){}
-    TrianRes(const std::vector<oft::Point>& vs,
+    TrianRes(const std::vector<ofts::Point>& vs,
              const std::vector<std::array<int, 3>>& ts) :
         _vertexs(vs),_triangles(ts){}
-    const std::vector<oft::Point>&Vertexs() const{return _vertexs;}
+    const std::vector<ofts::Point>&Vertexs() const{return _vertexs;}
     const std::vector<std::array<int, 3>>&Triangles() const{return _triangles;}
 public:
-    std::vector<oft::Point> _vertexs;
+    std::vector<ofts::Point> _vertexs;
     std::vector<std::array<int, 3>> _triangles;
 
 };
 /// 顶点比较函数对象
 struct VertexHash {
-    std::size_t operator()(const oft::Point& p) const {
+    std::size_t operator()(const ofts::Point& p) const {
         std::size_t h1 = std::hash<double>()(p.X());
         std::size_t h2 = std::hash<double>()(p.Y());
         std::size_t h3 = std::hash<double>()(p.Z());
@@ -34,7 +34,7 @@ struct VertexHash {
     }
 };
 struct VertexEqual {
-    bool operator()(const oft::Point& p1, const oft::Point& p2) const {
+    bool operator()(const ofts::Point& p1, const ofts::Point& p2) const {
         return p1.DistSquare3D(p2) < 1e-12; // 使用容差比较
     }
 };
@@ -50,7 +50,7 @@ public:
         TopExp_Explorer explorer(_shape, TopAbs_VERTEX);
         while (explorer.More()) {
             TopoDS_Vertex vertex = TopoDS::Vertex(explorer.Current());
-            auto p = oft::Point(BRep_Tool::Pnt(vertex).X(),
+            auto p = ofts::Point(BRep_Tool::Pnt(vertex).X(),
                                 BRep_Tool::Pnt(vertex).Y(),BRep_Tool::Pnt(vertex).Z());
             if(first){
                 _minxp = p;_maxxp = p;_minyp = p;_maxyp = p;_minzp = p;_maxzp = p;
@@ -68,18 +68,18 @@ public:
     double XLen()const{return _maxxp.X() - _minxp.X();}
     double YLen()const{return _maxyp.Y() - _minyp.Y();}
     double ZLen()const{return _maxzp.Z() - _minzp.Z();}
-    const oft::Point& MinXPt()const{return _minxp;}
-    const oft::Point& MaxXPt()const{return _maxxp;}
-    const oft::Point& MinYPt()const{return _minyp;}
-    const oft::Point& MaxYPt()const{return _maxyp;}
-    const oft::Point& MinZPt()const{return _minzp;}
-    const oft::Point& MaxZPt()const{return _maxzp;}
+    const ofts::Point& MinXPt()const{return _minxp;}
+    const ofts::Point& MaxXPt()const{return _maxxp;}
+    const ofts::Point& MinYPt()const{return _minyp;}
+    const ofts::Point& MaxYPt()const{return _maxyp;}
+    const ofts::Point& MinZPt()const{return _minzp;}
+    const ofts::Point& MaxZPt()const{return _maxzp;}
 
 
 public:
 
     TopoDS_Shape _shape;
-    oft::Point _minxp,_maxxp,_minyp,_maxyp,_minzp,_maxzp;
+    ofts::Point _minxp,_maxxp,_minyp,_maxyp,_minzp,_maxzp;
 
 };
 

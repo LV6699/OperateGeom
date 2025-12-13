@@ -15,23 +15,23 @@ class PntSet
 {
 public:
     PntSet() {}
-    PntSet(const std::vector<oft::Point>&v) : _vPnt(v) {}
+    PntSet(const std::vector<ofts::Point>&v) : _vPnt(v) {}
 public:
-    std::vector<oft::Point>_vPnt;
+    std::vector<ofts::Point>_vPnt;
 };
 }
 namespace GridArea {
 class LinePnt{
 public:
     LinePnt(){}
-    LinePnt(const std::vector<oft::Point> &v){_vPnt = v;}
-    void PushBack(const oft::Point &v){_vPnt.push_back(v);}
-    oft::Point IndexPt(int i) const{return _vPnt[i];}
-    oft::Point Back() const{return _vPnt.back();}
-    oft::Point Front() const{return _vPnt.front();}
-    oft::Point * IndexNormal(int i) const{return 
+    LinePnt(const std::vector<ofts::Point> &v){_vPnt = v;}
+    void PushBack(const ofts::Point &v){_vPnt.push_back(v);}
+    ofts::Point IndexPt(int i) const{return _vPnt[i];}
+    ofts::Point Back() const{return _vPnt.back();}
+    ofts::Point Front() const{return _vPnt.front();}
+    ofts::Point * IndexNormal(int i) const{return 
 _vPnt[i]._lable._normal;}
-    oft::Point TailSecond() const{
+    ofts::Point TailSecond() const{
         return _vPnt[_vPnt.size() - 2];
     }
     void SetOnBorder(int i){_vPnt[i]._lable.SetOnBorder(true);}
@@ -45,7 +45,7 @@ _vPnt[i]._lable._normal;}
     void SetHeadOnSteep(){_vPnt[0]._lable._isOnSteep = true;}
     void Reverse(){std::reverse(_vPnt.begin(),_vPnt.end());}
 public:
-    std::vector<oft::Point>_vPnt;
+    std::vector<ofts::Point>_vPnt;
 };
 /**
 m,0|--|--|--|--|--|--|m,n
@@ -188,7 +188,7 @@ public:
     void SetP2(const OftStr::Point &p){_p2 = p;}
     void SetNormal(const OftStr::Point &p){_normal = p;}
     void CalculateAngel(){
-        oft::Point ab = _p0 - _p1,ac = _p0 - _p2,
+        ofts::Point ab = _p0 - _p1,ac = _p0 - _p2,
                 _normal = ab.Cross(ac);
         double l = _normal.Length2D();
         double a = std::atan2(std::abs(_normal._z),l);
@@ -260,7 +260,7 @@ public:
     TriInfo _relInfo;
     TriLable _lable;
     TriBorder _border;
-    oft::Point _normal;
+    ofts::Point _normal;
     std::vector<int>_adjs[3];
 };
 class TrianRes{
@@ -277,7 +277,7 @@ public:
     bool _isExiHorArc = false;
     bool _isExiVerArc = false;
     double _horY,verX;
-    std::vector<oft::DefArc> _vHorArc,_vVerArc;
+    std::vector<ofts::DefArc> _vHorArc,_vVerArc;
 };
 class RecAglBor{
 public:
@@ -285,7 +285,7 @@ public:
 public:
     bool _isInsBord = false;
     bool _isLineBord = false;
-    std::vector<oft::Point>_vBordPt;
+    std::vector<ofts::Point>_vBordPt;
 };
 class RecLable{
 public:
@@ -299,9 +299,9 @@ public:
 public:
     GridArea::LinePnt _vSeg[4];
     GridArea::LinePnt* _seg[4];/// 指针数组.
-    oft::Point _p0,_p1,_p2,_p3;
-    oft::Point _mp0,_mp1,_mp2,_mp3,_cp;
-    oft::Point _maxZPt,_minZPt;
+    ofts::Point _p0,_p1,_p2,_p3;
+    ofts::Point _mp0,_mp1,_mp2,_mp3,_cp;
+    ofts::Point _maxZPt,_minZPt;
 };
 /**
 p1------p2    ----l2---->
@@ -393,14 +393,14 @@ _vertex._p0 : _vertex._p1;
     bool IsLocatedBorder() const{return _isLocBorder;}
     std::vector<std::shared_ptr<Rectangle>> ArrayRectangle() {
         return _vRect;}
-    oft::Point IndexPt(int s,int p) const{
+    ofts::Point IndexPt(int s,int p) const{
         return _vertex._vSeg[s]._vPnt[p];}
-    std::vector<oft::Point>IndexPtSet(
+    std::vector<ofts::Point>IndexPtSet(
             int i,bool isReverse = false) const{
         return _vertex._vSeg[i]._vPnt;}
     GridArea::LinePnt IndexSeg(int i) const{
         return _vertex._vSeg[i];}
-    oft::Point LinePt(
+    ofts::Point LinePt(
             int i,int p) const{
         return _vertex._vSeg[i]._vPnt[p];}
     GridArea::LinePnt ExceptFirst(int i) const{
@@ -479,12 +479,12 @@ public:
         if(_vArrPoint.empty())
             return;
         _pntNum = _vArrPoint.size() * _vArrPoint[0].size();}
-    vector<vector<oft::Point>> GetPlanePoint() const{return 
+    vector<vector<ofts::Point>> GetPlanePoint() const{return 
 _vArrPoint;}
     int PlanePointNum() const{return _pntNum;}
 public:
     int _pntNum = 0;
-    vector<vector<oft::Point>>_vArrPoint;
+    vector<vector<ofts::Point>>_vArrPoint;
 };
 class ModelStruct{
 public:

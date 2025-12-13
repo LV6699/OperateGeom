@@ -9,7 +9,7 @@ class EquidIslandAux{
 public:
 
     void AddDeleteIslNode(vector<LoopNode>&iNodes,int i,
-                          oft::NodeForm& nodeForm);
+                          ofts::NodeForm& nodeForm);
 
     void DeleteInsidedOutLoop(vector<LoopNode>& iNodes,
                               vector<InOutLoop>& ioLoops);
@@ -18,12 +18,12 @@ public:
     void OperateEquidOutLoop(const vector<DefLoop>& inloops,
                              vector<DefLoop>& outloops,
                              vector<LoopNode>& iNodes,
-                             oft::NodeForm& nodeForm,
+                             ofts::NodeForm& nodeForm,
                              vector<GeomArea>& regions);
 
     void DeleteInsideIslNode(const vector<DefLoop>& inloops,
                              vector<LoopNode>& iNodes,
-                             oft::NodeForm& nodeForm);
+                             ofts::NodeForm& nodeForm);
 
 
 

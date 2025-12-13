@@ -78,7 +78,7 @@ void GeomToShape::GetShapeColor(bool isClassify,bool isOriProf,
         break;
     }
 }
-void GeomToShape::LoopToShape(const oft::DefLoop& loop,TopoDS_Shape &shape)
+void GeomToShape::LoopToShape(const ofts::DefLoop& loop,TopoDS_Shape &shape)
 {
     std::vector<TopoDS_Shape>shapes;
     shapes.reserve(loop.Size());
@@ -91,7 +91,7 @@ void GeomToShape::LoopToShape(const oft::DefLoop& loop,TopoDS_Shape &shape)
     }
     ShapesToShape(shapes,shape);
 }
-void GeomToShape::LoopsToShape(const std::vector<oft::DefLoop> &loops, TopoDS_Shape &shape)
+void GeomToShape::LoopsToShape(const std::vector<ofts::DefLoop> &loops, TopoDS_Shape &shape)
 {
     std::vector<TopoDS_Shape>shapes;
     shapes.reserve(loops.size());
@@ -104,7 +104,7 @@ void GeomToShape::LoopsToShape(const std::vector<oft::DefLoop> &loops, TopoDS_Sh
     }
     ShapesToShape(shapes,shape);
 }
-void GeomToShape::GeomAreaToShape(const oft::GeomArea& area,TopoDS_Shape& shape)
+void GeomToShape::GeomAreaToShape(const ofts::GeomArea& area,TopoDS_Shape& shape)
 {
     TopoDS_Shape s,s1;
     LoopToShape(area._bndLoop,s);

@@ -120,7 +120,7 @@ bool CntLinePathAux::IsStraightConnect(const JLC_Leads::ModelProtect& modelp,
         Point mp = pt.Midpoint(pt1);        std::cout<<dist<<endl;
     }
 #endif
-    vector<oft::Point>points;
+    vector<ofts::Point>points;
     GeomCalculate().DiscreteLineToPoint3D(cntp0,cntp1,PreErr5_2,points);
     double z = 0;
     ///std::vector<double>errs;
@@ -148,7 +148,7 @@ bool CntLinePathAux::IsSafeDownUpLocation(const
 {
     double z = 0,z1 = 0;
     double h = cntParam.safe_plane.plungeHeight;
-    vector<oft::Point>points;
+    vector<ofts::Point>points;
     for(const auto& d : wires){
         for(const auto& w : d){
             const auto& curves = w.vCurveList;

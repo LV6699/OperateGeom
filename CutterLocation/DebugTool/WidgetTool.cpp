@@ -41,7 +41,7 @@ void WidgetTool::ReDrawPosLine()
     _posLine->SetWidth(1.5);
     _mainwind->myOccView->getContext()->Display(_posLine,true);
     ///_mainwind->myOccView->fitAll();
-    OperateObject().FindIntBasePoint(oft::Point(x,y));
+    OperateObject().FindIntBasePoint(ofts::Point(x,y));
 }
 
 void WidgetTool::on_btLineInt_clicked()

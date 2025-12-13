@@ -13,7 +13,7 @@ class ViewTool
 {
 public:
     ViewTool(){}
-    static gp_Pnt OccPt(const oft::Point& p){return gp_Pnt (p.X(),p.Y(),p.Z());}
+    static gp_Pnt OccPt(const ofts::Point& p){return gp_Pnt (p.X(),p.Y(),p.Z());}
     static void RemoveAShape(Handle(AIS_Shape)& a)
     {
         _mainwind->myOccView->getContext()->Remove(a,true);
@@ -49,14 +49,14 @@ public:
         TopoDS_Shape shape = comp;
         return shape;
     }
-    static TopoDS_Shape PointToShape(const oft::Point& p)
+    static TopoDS_Shape PointToShape(const ofts::Point& p)
     {
         BRepBuilderAPI_MakeVertex v(OccPt(p));
         TopoDS_Shape shape = v;
         return shape;
     }
-    static TopoDS_Shape SegmentToShape(const oft::Point& sp,
-                                       const oft::Point& ep)
+    static TopoDS_Shape SegmentToShape(const ofts::Point& sp,
+                                       const ofts::Point& ep)
     {
         if(sp.IsSameCoord3D(ep,PreErr_8)){return TopoDS_Shape();}
         TopoDS_Edge e = BRepBuilderAPI_MakeEdge(OccPt(sp),OccPt(ep));
@@ -88,7 +88,7 @@ public:
         s = ShapesToShape(shapes);
         return s;
     }
-    static TopoDS_Shape CircleToShape(const oft::DefCircle& circle)
+    static TopoDS_Shape CircleToShape(const ofts::DefCircle& circle)
     {
         double r = circle._cirR;
         gp_Pnt cp = OccPt(circle._cirCp);
@@ -116,7 +116,7 @@ public:
         TopoDS_Shape s = ShapesToShape(shapes);
         return s;
     }
-    static TopoDS_Shape PointsToShape(const std::vector<std::vector<oft::Point>>& pts)
+    static TopoDS_Shape PointsToShape(const std::vector<std::vector<ofts::Point>>& pts)
     {
         std::vector<TopoDS_Shape>shapes;
         shapes.resize(pts.size());
@@ -131,14 +131,14 @@ public:
         TopoDS_Shape s = ShapesToShape(shapes);
         return s;
     }
-    static void DisplayPoint(const oft::Point& p,Quantity_Color c =
+    static void DisplayPoint(const ofts::Point& p,Quantity_Color c =
             Quantity_Color(0.6,0.6,0,Quantity_TOC_RGB),bool isClear = false)
     {
         auto s = PointToShape(p);
         auto as = ShapeToAis(s,c,1);
         DisplayAShape(as,isClear);
     }
-    static void DisplaySegment(const oft::Point& sp,const oft::Point& ep,
+    static void DisplaySegment(const ofts::Point& sp,const ofts::Point& ep,
                                Quantity_Color c = Quantity_Color(0,0,0.7,Quantity_TOC_RGB),
                                double w = 1, bool isLable = false,
                                int index = 0, bool isClear = false)

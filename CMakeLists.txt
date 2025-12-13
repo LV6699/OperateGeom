@@ -23,6 +23,7 @@ include_directories(${OpenCASCADE_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 #add_subdirectory(./OffsetStruct)
+add_subdirectory(./etc/Eigen)
 
 aux_source_directory(./ SRC_DIR)
 aux_source_directory(./oft/CommonFile SRC_DIR)
@@ -39,7 +40,7 @@ set(forms ./ViewWindow/MainWindow.ui ./CutterLocation/DebugTool/WidgetTool.ui)
 set(user_source ./ViewWindow/Image.qrc)
 add_executable(GeomOperate ${SRC_DIR} ${forms} ${user_source})
 
-target_link_libraries(GeomOperate PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+target_link_libraries(GeomOperate PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Eigen3::Eigen 
     Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui ${OpenCASCADE_LIBRARIES}
     TKBin TKBinL TKBinTObj TKBinXCAF TKBO TKBool TKBRep TKCAF TKCDF TKDCAF TKDE TKDECascade
     TKDEGLTF TKDEIGES TKDEOBJ TKDEPLY TKDESTEP TKDESTL TKDEVRML TKDraw TKernel TKExpress

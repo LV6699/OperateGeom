@@ -1,0 +1,14 @@
+# CMake generation dependency list for this directory.
+C:/Users/lvd/Desktop/GeomOperate/build/CMakeFiles/3.30.0/CMakeCCompiler.cmake
+C:/Users/lvd/Desktop/GeomOperate/etc/Eigen/CMakeLists.txt
+C:/Users/lvd/Desktop/GeomOperate/etc/Eigen/cmake/Version.in
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCInformation.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeDependentOption.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/MSVC-C.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Compiler/MSVC.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/GNUInstallDirs.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-MSVC-C.cmake
+D:/WorkRJAZ/CMake/share/cmake-3.30/Modules/Platform/Windows-MSVC.cmake

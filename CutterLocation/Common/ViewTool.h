@@ -13,11 +13,14 @@ class ViewTool
 {
 public:
     ViewTool(){}
+<<<<<<< HEAD
     static string PointToString(const ofts::Point& p)
     {
         return "(" + std::to_string(p.X()) + ","+
                std::to_string(p.Y()) + "," + std::to_string(p.Z()) + ")";
     }
+=======
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
     static gp_Pnt OccPt(const ofts::Point& p){return gp_Pnt (p.X(),p.Y(),p.Z());}
     static void RemoveAShape(Handle(AIS_Shape)& a)
     {
@@ -135,7 +138,10 @@ public:
         TopoDS_Shape s = ShapesToShape(shapes);
         return s;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
     static TopoDS_Shape PointsToShape(const std::vector<std::vector<ofts::Point>>& pts)
     {
         std::vector<TopoDS_Shape>shapes;

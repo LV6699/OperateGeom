@@ -3,6 +3,7 @@
 
 namespace grm {
 
+<<<<<<< HEAD
 enum class ToolType {
   PlaneEnd = 0,  /// 平底刀
   BallNoseEnd,   /// 圆笔刀
@@ -35,6 +36,22 @@ class DefTool {
       case ToolType::RoundNoseEnd:return _cr;
       case ToolType::TaperEnd:return (_R - _bottom_r) / std::tan(_taper_alg);
       default:throw "unsupported tool type";
+=======
+enum class ToolType{
+    PlaneEnd = 0,  ///平底刀
+    BallNoseEnd,   ///圆笔刀
+    RoundNoseEnd,  ///球刀
+    V_Cutter       ///v刀
+};
+
+class  DefTool{
+public:
+    DefTool(){}
+    DefTool(ToolType t,double R,double cr):_type(t),_R(R),_cr(cr){
+        if(t == ToolType::PlaneEnd){cr = 0;}
+        else if(t == ToolType::BallNoseEnd){cr = R;}
+        else if(t == ToolType::V_Cutter){cr = 0;}
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
     }
   }
 

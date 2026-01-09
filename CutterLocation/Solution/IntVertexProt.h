@@ -10,6 +10,7 @@ namespace grm {
 class IntVertProt {
 public:
   IntVertProt() {}
+<<<<<<< HEAD
   
   static double TriangleFaceZ(const ofts::Point& p0,const ofts::Point& p1,
                               const ofts::Point& p2,const ofts::Point& p)
@@ -45,6 +46,32 @@ public:
       z = v.Z();
     } else {
       double d = std::sqrt(d2);
+=======
+
+  static double VertexProtectZ(const DefTool& T, const ofts::Point& v,
+                               const ofts::Point& p) {
+    double z = Min_Val;
+    double d2 = p.DistSquare2D(v);
+    if(d2 > T.RR()){
+        return z;
+    }
+    switch (T._type) {
+    case ToolType::PlaneEnd: {
+      z = v.Z();
+      break;
+    }
+    case ToolType::BallNoseEnd: {
+      double h = std::sqrt(T.RR() - d2);
+      z = v.Z() + h - T._R;
+      break;
+    }
+    case ToolType::RoundNoseEnd: {
+      double sub = T._R - T._cr;
+      if (d2 <= sub * sub) {
+        z = v.Z();
+      } else {
+        double d = std::sqrt(d2);
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
 #if 0
         if (pnum::RightInc2(sub, d, T._R)) {
           double rr = T._cr * T._cr;
@@ -54,6 +81,7 @@ public:
           z = v.Z() + h;
         }
 #else
+<<<<<<< HEAD
       double q = d - T._R + T._cr;
       auto h2 = T._cr * T._cr - q * q;
       if (h2 <= 0) {
@@ -105,6 +133,25 @@ public:
     return z;
   }
 
+=======
+        double q = d - T._R + T._cr;
+        auto h2 = T._cr * T._cr - q * q;
+        if (h2 <= 0) {
+          z = v.Z() - T._cr;
+        } else {
+          z = v.Z() - T._cr + std::sqrt(h2);
+        }
+#endif
+      }
+      break;
+    }
+    default:
+      break;
+    }
+    return z;
+  }
+
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
   static double TriangleVertProtZ(const DefTool &T, const Triangle &t,
                                   const ofts::Point &p) {
     double z = Min_Val;

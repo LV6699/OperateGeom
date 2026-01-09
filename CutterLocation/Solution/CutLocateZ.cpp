@@ -23,7 +23,11 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
         }
         const auto& t = ts[i];
         if(t.IsInRange(p) && t.N().Z() > PreErr5_10){
+<<<<<<< HEAD
             double z = clz::ProtectFaceZ(t,p);
+=======
+            double z = clz::ProtectFaceZ(_meshMap.Tool(),t,p);
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
             rels.push_back(ClRelItem(ClRelType::OftTriangle,t,i,z));
         }
         {

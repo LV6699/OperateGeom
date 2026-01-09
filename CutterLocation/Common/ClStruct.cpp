@@ -47,7 +47,11 @@ void grm::MeshMap::CreateModelGrid(double step)
         double cx = m.MinXPt().X();
         vector<ofts::Point>xs;
         while (cx < x1) {
+<<<<<<< HEAD
             xs.emplace_back(ofts::Point(cx,cy,0));
+=======
+            xs.emplace_back(ofts::Point(cx,cy));
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
             cx += step;
         }
         _clPts.emplace_back(xs);

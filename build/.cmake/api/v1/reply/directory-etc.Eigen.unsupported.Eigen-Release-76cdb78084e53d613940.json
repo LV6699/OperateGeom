@@ -1,0 +1,78 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"etc/Eigen/unsupported/Eigen/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 29,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Devel",
+			"destination" : "include/eigen3/unsupported/Eigen",
+			"paths" : 
+			[
+				"etc/Eigen/unsupported/Eigen/AdolcForward",
+				"etc/Eigen/unsupported/Eigen/AlignedVector3",
+				"etc/Eigen/unsupported/Eigen/ArpackSupport",
+				"etc/Eigen/unsupported/Eigen/AutoDiff",
+				"etc/Eigen/unsupported/Eigen/BVH",
+				"etc/Eigen/unsupported/Eigen/EulerAngles",
+				"etc/Eigen/unsupported/Eigen/FFT",
+				"etc/Eigen/unsupported/Eigen/IterativeSolvers",
+				"etc/Eigen/unsupported/Eigen/KroneckerProduct",
+				"etc/Eigen/unsupported/Eigen/LevenbergMarquardt",
+				"etc/Eigen/unsupported/Eigen/MatrixFunctions",
+				"etc/Eigen/unsupported/Eigen/MPRealSupport",
+				"etc/Eigen/unsupported/Eigen/NNLS",
+				"etc/Eigen/unsupported/Eigen/NonLinearOptimization",
+				"etc/Eigen/unsupported/Eigen/NumericalDiff",
+				"etc/Eigen/unsupported/Eigen/OpenGLSupport",
+				"etc/Eigen/unsupported/Eigen/Polynomials",
+				"etc/Eigen/unsupported/Eigen/SparseExtra",
+				"etc/Eigen/unsupported/Eigen/SpecialFunctions",
+				"etc/Eigen/unsupported/Eigen/Splines"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Devel",
+			"destination" : "include/eigen3/unsupported/Eigen",
+			"paths" : 
+			[
+				"etc/Eigen/unsupported/Eigen/src"
+			],
+			"type" : "directory"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "etc/Eigen/unsupported/Eigen",
+		"source" : "etc/Eigen/unsupported/Eigen"
+	}
+}

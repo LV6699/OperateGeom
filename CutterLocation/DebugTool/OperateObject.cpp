@@ -161,10 +161,16 @@ void OperateObject::FindTrianges()
 
 void OperateObject::FindDiscreteEdge()
 {
+<<<<<<< HEAD
     if(_isPoint || !_hasUiFind){return;}
     
     size_t id = 0;
     bool hasFind = false;
+=======
+    size_t id = 0;
+    bool hasFind = false;
+    
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
     const auto& sp = _selObj.StarPt();
     const auto& ep = _selObj.EndPt();
     const auto& edges = _meshMap.GetTEdges();
@@ -176,8 +182,13 @@ void OperateObject::FindDiscreteEdge()
             hasFind = true;
             break;
       }
+<<<<<<< HEAD
       if ((edges[i]._p0.IsSameCoord3D(ep, PreErr5_6) &&
            edges[i]._p1.IsSameCoord3D(sp, PreErr5_6))) {
+=======
+      if ((edges[i]._p0.IsSameCoord3D(sp, PreErr5_6) &&
+           edges[i]._p1.IsSameCoord3D(ep, PreErr5_6))) {
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
             std::cout<<"离散边索引:"<<i<<std::endl;
             hasFind = true;
             break;

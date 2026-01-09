@@ -37,7 +37,11 @@ public:
       _maxy = y;
     }
   }
+<<<<<<< HEAD
   double _minx, _maxx, _miny, _maxy,_maxz;
+=======
+  double _minx, _maxx, _miny, _maxy;
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
 };
 class Triangle {
 public:
@@ -64,12 +68,18 @@ public:
     double x1 = LimVal::ThreeMax(_p0.X(), _p1.X(), _p2.X());
     double y = LimVal::ThreeMin(_p0.Y(), _p1.Y(), _p2.Y());
     double y1 = LimVal::ThreeMax(_p0.Y(), _p1.Y(), _p2.Y());
+<<<<<<< HEAD
     double z1 = LimVal::ThreeMax(_p0.Z(), _p1.Z(), _p2.Z());
+=======
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
     _limVal._minx = x;
     _limVal._maxx = x1;
     _limVal._miny = y;
     _limVal._maxy = y1;
+<<<<<<< HEAD
     _limVal._maxz = z1;
+=======
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
     _eLim0 = LimVal(_p0.X(), _p1.X(), _p0.Y(), _p1.Y());
     _eLim1 = LimVal(_p1.X(), _p2.X(), _p1.Y(), _p2.Y());
     _eLim2 = LimVal(_p2.X(), _p0.X(), _p2.Y(), _p0.Y());
@@ -179,8 +189,13 @@ public:
   }
   void SetP0(const ofts::Point &p){_p0 = p;}
   void SetP1(const ofts::Point &p){_p1 = p;}
+<<<<<<< HEAD
   const ofts::Point& P0() const {return _p0;}
   const ofts::Point& P1() const {return _p1;}
+=======
+  const ofts::Point &P0() const {return _p0;}
+  const ofts::Point &P1() const {return _p1;}
+>>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
   size_t TId()const{return _tid;}
   size_t EId()const{return _tid;}
 

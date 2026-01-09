@@ -4,7 +4,7 @@
 #include"../../../OperateView/OperateView/DisplayGeom.h"
 
 using namespace std;
-using namespace oft;
+using namespace ofts;
 
 void EquidIsland::EquidistantceIsland(OffsetParam param,
                                       vector<LoopNode>& iNodes,

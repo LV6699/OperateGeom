@@ -5,7 +5,7 @@
 #include"../../../OperateView/OperateView/DisplayGeom.h"
 #endif
 using namespace std;
-using namespace oft;
+using namespace ofts;
 void EquidBoundary::EquidistantceBoundary(OffsetParam param,
                                           DefLoop bloop,
                                           vector<DefLoop>& loops)

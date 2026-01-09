@@ -6,11 +6,11 @@ class CntLinePathAux
 {
 public:
     CntLinePathAux(){}
-    gp_Pnt ToPnt(const oft::Point& p){
+    gp_Pnt ToPnt(const ofts::Point& p){
         return gp_Pnt(p.X(),p.Y(),p.Z());
     }
     Point ToPt(const gp_Pnt& p){
-        return oft::Point(p.X(),p.Y(),p.Z());
+        return ofts::Point(p.X(),p.Y(),p.Z());
     }
     bool ArrayFirstPoint(const std::vector<JLC_Wire>&paths,Point& p){
         for(size_t t = 0;t < paths.size();++t){

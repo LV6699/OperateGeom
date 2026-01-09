@@ -1,7 +1,7 @@
 #include "CutLocateZ.h"
 
 using std::vector;
-using namespace oft;
+using namespace ofts;
 
 typedef grm::CutLocateZ clz;
 typedef grm::IntVertProt ivp;
@@ -23,7 +23,7 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
         }
         const auto& t = ts[i];
         if(t.IsInRange(p) && t.N().Z() > PreErr5_10){
-            double z = clz::OftTriangleCase(_meshMap.Tool(),t,p);
+            double z = clz::ProtectFaceZ(t,p);
             rels.push_back(ClRelItem(ClRelType::OftTriangle,t,i,z));
         }
         {
@@ -44,13 +44,16 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
         {
             double z0 = Min_Val,z1 = Min_Val,z2 = Min_Val;
             if(t.IsInE0Range(p,T.R()+PreErr_10)){
-                z0 = iep::EdgeProtectCase(T,t.P0(),t.P1(),p);
+              auto pro = BaseCalc::GetProjPoint(p, t.P0(), t.P1());
+              z0 = iep::EdgeProtectCase(T, pro, t.P0(), t.P1(), p,z0);
             }
             if(t.IsInE1Range(p,T.R()+PreErr_10)){
-                z1 = iep::EdgeProtectCase(T,t.P1(),t.P2(),p);
+              auto pro = BaseCalc::GetProjPoint(p, t.P1(), t.P2());
+              z1 = iep::EdgeProtectCase(T, pro, t.P1(), t.P2(), p,z1);
             }
             if(t.IsInE2Range(p,T.R()+PreErr_10)){
-                z2 = iep::EdgeProtectCase(T,t.P2(),t.P0(),p);
+              auto pro = BaseCalc::GetProjPoint(p, t.P2(), t.P0());
+              z2 = iep::EdgeProtectCase(T, pro,t.P2(), t.P0(), p,z2);
             }
             if(z0 != Min_Val){
                 rels.push_back(ClRelItem(ClRelType::EdgeProtecct,t.P0(),t.P1(),i,z0));

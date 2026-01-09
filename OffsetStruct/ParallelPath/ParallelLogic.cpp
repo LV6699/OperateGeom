@@ -7,7 +7,7 @@
 #endif
 using namespace std;
 void ParallelLogic::SetPointsZ(const std::shared_ptr<cls::model> &clsMod,
-                               std::vector<oft::Point> &points)
+                               std::vector<ofts::Point> &points)
 {
 #if 1
     double z;

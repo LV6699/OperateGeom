@@ -20,21 +20,23 @@ public:
 
     void CreateInfo();
 
-    oft::Point ToPoint(const gp_Pnt& p){return oft::Point(p.X(),p.Y(),p.Z());}
-    gp_Pnt ToOccPoint(const oft::Point& p){return gp_Pnt(p.X(),p.Y(),p.Z());}
+    ofts::Point ToPoint(const gp_Pnt& p){return ofts::Point(p.X(),p.Y(),p.Z());}
+    gp_Pnt ToOccPoint(const ofts::Point& p){return gp_Pnt(p.X(),p.Y(),p.Z());}
 
     void ClearAllLabel();
     void UpdateLabel(OperateObject::Label&label);
     void FindSelectObject();
     void FindTrianges();
+    void FindDiscreteEdge();
     void FindSelItem();
-    void FindIntBasePoint(const oft::Point& p);
+    void FindIntBasePoint(const ofts::Point& p);
 
     void GetSelPointIndex();
+    void GetTrianglesVert();
 
 public:
-    oft::Point _p,_mp;
-    oft::DefElem _selObj;
+    ofts::Point _p,_mp;
+    ofts::DefElem _selObj;
     bool _isPoint = false;
     bool _hasUiFind = false,_hasFind = false;
     TCollection_ExtendedString _info;

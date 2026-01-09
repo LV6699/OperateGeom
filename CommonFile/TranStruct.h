@@ -6,7 +6,7 @@
 
 namespace Trans {
 
-//oft::Point ToPt(const gp_Pnt& p){return oft::Point(p.X(),p.Y(),p.Z());}
+//ofts::Point ToPt(const gp_Pnt& p){return ofts::Point(p.X(),p.Y(),p.Z());}
 //gp_Pnt ToOccPt(const gp_Pnt& p){return gp_Pnt(p.X(),p.Y(),p.Z());}
 
 }

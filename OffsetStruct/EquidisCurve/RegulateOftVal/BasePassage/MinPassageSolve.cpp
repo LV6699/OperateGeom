@@ -1,5 +1,5 @@
 #include "MinPassageSolve.h"
-using namespace oft::ProgOftValue;
+using namespace ofts::ProgOftValue;
 #if DebugModel
 #pragma optimize("", off)
 #endif

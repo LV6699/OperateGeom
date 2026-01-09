@@ -16,10 +16,10 @@ class ParallelLogic
     public:
     ParallelLogic(){}
     void SetPointsZ(const std::shared_ptr<cls::model> &clsMod,
-                    std::vector<oft::Point> &points);
+                    std::vector<ofts::Point> &points);
     void IterateSegmentZ(const std::shared_ptr<cls::model>&clsMod,
-                         const oft::Point& lsp,
-                         const oft::Point& lep,
+                         const ofts::Point& lsp,
+                         const ofts::Point& lep,
                          double err,double limit,vector<Point>& points)
     {
         double z = 0,e = 0;

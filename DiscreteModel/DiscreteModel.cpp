@@ -16,7 +16,7 @@ void DiscreteModel::ModelTriangulation(const TopoDS_Shape &inshape, TrianRes &re
     result._vertexs.clear();
     result._triangles.clear();
 
-    std::unordered_map<oft::Point, int, VertexHash, VertexEqual> vertex_map;
+    std::unordered_map<ofts::Point, int, VertexHash, VertexEqual> vertex_map;
     int global_vertex_index = 0;
 
     /// 遍历所有面
@@ -38,7 +38,7 @@ void DiscreteModel::ModelTriangulation(const TopoDS_Shape &inshape, TrianRes &re
         for (int i = 1; i <= nodeCount; i++)
         {
             gp_Pnt vertex = triangulation->Node(i).Transformed(location.Transformation());
-            oft::Point tp(vertex.X(), vertex.Y(), vertex.Z());
+            ofts::Point tp(vertex.X(), vertex.Y(), vertex.Z());
             /// 检查顶点是否已存在
             auto it = vertex_map.find(tp);
             if (it == vertex_map.end())

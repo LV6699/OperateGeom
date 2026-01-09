@@ -9,7 +9,7 @@ namespace grm{
 void grm::MeshMap::InitialEdge()
 {
     auto& pts = _clPts;
-    auto HandleEdges = [](vector<vector<oft::Point>>& pts,
+    auto HandleEdges = [](vector<vector<ofts::Point>>& pts,
             std::vector<std::vector<ClEdge>>& es){
         es.reserve(pts.size());
         for(auto& d : pts){
@@ -45,9 +45,9 @@ void grm::MeshMap::CreateModelGrid(double step)
     double cy = m.MinYPt().Y();
     while (cy < y1) {
         double cx = m.MinXPt().X();
-        vector<oft::Point>xs;
+        vector<ofts::Point>xs;
         while (cx < x1) {
-            xs.emplace_back(oft::Point(cx,cy));
+            xs.emplace_back(ofts::Point(cx,cy,0));
             cx += step;
         }
         _clPts.emplace_back(xs);

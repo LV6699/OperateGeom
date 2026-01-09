@@ -3,7 +3,7 @@
 #include "../../../../offset2D/ToolTrajectoryAlg/CommonFile/Header.h"
 using namespace GridArea;
 using namespace GeomStruct;
-using namespace oft;
+using namespace ofts;
 using namespace GeomUnitStruct;
 #if 0
 #pragma optimize("", off)

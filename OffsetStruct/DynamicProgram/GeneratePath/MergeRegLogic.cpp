@@ -8,7 +8,7 @@
 #include"../../../OperateView/OperateView/DisplayGeom.h"
 #endif
 using namespace std;
-using namespace oft;
+using namespace ofts;
 void MergeRegLogic::HandleIslandMergeInside(vector<DefLoop>& inloops,
                                             vector<DefLoop>& iloops,
                                             vector<LoopNode>& iNodes,

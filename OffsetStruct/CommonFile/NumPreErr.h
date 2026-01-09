@@ -79,6 +79,7 @@
 #define OftValLimit PreErr5_4
 #define _AlgRad 57.29577951308232087679  ///180/PI
 #define _RadAlg 0.017453292519943295769  ///PI/180
+#define _PI_2_ 1.5707963267948966192313 ///PI/2
 ///Smooth
 #define SmoothAngle 170
 #define SmoothTimes 2.5

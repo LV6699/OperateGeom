@@ -7,7 +7,7 @@
 #include "../../../OperateView/OperateView/DisplayGeom.h"
 #endif
 using namespace std;
-using namespace oft;
+using namespace ofts;
 void MergeRegAux::ClassfyClipResult(vector<DefLoop>oriLoops,
                                     vector<DefLoop>rLoops,
                                     vector<DefLoop>& notClipLoops,
@@ -43,11 +43,11 @@ void MergeRegAux::AddOriIslLoopToNode(OffsetParam param,
         nodeForm._iOftNodes.emplace_back(node);
     }
 }
-void MergeRegAux::LoopNodeInArrayLoop(const vector<oft::DefLoop>& 
+void MergeRegAux::LoopNodeInArrayLoop(const vector<ofts::DefLoop>& 
 iloops,
-                                      std::vector<oft::LoopNode>& 
+                                      std::vector<ofts::LoopNode>& 
 iNodes,
-                                      oft::NodeForm& nodeForm)
+                                      ofts::NodeForm& nodeForm)
 {
     ElemCalculate numcal;
     for (size_t i = 0; i < iNodes.size(); ++i) {

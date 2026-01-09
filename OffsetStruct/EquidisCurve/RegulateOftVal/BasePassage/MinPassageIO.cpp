@@ -1,7 +1,7 @@
 #include <tbb/tbb.h>
 #include "MinPassageIO.h"
 #include<iostream>
-using namespace oft::ProgOftValue;
+using namespace ofts::ProgOftValue;
 #if DebugModel
 #pragma optimize("", off)
 #endif

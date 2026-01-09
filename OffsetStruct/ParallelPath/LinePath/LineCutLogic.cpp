@@ -3,7 +3,7 @@
 using namespace GeomUnit;
 using namespace GridArea;
 using namespace GeomStruct;
-using namespace oft;
+using namespace ofts;
 #if 0
 #pragma optimize("", off)
 #pragma GCC optimize ("O0")

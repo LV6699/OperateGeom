@@ -7,6 +7,7 @@ namespace ViewObj {
 
 enum class ItemType{
     Model = 0,
+    TrisEdge,
     ModTris,
     ClTris,
     PtProt,
@@ -93,6 +94,11 @@ public:
                 0.1,0.1,0.1,Quantity_TOC_RGB)){
         _clPts = ViewItem(s,ItemType::SelPoint,c);
     }
+    void IniTranglesEdge(const TopoDS_Shape& s,
+                         Quantity_Color c = Quantity_Color(
+                            0.1, 0.1, 0.1,Quantity_TOC_RGB),double w = 1) {
+      _oriEdge = ViewItem(s, ItemType::TrisEdge, c,w);
+    }
 
 public:
     ViewItem _model;       ///原始模型
@@ -107,6 +113,7 @@ public:
     ViewItem _sel_clts;    ///选择的偏置三角形
     ViewItem _int_clts;    ///相交三角形
     ViewItem _selPt;       ///选择的点
+    ViewItem _oriEdge;     ///离散三角形边
     std::vector<ViewItem> _clRelItems;  ///刀位点相关来源对象
 
 };

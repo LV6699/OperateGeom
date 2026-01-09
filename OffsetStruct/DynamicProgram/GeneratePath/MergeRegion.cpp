@@ -15,7 +15,7 @@ void MergeRegion::MergeIslandLoops(vector<GeomArea>& regions,
                                    vector<DefLoop>inLoops,
                                    vector<DefLoop>& iloops,
                                    vector<DefLoop>& outLoops,
-                                   oft::NodeForm& nodeForm)
+                                   ofts::NodeForm& nodeForm)
 {
 #if 0
     for(auto& d : regions){

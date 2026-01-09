@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 3.12)
-
 project(GeomOperate VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+# 将所有源文件合并成一个编译单元
+set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD_BATCH_SIZE 50)  # 每批50个文件
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -23,6 +26,7 @@ include_directories(${OpenCASCADE_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 #add_subdirectory(./OffsetStruct)
+add_subdirectory(./etc/Eigen)
 
 aux_source_directory(./ SRC_DIR)
 aux_source_directory(./oft/CommonFile SRC_DIR)
@@ -39,7 +43,7 @@ set(forms ./ViewWindow/MainWindow.ui ./CutterLocation/DebugTool/WidgetTool.ui)
 set(user_source ./ViewWindow/Image.qrc)
 add_executable(GeomOperate ${SRC_DIR} ${forms} ${user_source})
 
-target_link_libraries(GeomOperate PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+target_link_libraries(GeomOperate PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Eigen3::Eigen 
     Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui ${OpenCASCADE_LIBRARIES}
     TKBin TKBinL TKBinTObj TKBinXCAF TKBO TKBool TKBRep TKCAF TKCDF TKDCAF TKDE TKDECascade
     TKDEGLTF TKDEIGES TKDEOBJ TKDEPLY TKDESTEP TKDESTL TKDEVRML TKDraw TKernel TKExpress

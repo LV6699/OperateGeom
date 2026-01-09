@@ -7,7 +7,7 @@
 #include"../../../OperateView/OperateView/DisplayGeom.h"
 #endif
 using namespace std;
-using namespace oft;
+using namespace ofts;
 void TrajectorySolve::SetNodeLoopSpecifyOrigin(OffsetParam param,
                                                shared_ptr<OffsetNode>& pathNode)
 {

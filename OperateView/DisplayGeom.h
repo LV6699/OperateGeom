@@ -25,34 +25,34 @@ public:
     void DisplayLable(TCollection_ExtendedString& info,
                       const gp_Pnt& pos,bool isUp = true);
 
-    void DisplayPoint(const oft::Point& P,const Quantity_Color &c,
+    void DisplayPoint(const ofts::Point& P,const Quantity_Color &c,
                       bool isLable = false,
                       int index = -1,bool isClear = false);
 
-    void DisplaySegment(const oft::Point& sp,
-                        const oft::Point& ep,
+    void DisplaySegment(const ofts::Point& sp,
+                        const ofts::Point& ep,
                         Quantity_Color &c,
                         double w, bool isLable = false,
                         int index = false,
                         bool isClear = false);
-    void DisplayArc(const oft::DefArc& arc,Quantity_Color &c,
+    void DisplayArc(const ofts::DefArc& arc,Quantity_Color &c,
                     double w, bool isLable = false,
                     int index = false, bool isClear = false);
-    void DisplayElement(const oft::DefElem& ele,Quantity_Color& c,
+    void DisplayElement(const ofts::DefElem& ele,Quantity_Color& c,
                         double w,bool isClear = false);
 
-    void DisplayLoop(const oft::DefLoop& loop, Quantity_Color& c,
+    void DisplayLoop(const ofts::DefLoop& loop, Quantity_Color& c,
                      double w,bool isIndex = false,bool isClear = false);
 
-    void DisplayGeomArea(const oft::GeomArea& area,
+    void DisplayGeomArea(const ofts::GeomArea& area,
                          bool isClear = false);
-    void DisplayLoops(const std::vector<oft::DefLoop>&vLoop,
+    void DisplayLoops(const std::vector<ofts::DefLoop>&vLoop,
                       Quantity_Color& c,double w,
                       bool isIndex = false,bool isClear = false);
-    void DisplayPathNode(const std::shared_ptr<oft::OffsetNode>& node,
+    void DisplayPathNode(const std::shared_ptr<ofts::OffsetNode>& node,
                          bool isClear,bool isClassify);
-    void DisplayOffsetResult(const oft::GeomArea& area,
-                             const std::shared_ptr<oft::OffsetNode>& pathNode,
+    void DisplayOffsetResult(const ofts::GeomArea& area,
+                             const std::shared_ptr<ofts::OffsetNode>& pathNode,
                              bool isClear = false,
                              bool isClassify = false);
 

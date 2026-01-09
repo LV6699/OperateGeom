@@ -107,6 +107,8 @@ void OccView::init()
     datumAspect->ShadingAspect(Prs3d_DP_XAxis)->SetColor(Quantity_NOC_RED2);
     datumAspect->ShadingAspect(Prs3d_DP_YAxis)->SetColor(Quantity_NOC_GREEN2);
     datumAspect->ShadingAspect(Prs3d_DP_ZAxis)->SetColor(Quantity_NOC_BLUE2);
+    aisViewCube->SetAutoHilight(Standard_False);  // 禁用自动高亮
+    //aisViewCube->SetSelectionMode(0);  // 设置基本选择模式
 }
 Aspect_TypeOfTriedronPosition OccView::toOccCorner(Qt::Corner corner)
 {

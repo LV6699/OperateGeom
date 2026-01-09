@@ -8,7 +8,7 @@ CreateFitting.h"
 #include <ShapeAnalysis_FreeBounds.hxx>
 #include "../../string_conver.h"
 using namespace std;
-using namespace oft;
+using namespace ofts;
 #if 0
 #pragma optimize("", off)
 #pragma GCC optimize("O0")

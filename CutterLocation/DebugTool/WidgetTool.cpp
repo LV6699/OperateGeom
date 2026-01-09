@@ -41,7 +41,7 @@ void WidgetTool::ReDrawPosLine()
     _posLine->SetWidth(1.5);
     _mainwind->myOccView->getContext()->Display(_posLine,true);
     ///_mainwind->myOccView->fitAll();
-    OperateObject().FindIntBasePoint(oft::Point(x,y));
+    OperateObject().FindIntBasePoint(ofts::Point(x,y));
 }
 
 void WidgetTool::on_btLineInt_clicked()
@@ -63,9 +63,15 @@ void WidgetTool::DisplayOperItem(ViewObj::ViewItem& item)
     }
     item.SetHasDisplay();
     _mainwind->myOccView->getContext()->Activate(
-                AIS_Shape::SelectionMode(TopAbs_EDGE));
+        AIS_Shape::SelectionMode(TopAbs_EDGE));
     _mainwind->myOccView->getContext()->Activate(
-                AIS_Shape::SelectionMode(TopAbs_VERTEX));
+        AIS_Shape::SelectionMode(TopAbs_VERTEX));
+    // 确保启用了动态高亮
+    _mainwind->myOccView->getContext()->SetAutoActivateSelection(Standard_True);
+    _mainwind->myOccView->CreateViewDir();
+    
+
+
 }
 void WidgetTool::on_cheOriModel_clicked()
 {
@@ -73,7 +79,8 @@ void WidgetTool::on_cheOriModel_clicked()
 }
 void WidgetTool::on_cheDiscTria_clicked()
 {
-    DisplayOperItem(_opeItem._modTris);
+    //DisplayOperItem(_opeItem._modTris);
+    DisplayOperItem(_opeItem._oriEdge);
 }
 void WidgetTool::on_chePtProtect_clicked()
 {

@@ -35,10 +35,6 @@ static bool IsInRange(double v,double min,double max,double e){
 }
 
 static double Square(double v) {return v * v;}
-<<<<<<< HEAD
-=======
-
->>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
 
 static double IsNear(double v1,double v2,double e){return std::abs(v2-v1)<=e;}
 

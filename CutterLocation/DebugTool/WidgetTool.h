@@ -47,6 +47,8 @@ private  slots:
 
     void on_btVieIdTria_clicked();
 
+    void on_btVieIdEdge_clicked();
+
 public:
     bool isIniL = false;
     Handle(AIS_Shape) _posLine = nullptr;

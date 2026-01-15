@@ -14,8 +14,8 @@ public:
 
     ofts::Point GetVertProtFace(const DefTool& T, const Triangle& t,
                                 const ofts::Point& p) {
-      double x = 0, y = 0, z = 0;
-      switch (T._type) {
+        double x = 0, y = 0, z = 0;
+        switch (T._type) {
         case ToolType::PlaneEnd:{
             const auto& nor_xy = t.Nxy();
             x = nor_xy.X() * T._R;
@@ -45,15 +45,15 @@ public:
             double curr_k = std::sqrt(pnum::Square(n.X()) + pnum::Square(n.Y())) / n.Z();
             double k = T._taper_k;
             if (curr_k <= k) {
-                x = nor_xy.X() * T._bottom_r;
-                y = nor_xy.Y() * T._bottom_r;
+                x = nor_xy.X() * T._br;
+                y = nor_xy.Y() * T._br;
                 z = 0;
             } else {
                 x = nor_xy.X() * T._R;
                 y = nor_xy.Y() * T._R;
-                z = -T._l;
-          }
-          break;
+                z = -T._h;
+            }
+            break;
         }
         case ToolType::V_Cutter:{
             break;
@@ -87,10 +87,10 @@ public:
         std::cout<<"ts.size():"<<ts.size()<<endl;
     }
     bool IsPtInRangeEdge(const ofts::Point &p0, const ofts::Point &p1,
-                         const ofts::Point &p, double e) 
+                         const ofts::Point &p, double e)
     {
         return false;
-                            
+
     }
 };
 

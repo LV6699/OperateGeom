@@ -45,6 +45,11 @@ TCollection_ExtendedString ToOccData(const QString& str){
 QString PntToString(const gp_Pnt& p){
     return QString("%1,%2").arg(p.X()).arg(p.Y());
 }
+std::string PtToString(const ofts::Point& p)
+{
+    return "(" + std::to_string(p.X()) + "," +
+            std::to_string(p.Y()) + "," + std::to_string(p.Z()) + ")";
+}
 void OperateObject::ClearAllLabel()
 {
     for(auto& d : _labels){
@@ -161,38 +166,29 @@ void OperateObject::FindTrianges()
 
 void OperateObject::FindDiscreteEdge()
 {
-<<<<<<< HEAD
     if(_isPoint || !_hasUiFind){return;}
     
     size_t id = 0;
     bool hasFind = false;
-=======
-    size_t id = 0;
-    bool hasFind = false;
-    
->>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
     const auto& sp = _selObj.StarPt();
     const auto& ep = _selObj.EndPt();
     const auto& edges = _meshMap.GetTEdges();
 
     for (size_t i = 0; i < edges.size(); i++) {
-      if ((edges[i]._p0.IsSameCoord3D(sp, PreErr5_6) &&
-           edges[i]._p1.IsSameCoord3D(ep, PreErr5_6))) {
-            std::cout<<"离散边索引:"<<i<<std::endl;
+        const auto& p0 = edges[i]._p0;
+        const auto& p1 = edges[i]._p1;
+        if ((p0.IsSameCoord3D(sp, PreErr5_6) &&
+             p1.IsSameCoord3D(ep, PreErr5_6))) {
+            std::cout<<"离散边索引:"<<i<<"->" <<PtToString(p0)<<","<<PtToString(p1)<< std::endl;
             hasFind = true;
             break;
-      }
-<<<<<<< HEAD
-      if ((edges[i]._p0.IsSameCoord3D(ep, PreErr5_6) &&
-           edges[i]._p1.IsSameCoord3D(sp, PreErr5_6))) {
-=======
-      if ((edges[i]._p0.IsSameCoord3D(sp, PreErr5_6) &&
-           edges[i]._p1.IsSameCoord3D(ep, PreErr5_6))) {
->>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
-            std::cout<<"离散边索引:"<<i<<std::endl;
+        }
+        if ((p0.IsSameCoord3D(ep, PreErr5_6) &&
+             p1.IsSameCoord3D(sp, PreErr5_6))) {
+            std::cout<<"离散边索引:"<<i<<"->" <<PtToString(p0)<<","<<PtToString(p1)<< std::endl;
             hasFind = true;
             break;
-      }
+        }
     }
     if(!hasFind){std::cout<<"No data found!"<<endl;return;}
     auto shape = ViewTool::SegmentToShape(edges[id]._p0,edges[id]._p1);
@@ -206,8 +202,8 @@ void OperateObject::FindSelItem()
     if(!_hasUiFind){return;}
     if(_isPoint){GetSelPointIndex();
     } else {
-      //FindTrianges();
-      FindDiscreteEdge();
+        //FindTrianges();
+        FindDiscreteEdge();
     }
 }
 

@@ -13,11 +13,7 @@ void ExicuteCalc::LineTriangleClInt(const ofts::Point& p)
     double z = Min_Val;
     for(size_t i = 0;i < ts_.size();++i){
         const auto& t = ts_[i];
-<<<<<<< HEAD
         double z_ = cl.ProtectFaceZ(t,p);
-=======
-        double z_ = cl.ProtectFaceZ(_meshMap.Tool(),t,p);
->>>>>>> d8e13c22dbd9b21918161bd2a0a3146af0ea6396
         if(z < z_){z = z_;}
     }
 

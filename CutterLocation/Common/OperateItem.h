@@ -96,8 +96,8 @@ public:
     }
     void IniTranglesEdge(const TopoDS_Shape& s,
                          Quantity_Color c = Quantity_Color(
-                            0.1, 0.1, 0.1,Quantity_TOC_RGB),double w = 1) {
-      _oriEdge = ViewItem(s, ItemType::TrisEdge, c,w);
+                0.1, 0.1, 0.1,Quantity_TOC_RGB),double w = 1) {
+        _oriEdge = ViewItem(s, ItemType::TrisEdge, c,w);
     }
 
 public:
@@ -121,6 +121,7 @@ public:
 }
 
 extern ViewObj::ViewItem _idTria;
+extern ViewObj::ViewItem _id_e_ite;
 extern ViewObj::OpeViewItem _opeItem;
 
 #endif // OPERVIEWDATA_H

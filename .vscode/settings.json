@@ -2,7 +2,7 @@
     //"cmake.generator": "Ninja",
     //"cmake.generator": "Visual Studio 16 2019",
     //"cmake.buildDirectory": "${workspaceFolder}/build1"
-    "cmake.buildDirectory": "C:\\Users\\lvd\\Desktop\\GeomOperate\\build",
+    "cmake.buildDirectory": "C:\\Users\\lvd\\Desktop\\build",
     "cmake.configureArgs": [
         "-DBUILD_CLS_TEST_GUI=ON",
         "-DCMAKE_BUILD_PARALLEL_LEVEL=12"

@@ -63,9 +63,9 @@ void WidgetTool::DisplayOperItem(ViewObj::ViewItem& item)
     }
     item.SetHasDisplay();
     _mainwind->myOccView->getContext()->Activate(
-        AIS_Shape::SelectionMode(TopAbs_EDGE));
+                AIS_Shape::SelectionMode(TopAbs_EDGE));
     _mainwind->myOccView->getContext()->Activate(
-        AIS_Shape::SelectionMode(TopAbs_VERTEX));
+                AIS_Shape::SelectionMode(TopAbs_VERTEX));
     // 确保启用了动态高亮
     _mainwind->myOccView->getContext()->SetAutoActivateSelection(Standard_True);
     _mainwind->myOccView->CreateViewDir();
@@ -142,4 +142,30 @@ void WidgetTool::on_btVieIdTria_clicked()
     DisplayOperItem(_idTria);
     std::cout<<"已显示索引三角形"<<std::endl;
 }
+
+void WidgetTool::on_btVieIdEdge_clicked()
+{
+    DisplayOperItem(_id_e_ite);
+    int id = sub_ui->spinEdgeId->text().toInt();
+    if(id > _meshMap._tedges.size() - 1){
+        std::cout<<"无效离散边索引"<<std::endl;return;
+    }
+    const auto& edge = _meshMap._tedges[id];
+    auto shape = ViewTool::EdgeToShape(edge);
+    _id_e_ite = ViewObj::ViewItem(shape,_colors[5],2);
+    _id_e_ite._hasInitial = true;
+    DisplayOperItem(_id_e_ite);
+    std::cout<<"已显示索引离散边"<<std::endl;
+
+}
+
+
+
+
+
+
+
+
+
+
 

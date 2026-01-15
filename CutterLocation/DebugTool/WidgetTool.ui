@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>349</width>
-    <height>348</height>
+    <width>539</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -152,7 +152,7 @@
      <x>0</x>
      <y>220</y>
      <width>341</width>
-     <height>121</height>
+     <height>201</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -300,6 +300,35 @@
     </property>
     <property name="text">
      <string>索引三角形</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinEdgeId">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>102</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(220, 220, 220);</string>
+    </property>
+    <property name="maximum">
+     <number>99999</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btVieIdEdge">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>102</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>索引边</string>
     </property>
    </widget>
   </widget>

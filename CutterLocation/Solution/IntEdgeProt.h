@@ -128,282 +128,6 @@ public:
         z = p0.Z() - T._R + h + std::abs(xk) * len / H;
         return z;
     }
-
-    static double TaperEndToolUp(const DefTool& T, const ofts::Point& op,
-                                 double x1, double z1)
-    {
-        double r2 = T._rr;
-        double h = T._h;
-        double px = op.X();
-        double py2 = op.Y() * op.Y();
-
-        double cur_z = Min_Val;
-        if(py2 > r2){
-            return cur_z;
-        }
-        double L_r_sq = pnum::Max(0.0, r2 - py2);
-        double Lr = std::sqrt(L_r_sq);
-        double t_max = Min_Val;
-
-        if (std::abs(x1) < PreErr_12) {
-            if (std::abs(px) <= Lr + PreErr_12) {
-                t_max = 1.0;
-            }
-        } else {
-            double t1 = (px - Lr) / x1;
-            double t2 = (px + Lr) / x1;
-            if (t1 > t2) {
-                std::swap(t1, t2);
-            }
-
-            t1 = pnum::Max(t1, 0.0);
-            t2 = pnum::Min(t2, 1.0);
-            if (t2 >= t1 - PreErr_12) {
-                t_max = t2;
-            }
-        }
-        if (t_max < -PreErr_12){
-            return cur_z;
-        }
-        cur_z = z1 * t_max + h;
-        return cur_z;
-    }
-
-    static void GetSideIntervals(double px, double py, double x1, double r,double R,
-                                 vector<std::pair<double, double>>& intervals) {
-        //q = px-x1t,d = sqrt(q*q - py*py)
-        //rr<qq+py_sq<RR
-        // 通过距离约束r<d<R确定q区间
-        double py_sq = py * py;
-        double Lr_sq = r * r - py_sq;
-        double LR_sq = R * R - py_sq;
-        if(Lr_sq < 0){Lr_sq = 0;}
-        if(LR_sq < 0){LR_sq = 0;}
-
-        if (LR_sq <= Lr_sq + PreErr_12) {
-            return;
-        }
-        double Lr = std::sqrt(Lr_sq);
-        double LR = std::sqrt(LR_sq);
-        if (std::abs(x1) < PreErr_12) {
-            // x1 = 0 特殊情况
-            double dist = std::sqrt(px * px + py_sq);
-            if (Lr < dist && dist < LR) {
-                intervals.push_back({0.0, 1.0});
-            }
-            return;
-        }
-        // 解q的区间,间而获取t的区间
-        // 情况1: q ∈ (Lr, LR)
-        double t1_min = (px - LR) / x1;
-        double t1_max = (px - Lr) / x1;
-        if (t1_min > t1_max) {
-            std::swap(t1_min, t1_max);
-        }
-        // 情况2: q ∈ (-LR, -Lr)
-        double t2_min = (px + Lr) / x1;
-        double t2_max = (px + LR) / x1;
-        if (t2_min > t2_max) {
-            std::swap(t2_min, t2_max);
-        }
-        // 与 [0,1] 取交集
-        auto clip = [](double a, double b) {
-            double left = pnum::Max(0.0, pnum::Min(a, b));
-            double right = pnum::Min(1.0, pnum::Max(a, b));
-            if (right > left - PreErr_12) {
-                return std::make_pair(left, right);
-            }
-            return std::make_pair(Max_Val, Max_Val);
-        };
-        auto iv1 = clip(t1_min, t1_max);
-        auto iv2 = clip(t2_min, t2_max);
-
-        if (iv1.first < Max_Val) {
-            intervals.push_back(iv1);
-        }
-        if (iv2.first < Max_Val) {
-            intervals.push_back(iv2);
-        }
-    }
-    //计算d(t)
-    static double PosToLineDist(double t, double px, double py, double x1) {
-        double q = px - x1 * t;
-        return std::sqrt(q * q + py * py);
-    };
-    static bool is_in_sidet(double t, double px, double py, double x1,
-                            double r,double R) {
-        double dist = PosToLineDist(t, px, py, x1);
-        return (r - PreErr_12 < dist && dist < R + PreErr_12);
-    };
-    // 处理常数区间情况 (x1^2 = K^2 且 py=0)
-    static void GetConstIntervalPts(double px, double py, double x1, double r,
-                                    double R, double K, vector<double>& ps) {
-        if (x1 > 0) {
-            // q ∈ (-R, -r)
-            double t_low = (px + r) / x1;
-            double t_high = (px + R) / x1;
-            if (t_low > t_high) {
-                std::swap(t_low, t_high);
-            }
-            // 与 [0,1] 取交集
-            t_low = pnum::Max(t_low, 0.0);
-            t_high = pnum::Min(t_high, 1.0);
-
-            if (t_high > t_low - PreErr_12) {
-                // 取中点作为代表点
-                double t_mid = (t_low + t_high) / 2.0;
-                if (is_in_sidet(t_mid, px, py, x1, r, R)) {
-                    //ps.push_back(t_low);
-                    ps.push_back(t_mid);
-                    //ps.push_back(t_high);
-                }
-            }
-        } else if (x1 < -PreErr_12) {
-            // q ∈ (r, R)
-            double t_low = (px - R) / x1;
-            double t_high = (px - r) / x1;
-            if (t_low > t_high) {
-                std::swap(t_low, t_high);
-            }
-            t_low = pnum::Max(t_low, 0.0);
-            t_high = pnum::Min(t_high, 1.0);
-            if (t_high > t_low + PreErr_12) {
-                double t_mid = (t_low + t_high) / 2.0;
-                if (is_in_sidet(t_mid, px, py, x1, r, R)) {
-                    ps.push_back(t_mid);
-                }
-            }
-        }
-    }
-    static double TaperEndToolSide(const DefTool& T,const ofts::Point& op,
-                                   double x1,double z1)
-    {
-        double R = T._R;
-        double r = T._br;
-        double h = T._h;
-        double RR = T._RR;
-        double rr = T._rr;
-        double py = op.Y();
-        double px = op.X();
-        // 1. 计算 K
-        double K = z1 * (R - r) / h;
-        double K_sq = K * K;
-        double x1_sq = x1 * x1;
-        double py_sq = py * py;
-
-        std::vector<double> cal_ts;
-        // 1. 端点 t=0, t=1
-        if(is_in_sidet(0,px,py,x1,r,R)){
-            cal_ts.push_back(0);
-        }
-        if(is_in_sidet(1,px,py,x1,r,R)){
-            cal_ts.push_back(1);
-        }
-        // 2. 获取 T_side 区间
-        std::vector<std::pair<double,double>>intervals;
-        GetSideIntervals(px,py,x1,r,R,intervals);
-        if(intervals.empty()){
-            return Min_Val;
-        }
-        // 3. 处理常数区间 (x1^2 = K^2 且 py=0)
-        //if (std::abs(x1_sq - K_sq) < PreErr_12 && std::abs(py) < PreErr_12) {
-        if (x1_sq == K_sq && py == 0) {
-            vector<double>ps;
-            GetConstIntervalPts(px, py, x1, r, R, K,ps);
-            cal_ts.insert(cal_ts.end(), ps.begin(), ps.end());
-        }
-        // 4. 处理驻点 (x1^2 ≠ K^2 或 py ≠ 0)
-        //if (std::abs(x1_sq - K_sq) > PreErr_12 || std::abs(py) > PreErr_12) {
-        if (x1_sq > K_sq && py != 0) {
-            double denom = std::sqrt(x1_sq - K_sq);
-            double q1 = K * std::fabs(py) / denom;
-            double q2 = -q1;
-
-            vector<double> q_candidates;
-            if (x1 * q1 < -PreErr_12){
-                q_candidates.push_back(q1);
-            }
-            if (x1 * q2 < -PreErr_12){
-                q_candidates.push_back(q2);
-            }
-            for (double q : q_candidates) {
-                double t_s = (px - q) / x1;
-                if (t_s >= -PreErr_12 && t_s <= 1.0 + PreErr_12 &&
-                            is_in_sidet(t_s, px, py, x1, r, R)) {
-                    cal_ts.push_back(t_s);
-                }
-            }
-        }
-        // 5. 对每个区间，添加中点和端点作为候选点
-        for (const auto& interval : intervals) {
-            double t_mid = (interval.first + interval.second) / 2.0;
-            cal_ts.push_back(t_mid);
-            // 端点 (如果不在常数区间内)
-            bool is_const_interval = (std::abs(py) < PreErr_12 &&
-                                      std::abs(x1_sq - K_sq) < PreErr_12);
-            if (!is_const_interval) {
-                cal_ts.push_back(interval.first);
-                cal_ts.push_back(interval.second);
-            }
-        }
-        // 6. 去重
-        std::sort(cal_ts.begin(), cal_ts.end());
-        cal_ts.erase(unique(cal_ts.begin(), cal_ts.end(),
-                                [](double a, double b) {
-            return std::fabs(a - b) < PreErr_12;}),cal_ts.end());
-        // 计算侧面 z 坐标
-        auto z_side = [](double t, double px, double py, double x1, 
-            double z1,double h, double R, double r) {
-            double dist = PosToLineDist(t, px, py, x1);
-            return z1 * t + h * (dist - R) / (r - R);
-        };
-        // 7. 计算最大值
-        double cur_z = Min_Val;
-        for (double t : cal_ts) {
-            double z_val = z_side(t, px, py, x1, z1, h, R, r);
-            if (z_val > cur_z) {
-                cur_z = z_val;
-            }
-        }
-        return cur_z;
-    }
-
-    static double TaperEndToolCase(const DefTool& T, const ProjRes& pro,
-                                   const ofts::Point& p0, const ofts::Point& p1,
-                                   const ofts::Point& p)
-    {
-        if(BaseCalc::PtToSegDistSqua2D(p,p0,p1) > T._RR){
-            return Min_Val;
-        }
-        double cur_z = Min_Val;
-        double px = p0.Distance2D(pro._p);
-        double py = p.Distance2D(pro._p);
-        double x1 = p0.Distance2D(p1);
-        double z1 = p1.Z() - p0.Z();
-        ofts::Point op(px,py);
-
-        double up_z = Min_Val,side_z = Min_Val,low_z = Min_Val;
-        low_z = PlaneEndToolCase(T,pro,p0,p1,p);
-        low_z -= p0.Z();
-        up_z = TaperEndToolUp(T,op,x1,z1);
-        side_z = TaperEndToolSide(T,op,x1,z1);
-        double cal_z = pnum::ThreeMax(up_z,side_z,low_z);
-        //if(std::abs(py - T._br) <= PreErr5_12){cal_z = up_z;}
-        //else if(std::abs(py - T._R) <= PreErr5_12){cal_z = low_z;}
-        //else{cal_z = side_z;}
-        cur_z = p0.Z() - T._h + cal_z;
-        //22,22->25 px=6.6086238112816140,py=1,i:1761(8.3406746) 1804(8.3406746)  
-        //22,22->23 px=6.6086238112816140,py=2,i:1767(6.6086238) 1804(6.6086238)
-        //36,-36->17 1591 1677 
-        //37,-36->17 1591 1677
-        if(p.IsSamePoint2D(ofts::Point(36,-36,18.8009),PreErr5_6) && cur_z > 17){
-            double dist = BaseCalc::PtToSegDistSqua2D(p,p0,p1);
-            int tem = 1;
-        }
-        return cur_z;
-
-    }
-
     static double RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
                                     const ofts::Point& p0, const ofts::Point& p1,
                                     const ofts::Point& p)
@@ -488,6 +212,146 @@ public:
             }
         }
         return res_z;
+    }
+
+    static double TaperEndLocation(const DefTool& T,const ofts::Point& op,
+                                   double x1,double z1)
+    {
+        double cur_z = Min_Val;
+        double R = T._R;
+        double r = T._br;
+        double h = T._h;
+        double RR = T._RR;
+        double rr = T._rr;
+        double px = op.X();
+        double py = op.Y();
+        double x1_sq = x1 * x1;
+        double py_sq = py * py;
+        
+        auto get_dt = [&](double t){
+            return std::sqrt(std::pow(px-x1*t,2) + py*py);
+        };
+        auto get_zt = [&](double t) -> double {
+            double d = get_dt(t);
+            return z1*t + h*(R - d)/(R - r);
+        };
+        auto constraint = [&](double t) {
+            double d = get_dt(t);
+            return (d >= r-PreErr5_12) && (d <= R+PreErr5_12);
+        };
+        std::vector<double>cal_ts;
+        //计算端点情况
+        if (constraint(0.0)) {
+            cal_ts.emplace_back(0.0);
+        }
+        if (constraint(1.0)) {
+            cal_ts.emplace_back(1.0);
+        }
+        //计算约束边界点,即d(t)=R和d(t)=r时的t值
+        auto boundary = [&](double dd){
+            if(dd < py_sq){return;}
+            double sqrt_d = std::sqrt(dd - py_sq);
+            double t1 = (px - sqrt_d)/x1;
+            double t2 = (px + sqrt_d)/x1;
+            if (0 <= t1 && t1 <= 1){
+                cal_ts.emplace_back(t1);
+            }
+            if (0 <= t2 && t2 <= 1){
+                cal_ts.emplace_back(t2);
+            }
+        };
+        boundary(rr);
+        boundary(RR);
+        //计算可能的内部驻点
+        double k = h / (R - r);
+        double A = k * x1;
+        //情况1:A = z1(即h*x1 = (R-r)*z1),且py = 0
+        //对于常数区间,整个区间都是最大值点,选择区间的中点作为代表
+        if (std::abs(A - z1) < PreErr_12 && std::abs(py) < PreErr_12) {
+            double t_min = pnum::Max(0.0,px/x1);  //常数区间的起点
+            double t_max = 1.0;   //常数区间的终点,整个区间都是最大值点
+            if (t_min < t_max) {  //如果常数区间非空
+                double t_mid = (t_min + t_max) / 2;  //取区间中点作为代表
+                double d = get_dt(t_mid);
+                if (d >= r && d <= R) {
+                    cal_ts.push_back(t_mid);
+                }
+            }
+        }
+        //情况2:A > z1,即h*x1 > (R-r)*z1
+        //此时存在一个内部驻点,需要检查是否在有效区间内,且
+        //t0 = (px + sqrt(z1^2*py^2/(A^2-z1^2))) / x1
+        if (A > z1) {  //确保分母为正                         
+            double deno = A*A - z1*z1;
+            if(deno > 0) {
+                double nume = z1*z1 * py_sq;
+                double sqrt_term = std::sqrt(nume/deno);
+                double t0 = (px + sqrt_term) / x1;
+                if (t0 > 0 && t0 < 1) {
+                    double d0 = get_dt(t0);
+                    if (d0 >= r && d0 <= R) {
+                        cal_ts.push_back(t0);
+                    }
+                }
+            }
+        }
+        if(cal_ts.empty()){
+            return cur_z;
+        }
+        std::vector<double>zs;
+        for(auto& t : cal_ts){
+            zs.emplace_back(get_zt(t));
+        }
+        std::sort(zs.begin(),zs.end(),[](const double& a,
+            const double& b){return a < b;});
+        cur_z = zs.back();
+        return cur_z;
+    }
+
+    static double TaperEndToolCase(const DefTool& T, const ProjRes& pro,
+                                   const ofts::Point& p0, const ofts::Point& p1,
+                                   const ofts::Point& p)
+    {
+        double dist = BaseCalc::PtToSegDistSqua2D(p,p0,p1);
+        if(dist > T._RR){
+            return Min_Val;
+        }
+        double cur_z = Min_Val;
+        double px = p0.Distance2D(pro._p);
+        double py = p.Distance2D(pro._p);
+        double x1 = p0.Distance2D(p1);
+        double z1 = p1.Z() - p0.Z();
+        if(pro._val < 0){px = -px;}
+        ofts::Point op(px,py);
+
+        double up_z = Min_Val,side_z = Min_Val,low_z = Min_Val;\
+        {
+            auto up0 = p0,up1 = p1;auto uT = T;uT.SetR(T._br);
+            up0.SetZ(p0.Z()+T._h);up1.SetZ(p1.Z()+T._h);
+            if(dist <= T._br*T._br){
+                up_z = PlaneEndToolCase(uT,pro,up0,up1,p);
+                up_z -= up0.Z();
+            }
+        }
+        low_z = PlaneEndToolCase(T,pro,p0,p1,p);
+        low_z -= p0.Z();
+        //up_z = TaperEndToolUp(T,op,x1,z1);
+        side_z = TaperEndLocation(T,op,x1,z1);
+        double cal_z = pnum::ThreeMax(up_z,side_z,low_z);
+        //if(std::abs(py - T._br) <= PreErr5_12){cal_z = up_z;}
+        //else if(std::abs(py - T._R) <= PreErr5_12){cal_z = low_z;}
+        //else{cal_z = side_z;}
+        cur_z = p0.Z() - T._h + cal_z;
+        //22,22->25 px=6.6086238112816140,py=1,i:1761(8.3406746) 1804(8.3406746)  
+        //22,22->23 px=6.6086238112816140,py=2,i:1767(6.6086238) 1804(6.6086238)
+        //36,-36->17 1591 1677 
+        //37,-36->17 1591 1677  19,15,19.1234 19,14,20.1234
+        if(p.IsSamePoint2D(ofts::Point(19,14,20.1234),PreErr5_6) && cur_z > 20){
+            double dist = BaseCalc::PtToSegDistSqua2D(p,p0,p1);
+            int tem = 1;
+        }
+        return cur_z;
+
     }
 
     static double EdgeProtectCase(const DefTool& T, const ProjRes& pro,

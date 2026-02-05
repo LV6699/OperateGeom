@@ -42,9 +42,9 @@ public:
         case ToolType::TaperEnd:{
             const auto& n = t.N();
             const auto& nor_xy = t.Nxy();
-            double curr_k = std::sqrt(pnum::Square(n.X()) + pnum::Square(n.Y())) / n.Z();
+            double nor_k = std::sqrt(pnum::Square(n.X()) + pnum::Square(n.Y())) / n.Z();
             double k = T._taper_k;
-            if (curr_k <= k) {
+            if (nor_k <= k) {
                 x = nor_xy.X() * T._br;
                 y = nor_xy.Y() * T._br;
                 z = 0;

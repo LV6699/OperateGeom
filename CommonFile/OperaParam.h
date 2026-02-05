@@ -8,6 +8,7 @@ enum class ToolType {
   BallNoseEnd,   /// 圆笔刀
   RoundNoseEnd,  /// 球刀
   TaperEnd,      /// 锥度平底刀
+  TaperBall,     /// 锥度球铣刀
   V_Cutter       /// v刀
 };
 class DefTool {
@@ -30,40 +31,24 @@ class DefTool {
   double R() const { return _R; }
   double CR() const { return _cr; }
   double RadSub() const { return _R - _cr; }
-  double RR() const { return _RR; }/**
-  double Calc_Length() const {
-    switch (_type) {
-      case ToolType::PlaneEnd:
-        return 0;
-      case ToolType::BallNoseEnd:
-        return _R;
-      case ToolType::RoundNoseEnd:
-        return _cr;
-      case ToolType::TaperEnd:{
-        double dff = _R - _br;
-        double k = std::tan(_taper_agl*_RadAlg);
-        return dff / k;
-      }
-      default:
-        throw "unsupported tool type";
-    }
-  }*/
+  double RR() const { return _RR; }
   ToolType _type;
-  double _R = 0;
-  double _cr = 0;
-  double _br = 0;
+  double _R = 0;         //最大半径
+  double _cr = 0;        //边角半径
+  double _br = 0;        //底边半径
   
-  double _h = 0;
-  double _taper_l;
-  double _full_taper_l;
-                                    
+  double _h = 0;         //有效高度
+  double _full_h;        //计算高度(有效高度加延伸高度)
+  double _taper_l;       //斜边有效长度
+  double _full_taper_l;  //斜边计算长度(有效长度加延伸长度)
+                              
   double _RR = 0;
   double _rr = 0;
   double _br2 = 0;
   double _R_r = 0;
   double _R_br = 0;
-  double _taper_agl = 45;
-  double _taper_k = 0;
+  double _taper_agl = 45;  //斜边角度
+  double _taper_k = 0;     //斜边斜率
 
 };
 

@@ -265,10 +265,10 @@ public:
         //计算可能的内部驻点
         double k = h / (R - r);
         double A = k * x1;
-        //情况1:A = z1(即h*x1 = (R-r)*z1),且py = 0
+        //情况1:A = z1(即h*x1 = (R-r)*z1),且py = 0,此时可能的驻点t=px/x1
         //对于常数区间,整个区间都是最大值点,选择区间的中点作为代表
         if (std::abs(A - z1) < PreErr_12 && std::abs(py) < PreErr_12) {
-            double t_min = pnum::Max(0.0,px/x1);  //常数区间的起点
+            double t_min = pnum::Max(0.0,px/x1);  //常数区间的起点,满足px-x1t<0
             double t_max = 1.0;   //常数区间的终点,整个区间都是最大值点
             if (t_min < t_max) {  //如果常数区间非空
                 double t_mid = (t_min + t_max) / 2;  //取区间中点作为代表
@@ -281,7 +281,7 @@ public:
         //情况2:A > z1,即h*x1 > (R-r)*z1
         //此时存在一个内部驻点,需要检查是否在有效区间内,且
         //t0 = (px + sqrt(z1^2*py^2/(A^2-z1^2))) / x1
-        if (A > z1) {  //确保分母为正                         
+        if (A > z1 && std::abs(py) > 0) {  //确保分母为正                         
             double deno = A*A - z1*z1;
             if(deno > 0) {
                 double nume = z1*z1 * py_sq;
@@ -312,45 +312,54 @@ public:
                                    const ofts::Point& p0, const ofts::Point& p1,
                                    const ofts::Point& p)
     {
-        double dist = BaseCalc::PtToSegDistSqua2D(p,p0,p1);
-        if(dist > T._RR){
-            return Min_Val;
-        }
-        double cur_z = Min_Val;
-        double px = p0.Distance2D(pro._p);
-        double py = p.Distance2D(pro._p);
-        double x1 = p0.Distance2D(p1);
-        double z1 = p1.Z() - p0.Z();
-        if(pro._val < 0){px = -px;}
-        ofts::Point op(px,py);
+#if 0
+    ofts::Point op0(24.565000,-35.000000,25.606602);
+    ofts::Point op1(18.707135,-35.000000,25.606602);
+    if(p.IsSameCoord2D(ofts::Point(20,-36,25.3137),PreErr5_4) && 
+        (p0.IsSameCoord2D(op0,PreErr5_4) || p0.IsSameCoord2D(op1,PreErr5_4)) && 
+        (p1.IsSameCoord2D(op0,PreErr5_4) || p1.IsSameCoord2D(op1,PreErr5_4))){
+        int tem = 1;
+    }
+#endif
+      double dist = BaseCalc::PtToSegDistSqua2D(p, p0, p1);
+      if (dist > T._RR) {
+        return Min_Val;
+      }
+      double cur_z = Min_Val;
+      double px = p0.Distance2D(pro._p);
+      double py = p.Distance2D(pro._p);
+      double x1 = p0.Distance2D(p1);
+      double z1 = p1.Z() - p0.Z();
+      if (pro._val < 0) {
+        px = -px;
+      }
+      ofts::Point op(px, py);
 
-        double up_z = Min_Val,side_z = Min_Val,low_z = Min_Val;\
-        {
-            auto up0 = p0,up1 = p1;auto uT = T;uT.SetR(T._br);
-            up0.SetZ(p0.Z()+T._h);up1.SetZ(p1.Z()+T._h);
-            if(dist <= T._br*T._br){
-                up_z = PlaneEndToolCase(uT,pro,up0,up1,p);
-                up_z -= up0.Z();
-            }
+      double up_z = Min_Val, side_z = Min_Val, low_z = Min_Val;
+      {
+        auto up0 = p0, up1 = p1;
+        auto uT = T;
+        uT.SetR(T._br);
+        up0.SetZ(p0.Z() + T._h);
+        up1.SetZ(p1.Z() + T._h);
+        if (dist <= T._br * T._br) {
+          up_z = PlaneEndToolCase(uT, pro, up0, up1, p);
+          up_z -= up0.Z();
         }
-        low_z = PlaneEndToolCase(T,pro,p0,p1,p);
-        low_z -= p0.Z();
-        //up_z = TaperEndToolUp(T,op,x1,z1);
-        side_z = TaperEndLocation(T,op,x1,z1);
-        double cal_z = pnum::ThreeMax(up_z,side_z,low_z);
-        //if(std::abs(py - T._br) <= PreErr5_12){cal_z = up_z;}
-        //else if(std::abs(py - T._R) <= PreErr5_12){cal_z = low_z;}
-        //else{cal_z = side_z;}
-        cur_z = p0.Z() - T._h + cal_z;
-        //22,22->25 px=6.6086238112816140,py=1,i:1761(8.3406746) 1804(8.3406746)  
-        //22,22->23 px=6.6086238112816140,py=2,i:1767(6.6086238) 1804(6.6086238)
-        //36,-36->17 1591 1677 
-        //37,-36->17 1591 1677  19,15,19.1234 19,14,20.1234
-        if(p.IsSamePoint2D(ofts::Point(19,14,20.1234),PreErr5_6) && cur_z > 20){
-            double dist = BaseCalc::PtToSegDistSqua2D(p,p0,p1);
-            int tem = 1;
-        }
-        return cur_z;
+      }
+      low_z = PlaneEndToolCase(T, pro, p0, p1, p);
+      low_z -= p0.Z();
+      side_z = TaperEndLocation(T, op, x1, z1);
+      double cal_z = pnum::ThreeMax(up_z, side_z, low_z);
+
+      cur_z = p0.Z() - T._h + cal_z;
+      // 18,-36,25.5541 id:1632
+      /*if (p.IsSamePoint2D(ofts::Point(18, -36, 25.5541), PreErr5_6) &&
+          cur_z > 25) {
+        double dist = BaseCalc::PtToSegDistSqua2D(p, p0, p1);
+        int tem = 1;
+      }*/
+      return cur_z;
 
     }
 
@@ -389,12 +398,8 @@ public:
         auto proj = BaseCalc::GetProjPoint(p, p0, p1);
         if (proj._val < 0 || proj._val > 1) {
             auto op = p;
-
             return Min_Val;
         }
-#if 1
-#endif
-
         double d2 = 0;
         if (proj._val <= 0) {
             d2 = p.DistSquare2D(p0);

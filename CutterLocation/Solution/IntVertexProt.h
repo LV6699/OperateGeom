@@ -4,6 +4,8 @@
 #include "BaseCalc.h"
 #include "OperTriaCl.h"
 
+#pragma optimize("", off)
+#pragma GCC optimize("o0")
 
 namespace grm {
 
@@ -69,10 +71,10 @@ public:
     static double TaperEndVertProtZ(const DefTool& T, double tz,double d2)
     {
         double d = std::sqrt(d2);
-        double full_l = T._taper_l;
+        double full_l = T._full_taper_l;
         double l = T._h;
-        double curr_l = full_l / T._R * (T._R - d);
-        return tz - (l - std::min(curr_l, l));
+        double l1 = (full_l / T._R) * (T._R - d);
+        return tz - (l - std::min(l1, l));
     }
 
     static double VertexProtectZ(const DefTool& T, const ofts::Point& v,

@@ -27,8 +27,8 @@ public:
         const auto& clts = m.TrianglesCl();
         const auto& T = m.Tool();
         double RR = T.RR();
-#if 1
-        ofts::Point op1(36,-36,10/*22,26,27.6066*/);///31,-24,22.6569 28,-24,25.0757
+#if 0
+        ofts::Point op1(20,-36,25.3137/*22,26,27.6066*/);///31,-24,22.6569 28,-24,25.0757
         if(op.IsSameCoord2D(op1,PreErr_8)){
             int tem = 1;
         }
@@ -77,7 +77,7 @@ public:
             const auto& edges = m.GetTEdges();
             for (size_t i = 0; i < edges.size(); i++) {
                 //continue;
-                if (i==1591 || i == 1767 || i == 1773 || i == 1803 ||
+                if (i==1597 || i == 1767 || i == 1773 || i == 1803 ||
                         i == 1806 || i == 1801) {
                     std::cout << "";
                 }
@@ -103,6 +103,7 @@ public:
                     if (pro._val < 0) {v = p0;}
                     else if (pro._val > 1) {v = p1;}
                     else {v = pro._p;}
+                    //v = pro._p;
                     z = IntVertProt::VertexProtectZ(T, v, op);
                     ResetResult(z, cur_z);
                     continue;

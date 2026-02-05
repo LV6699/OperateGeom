@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
 
   w.resize(1100, 900);
   /// string path = "C:\\Users\\lvd\\Desktop\\GeomOperate\\part\\STEP2.stp";
-  //string path = "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\lineOffset3DSimple2.step";
-   string path = "C:\\Users\\lvd\\Desktop\\CAD绘图\\刀位面\\刀位面案例.step";
+  string path = "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\lineOffset3DSimple2.step";
+  //string path = "C:\\Users\\lvd\\Desktop\\CAD绘图\\刀位面\\刀位面案例.step";
   /// string path =
   /// "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\lineOffset3DSimple2.step";
   /// string path =
@@ -96,7 +96,7 @@ void FunTest() {
   std::cout << "vertexs:" << result.Vertexs().size()
             << ",triangls:" << result.Triangles().size() << endl;
   _meshMap.IniTriangles();
-  _meshMap.CreateModelGrid(0.3);
+  _meshMap.CreateModelGrid(0.5);
   _meshMap.InitialEdge();
   _meshMap.IniTrisId(false);
   _meshMap.IniTrisId(true);

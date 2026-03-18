@@ -38,17 +38,23 @@ class DefTool {
   double _br = 0;        //底边半径
   
   double _h = 0;         //有效高度
-  double _full_h;        //计算高度(有效高度加延伸高度)
-  double _taper_l;       //斜边有效长度
-  double _full_taper_l;  //斜边计算长度(有效长度加延伸长度)
+  double _full_h = 0;    //计算高度(有效高度加延伸高度)
+  double _br_h  = 0;
+  double _taper_l = 0;       //斜边有效长度
+  double _full_taper_l = 0;  //斜边计算长度(有效长度加延伸长度)
                               
-  double _RR = 0;
-  double _rr = 0;
-  double _br2 = 0;
-  double _R_r = 0;
-  double _R_br = 0;
-  double _taper_agl = 45;  //斜边角度
+  double _RR = 0;          //R*R
+  double _cr2 = 0;          //r*r
+  double _br2 = 0;         //br*br
+  double _R_r = 0;         //R-r
+  double _R_br = 0;        //R-br
+  double _taper_agl = 45;  //斜边角度,轴线与母线夹角
   double _taper_k = 0;     //斜边斜率
+  
+  double _br_up_h = 0;     //底边半径对应上部高度
+  double _br_down_h = 0;   //底边半径对应下部高度
+  
+  std::shared_ptr<DefTool>_subTool = nullptr;
 
 };
 

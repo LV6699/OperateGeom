@@ -6,6 +6,8 @@
 #include "OperateItem.h"
 #include "PureNumStruct.h"
 
+#pragma optimize("", off)
+
 namespace grm {
 struct TId {
     TId() {}
@@ -49,12 +51,12 @@ public:
     void CalNormal() {
         auto v1 = _p1 - _p0, v2 = _p2 - _p0;
         _n = v1.Cross(v2);
-        _n = _n.Normalized();
+        _n.Normalize();
     }
     void CalNorProj() {
         _nxy = _n;
         _nxy.SetZ(0);
-        _nxy.Normalize(); ///_nxy.Normalize();
+        _nxy.Normalize();
     }
     void IniOrigin(const Triangle &t) {
         _ot = std::make_shared<Triangle>(t._p0, t._p1, t._p2);

@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) {
   w.show();
 
   w.resize(1100, 900);
-  /// string path = "C:\\Users\\lvd\\Desktop\\GeomOperate\\part\\STEP2.stp";
+  // string path = "C:\\Users\\lvd\\Desktop\\GeomOperate\\part\\STEP2.stp";
   string path = "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\lineOffset3DSimple2.step";
   //string path = "C:\\Users\\lvd\\Desktop\\CAD绘图\\刀位面\\刀位面案例.step";
-  /// string path =
-  /// "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\lineOffset3DSimple2.step";
-  /// string path =
-  /// "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\行切顺序simple1.step";
+  // string path =
+  // "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\lineOffset3DSimple2.step";
+  // string path =
+  // "C:\\Users\\lvd\\Desktop\\CAD绘图\\平行刀路\\行切顺序simple1.step";
   _meshMap._model._shape = w.PathMode(path);
   FunTest();
 
@@ -69,13 +69,17 @@ void FunTest() {
   DefTool tool1(grm::ToolType::PlaneEnd, 2,0);
   DefTool tool2(grm::ToolType::BallNoseEnd, 2, 2);
   DefTool tool3(grm::ToolType::RoundNoseEnd, 2, 1);
-  DefTool tool4(grm::ToolType::TaperEnd, 2, 0);
-  tool4._taper_agl = 45;
-  tool4._br = 1;
+  DefTool tool4(grm::ToolType::TaperEnd, 2, 1);
+  DefTool tool5(grm::ToolType::TaperBall, 2, 1);
+  tool4._taper_agl = 45;tool4._br = 1;
+  tool5._taper_agl = 45;
+  
   auto& tool = _meshMap._tool;
-  tool = tool4;
-  grm::ToolParam::SetToolBaseParam(2,1,45,_meshMap._tool);
-  _meshMap._tool._rr = 1;
+  tool = tool5;
+  //grm::ToolParam::SetToolBaseParam(2,1,45,_meshMap._tool);
+  grm::ToolParam::SetToolBaseParam(2,1.4142135623731,45,_meshMap._tool);
+   
+  //_meshMap._tool._cr2 = 1;
   Quantity_Color c(0.2, 0.3, 0.4, Quantity_TOC_RGB);
   Quantity_Color c1(0.1, 0.1, 0.1, Quantity_TOC_RGB);
 #if 1
@@ -96,7 +100,7 @@ void FunTest() {
   std::cout << "vertexs:" << result.Vertexs().size()
             << ",triangls:" << result.Triangles().size() << endl;
   _meshMap.IniTriangles();
-  _meshMap.CreateModelGrid(0.5);
+  _meshMap.CreateModelGrid(1);
   _meshMap.InitialEdge();
   _meshMap.IniTrisId(false);
   _meshMap.IniTrisId(true);

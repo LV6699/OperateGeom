@@ -53,6 +53,26 @@ public:
                 y = nor_xy.Y() * T._R;
                 z = -T._h;
             }
+            break; 
+        }
+        case ToolType::TaperBall:{
+            const auto& n = t.N();
+            const auto& nor_xy = t.Nxy();
+            double nor_k = std::sqrt(pnum::Square(n.X()) + pnum::Square(n.Y())) / n.Z();
+            double k = T._taper_k;
+            if (nor_k <= k) {
+                x = n.X() * T._cr;
+                y = n.Y() * T._cr;
+                z = n.Z() * T._cr - T._cr;
+                /*x = nor_xy.X() * T._br;
+                y = nor_xy.Y() * T._br;
+                //z = -(T._br_up_h + T._br_up_h);
+                z = -T._h;*/
+            } else {
+                x = nor_xy.X() * T._R;
+                y = nor_xy.Y() * T._R;
+                z = -T._h;
+            }
             break;
         }
         case ToolType::V_Cutter:{

@@ -10,10 +10,137 @@ typedef grm::IntEdgeProt iep;
 #pragma optimize("", off)
 
 namespace grm{
+
+double CutLocateZ::CurrentLocation(const MeshMap& m, ofts::Point& op)
+{
+    IntVertProt verp;IntEdgeProt edgp;
+    double cur_z = m.ModelData().MinZPt().Z();
+    const auto& clts = m.TrianglesCl();
+    const auto& T = m.Tool();
+    double RR = T.RR();
+#if 0
+    ofts::Point op1(20,-36,25.3137/*22,26,27.6066*/);///31,-24,22.6569 28,-24,25.0757
+    if(op.IsSameCoord2D(op1,PreErr_8)){
+        int tem = 1;
+    }
+#endif
+#define ResetResult(z, cur_z){if (z > cur_z) {cur_z = z;}}
+
+    {
+        /// 在保护面上求解
+        for (size_t i = 0; i < clts.size(); ++i) {
+            const auto& t = clts[i]; /**
+         if (op.IsSamePoint2D(op, PreErr_4)) {
+           int tem = 1;
+         }*/
+            /// 处理无效三角形
+            if (t._limVal._maxz <= cur_z) {
+                continue;
+            }
+            if (t.N().Z() < PreErr_8 || !t.IsInRange(op)) {
+                continue;
+            }
+            double z = ProtectFaceZ(t, op);
+            ResetResult(z, cur_z);
+            if(std::isinf(cur_z)){
+                int tem = 1;
+            }
+        }
+    }
+    {
+        /// 在点保护面上求解
+        const auto& verts = m.GetTVerts();
+        for (size_t i = 0; i < verts.size(); ++i) {
+            //continue;
+            const auto& v = verts[i];
+            if(v.Z() <= cur_z){
+                continue;
+            }
+            double z = verp.VertexProtectZ(T, v, op);
+            ResetResult(z, cur_z);
+            if(std::isinf(z)){
+                int tem = 1;
+            }
+        }
+        if(std::isinf(cur_z)){
+            int tem = 1;
+        }
+    }
+    {
+        /// 在边保护面上求解
+        const auto& edges = m.GetTEdges();
+        for (size_t i = 0; i < edges.size(); ++i) {
+            //continue;
+            /*if (i == 1641) {
+                std::cout << "i="<<i<<std::endl;
+            }*/
+            const auto& e = edges[i];
+            const auto& p0 = e.P0();
+            const auto& p1 = e.P1();
+            if(p1.Z() <= cur_z){
+                continue;
+            }
+            ///处理竖直边
+            if (p0.IsSameCoord2D(p1, PreErr5_6)) {
+                continue;
+            }
+            double z = 0;
+            auto pro = BaseCalc::GetProjPoint(op, p0, p1);
+            double ym2 = op.DistSquare2D(pro._p);
+            if (ym2 > RR) {
+                continue;
+            }
+            ///处理水平边
+            if (p1.Z() - p0.Z() < PreErr5_6) {
+                ofts::Point v;
+                if (pro._val < 0) {v = p0;}
+                else if (pro._val > 1) {v = p1;}
+                else {v = pro._p;}
+                //v = pro._p;
+                z = verp.VertexProtectZ(T, v, op);
+                ResetResult(z, cur_z);
+                if(std::isinf(z)){
+                    int tem = 1;
+                }
+                continue;
+            }
+            z = edgp.EdgeProtectCase(T,pro,p0,p1,op,cur_z,i);
+            //if(z > 15){
+            //int tem = 1;
+            //}
+            ResetResult(z, cur_z);
+            if(std::isinf(z)){
+                int tem = 1;
+            }
+        }
+    }
+
+    return cur_z;
+}
+
+void CutLocateZ::CutterLocation(MeshMap& m) {
+    double z = 0;
+    auto& pts = m._clPts;
+    for (size_t i = 0; i < pts.size(); ++i) {
+        for (size_t j = 0; j < pts[i].size(); ++j) {
+            // z = CutterLocation(m, pts[i][j]);
+            if(i == 0 && j == 38){
+                std::cout<<1<<std::endl;
+            }
+            z = CurrentLocation(m, pts[i][j]);
+            if(std::isinf(z) || m._xEdges[0][37]._ep->Z() < -100 || m._xEdges[0][37]._ep->Z() > 100){
+                std::cout<<1<<std::endl;
+            }
+            pts[i][j].SetZ(z);
+        }
+    }
+}
+
+
 void GetPtAllLocation(const MeshMap& m,const Point& p,
                       vector<ClRelItem>& rels)
 {
-    OperTriaCl ot;
+    OperTriaCl ot;IntEdgeProt edgp;
     const auto& ts = m.Triangles();
     const auto& T = m.Tool();
 
@@ -44,16 +171,16 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
         {
             double z0 = Min_Val,z1 = Min_Val,z2 = Min_Val;
             if(t.IsInE0Range(p,T.R()+PreErr_10)){
-              auto pro = BaseCalc::GetProjPoint(p, t.P0(), t.P1());
-              z0 = iep::EdgeProtectCase(T, pro, t.P0(), t.P1(), p,z0);
+                auto pro = BaseCalc::GetProjPoint(p, t.P0(), t.P1());
+                z0 = edgp.EdgeProtectCase(T, pro, t.P0(), t.P1(), p,z0,i);
             }
             if(t.IsInE1Range(p,T.R()+PreErr_10)){
-              auto pro = BaseCalc::GetProjPoint(p, t.P1(), t.P2());
-              z1 = iep::EdgeProtectCase(T, pro, t.P1(), t.P2(), p,z1);
+                auto pro = BaseCalc::GetProjPoint(p, t.P1(), t.P2());
+                z1 = edgp.EdgeProtectCase(T, pro, t.P1(), t.P2(), p,z1,i);
             }
             if(t.IsInE2Range(p,T.R()+PreErr_10)){
-              auto pro = BaseCalc::GetProjPoint(p, t.P2(), t.P0());
-              z2 = iep::EdgeProtectCase(T, pro,t.P2(), t.P0(), p,z2);
+                auto pro = BaseCalc::GetProjPoint(p, t.P2(), t.P0());
+                z2 = edgp.EdgeProtectCase(T, pro,t.P2(), t.P0(), p,z2,i);
             }
             if(z0 != Min_Val){
                 rels.push_back(ClRelItem(ClRelType::EdgeProtecct,t.P0(),t.P1(),i,z0));

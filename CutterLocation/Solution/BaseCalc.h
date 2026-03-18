@@ -8,8 +8,6 @@ class BaseCalc
 public:
     BaseCalc(){}
 
-
-
     static grm::ProjRes GetProjPoint(const ofts::Point& p,
                                      const ofts::Point& sp,
                                      const ofts::Point& ep){

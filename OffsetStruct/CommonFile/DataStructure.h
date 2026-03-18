@@ -43,6 +43,8 @@ const bool isPrintInfo = false;
 #define TimeStatistic 0
 #define _ViewDebug 0
 
+#pragma optimize("", off)
+
 namespace OffsetStruct {
 class CAMALGORITHM_EXPORT Coord {
 public:

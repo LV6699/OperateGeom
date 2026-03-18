@@ -67,16 +67,24 @@ public:
         }
         return z;
     }
-
     static double TaperEndVertProtZ(const DefTool& T, double tz,double d2)
     {
         double d = std::sqrt(d2);
-        double full_l = T._full_taper_l;
-        double l = T._h;
-        double l1 = (full_l / T._R) * (T._R - d);
-        return tz - (l - std::min(l1, l));
+        double rate = T._full_h * (T._R - d) / T._R;
+        return tz + std::min(rate, T._h) - T._h;
     }
-
+    static double TaperBallVertProtZ(const DefTool& T, double tz,double d2)
+    {
+        if(d2 >= T._br2){
+            double h = (T._R - std::sqrt(d2)) / T._taper_k;
+            double z = tz + h - T._h;
+            return z;
+        }
+        double h1 = std::sqrt(T._cr2 - d2);
+        double h2 = h1 - T._br_up_h;
+        double z = tz + T._br_h + h2 - T._h;
+        return z;
+    }
     static double VertexProtectZ(const DefTool& T, const ofts::Point& v,
                                  const ofts::Point& p) {
         double z = Min_Val;
@@ -99,6 +107,10 @@ public:
         }
         case ToolType::TaperEnd: {
             z = TaperEndVertProtZ(T,v.Z(),d2);
+            break;
+        }
+        case ToolType::TaperBall: {
+            z = TaperBallVertProtZ(T,v.Z(),d2);
             break;
         }
         default:

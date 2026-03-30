@@ -66,8 +66,8 @@ public:
                 z = n.Z() * T._cr - T._cr;
                 /*x = nor_xy.X() * T._br;
                 y = nor_xy.Y() * T._br;
-                //z = -(T._br_up_h + T._br_up_h);
-                z = -T._h;*/
+                z = -(T._br_down_h);
+                //z = -T._h;*/
             } else {
                 x = nor_xy.X() * T._R;
                 y = nor_xy.Y() * T._R;

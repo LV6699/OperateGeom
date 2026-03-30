@@ -64,9 +64,15 @@ public:
     double PlaneEndSweepInt(const DefTool& T, const ProjRes& pro,
                             const ofts::Point& p0, const ofts::Point& p1,
                             const ofts::Point& p,size_t id);
+    double PlaneEndEdgeProtZ(const DefTool& T, const ProjRes& pro,
+                             const ofts::Point& p0, const ofts::Point& p1,
+                             const ofts::Point& p,size_t id);
     double BallEndSweepInt(const DefTool& T, const ProjRes& pro,
                            const ofts::Point& p0, const ofts::Point& p1,
                            const ofts::Point& p,size_t id);
+    double BallEndEdgeProtZ(const DefTool& T, const ProjRes& pro,
+                            const ofts::Point& p0, const ofts::Point& p1,
+                            const ofts::Point& p,size_t id);
     double RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
                              const ofts::Point& p0, const ofts::Point& p1,
                              const ofts::Point& p,size_t id);

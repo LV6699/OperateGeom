@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
+    <width>442</width>
     <height>442</height>
    </rect>
   </property>
@@ -329,6 +329,19 @@
     </property>
     <property name="text">
      <string>索引边</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radiDrawTool">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>140</y>
+      <width>90</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>显示刀具</string>
     </property>
    </widget>
   </widget>

@@ -2,6 +2,7 @@
 #include "DisplayGeom.h"
 #include "GeomToShape.h"
 #include <AIS_Line.hxx>
+#include "../offset2D/ToolTrajectoryAlg/GeometryCalculate/GeomCalculate/BaseGeom2D.h"
 #include "../ViewWindow/MainWindow.h"
 
 using namespace std;
@@ -21,7 +22,7 @@ Handle(AIS_Shape) DisplayGeom::ShapeToAis(const AIS_Shape& s,
 }
 void DisplayGeom::RemoveAShape(Handle(AIS_Shape)& a){
     _mainwind->myOccView->getContext()->Remove(a,true);
-    Handle(AIS_Shape) a_;a = a_;
+    Handle(AIS_Shape) a1;a = a1;
 }
 
 void DisplayGeom::DisplayAShape(const Handle(AIS_Shape)&aShape,bool isClear)
@@ -112,19 +113,17 @@ void DisplayGeom::DisplayLoop(const DefLoop& loop,
     GeomToShape().LoopToShape(loop,shape);
     Handle(AIS_Shape)aShape = ShapeToAis(shape,c,w);
     DisplayAShape(aShape,isClear);
-    if(isIndex){/**
-        ElemCalculate elecal;
+    if(isIndex){
         vector<pair<TCollection_ExtendedString,gp_Pnt>>infos;
-        for (int i = 0; i < loop.ElemNum(); ++i) {
-            Point p;
-            elecal.ElementMidpoint(loop.IndexElem(i),p);
+        for (int i = 0; i < loop.Size(); ++i) {
+            Point p = BaseGeom2D::CurveMidpoint(loop[i]);
             string s = to_string(i);
             infos.push_back(std::make_pair(s.c_str(),gp_Pnt(p.X(),p.Y(),p.Z()
                                                             +0.05)));
         }
         for(auto& d : infos){
             DisplayLable(d.first,d.second);
-        }*/
+        }
     }
     _mainwind->myOccView->fitAll();
 }
@@ -163,8 +162,8 @@ void DisplayGeom::DisplayPathNode(const shared_ptr<OffsetNode>& node,
     double w = 1;
     Quantity_Color c;
     GeomToShape().GetShapeColor(isClassify,false,node->_geneType,w,c);
-    DisplayLoops(node->_vLoopData,c,w,false,isClear);
-    for(auto& d : node->_vOffsetNode){
+    DisplayLoops(node->_loops,c,w,false,isClear);
+    for(auto& d : node->_nodes){
         DisplayPathNode(d,isClear,isClassify);
     }
 }

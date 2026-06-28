@@ -15,18 +15,21 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#set(CMAKE_PREFIX_PATH D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64)
-#include_directories(D:/WorkRJAZ/QtCreator/5.12.12/msvc2017_64/include)
+set(CMAKE_PREFIX_PATH D:/WorkRJAZ/Qt/Qt5.12.12/5.12.12/msvc2017_64)
+include_directories(D:/WorkRJAZ/Qt/Qt5.12.12/5.12.12/msvc2017_64/include)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(OpenCASCADE_DIR "./etc/OCCT/cmake")
 find_package(OpenCASCADE CONFIG REQUIRED)
+# # find_package(jsoncpp REQUIRED)
+# find_package(TBB REQUIRED VERSION 2021.11.0)
 include_directories(${OpenCASCADE_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 #add_subdirectory(./OffsetStruct)
 add_subdirectory(./etc/Eigen)
+add_subdirectory(./offset2D)
 
 aux_source_directory(./ SRC_DIR)
 aux_source_directory(./oft/CommonFile SRC_DIR)
@@ -38,12 +41,16 @@ aux_source_directory(./CutterLocation/Common SRC_DIR)
 aux_source_directory(./CutterLocation/GridStruct SRC_DIR)
 aux_source_directory(./CutterLocation/Solution SRC_DIR)
 aux_source_directory(./CutterLocation/DebugTool SRC_DIR)
+aux_source_directory(./OctreeNode SRC_DIR)
+aux_source_directory(./OffsetData SRC_DIR)
+aux_source_directory(./ParallelFinishing/LineCutPath SRC_DIR)
+aux_source_directory(./ParallelFinishing/UnitStruct SRC_DIR)
 
 set(forms ./ViewWindow/MainWindow.ui ./CutterLocation/DebugTool/WidgetTool.ui)
 set(user_source ./ViewWindow/Image.qrc)
 add_executable(GeomOperate ${SRC_DIR} ${forms} ${user_source})
 
-target_link_libraries(GeomOperate PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Eigen3::Eigen 
+target_link_libraries(GeomOperate PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Eigen3::Eigen CAMAlgorithm #jsoncpp TBB::tbb
     Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui ${OpenCASCADE_LIBRARIES}
     TKBin TKBinL TKBinTObj TKBinXCAF TKBO TKBool TKBRep TKCAF TKCDF TKDCAF TKDE TKDECascade
     TKDEGLTF TKDEIGES TKDEOBJ TKDEPLY TKDESTEP TKDESTL TKDEVRML TKDraw TKernel TKExpress

@@ -2,7 +2,14 @@
     //"cmake.generator": "Ninja",
     //"cmake.generator": "Visual Studio 16 2019",
     //"cmake.buildDirectory": "${workspaceFolder}/build1"
-    "cmake.buildDirectory": "C:\\Users\\lvd\\Desktop\\build",
+    "cmake.buildDirectory": "C:/Users/Administrator/Desktop/build",
+    "cmake.configureSettings": {
+        "CMAKE_PREFIX_PATH": [
+            "C:/Users/Administrator/Desktop/Deve/GeomOperate/etc/OCCT/cmake",
+            "C:/Users/Administrator/Desktop/Deve/GeomOperate/etc/OCCT",
+            "C:/Users/Administrator/Desktop/Deve/GeomOperate/etc/Eigen/cmake"
+        ]
+    },
     "cmake.configureArgs": [
         "-DBUILD_CLS_TEST_GUI=ON",
         "-DCMAKE_BUILD_PARALLEL_LEVEL=12"

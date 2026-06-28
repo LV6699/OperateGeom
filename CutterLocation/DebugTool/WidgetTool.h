@@ -17,9 +17,11 @@ public:
     ~WidgetTool();
     void ReDrawPosLine();
 
-    void DisplayOperItem(ViewObj::ViewItem& item);
-    void RemoveOperItem(ViewObj::ViewItem& item);
+    void DisplayOperItem(grm::ViewItem& item);
+    void EreasOperItem(grm::ViewItem& item);
+    void RemoveOperItem(grm::ViewItem& item);
     void FindSelItem();
+    void DrawTool();
 
 private  slots:
     void on_douPtXCoord_valueChanged();
@@ -48,6 +50,8 @@ private  slots:
     void on_btVieIdTria_clicked();
 
     void on_btVieIdEdge_clicked();
+
+    void on_radiDrawTool_clicked(bool checked);
 
 public:
     bool isIniL = false;

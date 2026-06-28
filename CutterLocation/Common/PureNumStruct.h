@@ -1,7 +1,7 @@
 #ifndef PURENUMSTRUCT_H
 #define PURENUMSTRUCT_H
 
-#include "../../OffsetStruct/CommonFile/NumPreErr.h"
+#include"../../offset2D/ToolTrajectoryAlg/CommonFile/NumPreErr.h"
 
 namespace PureNum{
 
@@ -51,7 +51,7 @@ static double ThreeMin(double v1,double v2,double v3){
 
 }
 
-namespace pnum = PureNum;
+namespace pnums = PureNum;
 
 
 #endif // PURENUMSTRUCT_H

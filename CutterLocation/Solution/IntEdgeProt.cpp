@@ -8,7 +8,7 @@ double IntEdgeProt::PlaneEndSweepInt(const DefTool& T, const ProjRes& pro,
     double RR = T._RR;
     const auto& pr = pro._p;
     double ym2 = p.DistSquare2D(pr);
-    double z = Min_Val;
+    double z = Min_Value;
     double xm = p0.Distance2D(pr);
     if (pro.Val() < 0) {
         xm = -xm;
@@ -17,7 +17,7 @@ double IntEdgeProt::PlaneEndSweepInt(const DefTool& T, const ProjRes& pro,
     double len = p0.Distance2D(p1);
     double rat = (xm - xf) / len;
     if (rat < 0 || rat > 1) {
-        return Min_Val;
+        return Min_Value;
     }
     double H = p1.Z() - p0.Z();
     z = rat * H;
@@ -38,9 +38,9 @@ double IntEdgeProt::BallEndSweepInt(const DefTool& T, const ProjRes& pro,
     const auto& pr = pro.P();
     double ym2 = p.DistSquare2D(pr);
     // if (ym2 > RR) {
-    // return Min_Val;
+    // return Min_Value;
     //}
-    double z = Min_Val;
+    double z = Min_Value;
     double H = p1.Z() - p0.Z();
     double xm = p0.Distance2D(pr);
     if (pro.Val() < 0) {
@@ -53,7 +53,7 @@ double IntEdgeProt::BallEndSweepInt(const DefTool& T, const ProjRes& pro,
     double xk = -(H / l) * std::sqrt(RR - ym2);
     double rat = (xm - xk) / len;
     if (rat < 0 || rat > 1) {
-        return Min_Val;
+        return Min_Value;
     }
     double h = rat * H;
     // if(std::abs(xk) < PreErr_10){
@@ -66,7 +66,7 @@ double IntEdgeProt::BallEndEdgeProtZ(const DefTool& T, const ProjRes& pro,
                                      const ofts::Point& p0, const ofts::Point& p1,
                                      const ofts::Point& p,size_t id)
 {
-    double z = BallEndEdgeProtZ(T,pro,p0,p1,p,id);
+    double z = BallEndSweepInt(T,pro,p0,p1,p,id);
     return z + p0.Z() - T._R;
 }
 double IntEdgeProt::RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
@@ -87,9 +87,9 @@ double IntEdgeProt::RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
     double y = std::sqrt(yy);
     double A = (KK + 1) * rr;
     double B = 2 * (KK + 1) * (diff)*r;
-    double C = (KK + 1) * pnum::Square(diff) - KK * rr - yy;
+    double C = (KK + 1) * pnums::Square(diff) - KK * rr - yy;
     double D = -2 * KK * (diff)*r;
-    double E = -KK * pnum::Square(diff);
+    double E = -KK * pnums::Square(diff);
     Eigen::VectorXd params(5);
     params[4] = A;params[3] = B;params[2] = C;
     params[1] = D;params[0] = E;
@@ -97,9 +97,9 @@ double IntEdgeProt::RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
     solver.compute(params);
     Eigen::PolynomialSolver<double, Eigen::Dynamic>::RootsType roots =
             solver.roots();
-    double minAlg = 0, maxAlg = _PI_2_;
-    double val = std::sqrt(pnum::Square(x - L) + yy);
-    if (pnum::RightInc2(diff, val, R)) {
+    double minAlg = 0, maxAlg = Num_PI / 2;
+    double val = std::sqrt(pnums::Square(x - L) + yy);
+    if (pnums::RightInc2(diff, val, R)) {
         minAlg = std::acos(1 - (val / r));
     }
     if (y > diff && x >= 0) {
@@ -113,7 +113,7 @@ double IntEdgeProt::RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
             }
         }
     }
-    double res_z = Min_Val;
+    double res_z = Min_Value;
     double minVal = std::cos(maxAlg);
     double maxVal = std::cos(minAlg);
     minVal -= PreErr_15;
@@ -134,7 +134,7 @@ double IntEdgeProt::RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
                 continue;
             }
             double sin = std::sqrt(sin2);
-            double xf2 = pnum::Square(R + r * (cosa - 1)) - yy;
+            double xf2 = pnums::Square(R + r * (cosa - 1)) - yy;
             if (xf2 < -PreErr_15) {
                 continue;
             }
@@ -156,7 +156,7 @@ double IntEdgeProt::RoundNoseToolCase(const DefTool& T, const ProjRes& pro,
 
 double IntEdgeProt::TaperEndSweepInt(const DefTool& T,const ofts::Point& op,
                                      double x1, double z1,size_t id) {
-    double cur_z = Min_Val;
+    double cur_z = Min_Value;
     double R = T._R;
     double r = T._br;
     double h = T._h;
@@ -209,7 +209,7 @@ double IntEdgeProt::TaperEndSweepInt(const DefTool& T,const ofts::Point& op,
     // 情况1:A = z1(即h*x1 = (R-r)*z1),且py = 0,此时可能的驻点t=px/x1
     // 对于常数区间,整个区间都是最大值点,选择区间的中点作为代表
     if (std::abs(A - z1) < PreErr_12 && std::abs(py) < PreErr_12) {
-        double t_min = pnum::Max(0.0, px / x1);  // 常数区间的起点,满足px-x1t<0
+        double t_min = pnums::Max(0.0, px / x1);  // 常数区间的起点,满足px-x1t<0
         double t_max = 1.0;  // 常数区间的终点,整个区间都是最大值点
         if (t_min < t_max) {                   // 如果常数区间非空
             double t_mid = (t_min + t_max) / 2;  // 取区间中点作为代表
@@ -261,10 +261,10 @@ double IntEdgeProt::TaperEndToolCase(const DefTool& T, const ProjRes& pro,
     }
 #endif
     if (d2 > T._RR) {
-        return Min_Val;
+        return Min_Value;
     }
-    double cur_z = Min_Val;
-    double low_z = Min_Val,side_z = Min_Val,up_z = Min_Val;
+    double cur_z = Min_Value;
+    double low_z = Min_Value,side_z = Min_Value,up_z = Min_Value;
     low_z = PlaneEndSweepInt(T, pro, p0, p1, p,id);
     low_z -= T._h;
     if (d2 <= T._br * T._br) {
@@ -281,7 +281,7 @@ double IntEdgeProt::TaperEndToolCase(const DefTool& T, const ProjRes& pro,
     side_z = TaperEndSweepInt(T, op, x1, z1,id);
     side_z -= T._h;
     
-    double cal_z = pnum::ThreeMax(low_z,side_z,up_z);
+    double cal_z = pnums::ThreeMax(low_z,side_z,up_z);
     cur_z = p0.Z() + cal_z;
 #if 0
     // 18,-36,25.5541 id:1632
@@ -296,7 +296,7 @@ double IntEdgeProt::TaperEndToolCase(const DefTool& T, const ProjRes& pro,
 double IntEdgeProt::TaperBallSweepInt(const DefTool& T, const ofts::Point& op,
                                       double x1, double z1,size_t id)
 {
-    double cur_z = Min_Val;
+    double cur_z = Min_Value;
     double R = T._R;
     double RR = T._RR;
     double px = op.X();
@@ -351,7 +351,7 @@ double IntEdgeProt::TaperBallSweepInt(const DefTool& T, const ofts::Point& op,
 double IntEdgeProt::TaperBallToolCase(const DefTool& T, const ProjRes& pro,
                                       const ofts::Point& p0, const ofts::Point& p1,
                                       const ofts::Point& p, double d2,size_t id) {
-    double cur_z = Min_Val;
+    double cur_z = Min_Value;
     if (d2 > T._RR) {
         return cur_z;
     }
@@ -366,7 +366,7 @@ double IntEdgeProt::TaperBallToolCase(const DefTool& T, const ProjRes& pro,
         std::cout<<"";
     }
 #endif
-    double low_z = Min_Val,side_z = Min_Val,up_z = Min_Val;
+    double low_z = Min_Value,side_z = Min_Value,up_z = Min_Value;
     low_z = PlaneEndSweepInt(T, pro, p0, p1, p,id);
     
     double px = p0.Distance2D(pro._p);
@@ -386,10 +386,10 @@ double IntEdgeProt::TaperBallToolCase(const DefTool& T, const ProjRes& pro,
             std::cout<<"";
         }*/
     }
-    double cal_z = pnum::ThreeMax(up_z, side_z, low_z);
+    double cal_z = pnums::ThreeMax(up_z, side_z, low_z);
     cur_z = p0.Z() + cal_z - T._h;
 #if 0
-    if(p.IsSameCoord2D(cp2,PreErr5_4) && pnum::IsNear(cur_z,22.4035,1e-4) ){
+    if(p.IsSameCoord2D(cp2,PreErr5_4) && pnums::IsNear(cur_z,22.4035,1e-4) ){
         std::cout<<"";
     }
 #endif
@@ -398,7 +398,7 @@ double IntEdgeProt::TaperBallToolCase(const DefTool& T, const ProjRes& pro,
 double IntEdgeProt::EdgeProtectCase(const DefTool& T, const ProjRes& pro,
                                     const ofts::Point& p0, const ofts::Point& p1,
                                     const ofts::Point& p, double cur_z,size_t id) {
-    double z = Min_Val;
+    double z = Min_Value;
     switch (T._type) {
     case ToolType::PlaneEnd: {
         z = PlaneEndEdgeProtZ(T, pro, p0, p1, p,id);

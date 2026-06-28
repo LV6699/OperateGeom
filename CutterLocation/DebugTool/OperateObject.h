@@ -2,7 +2,7 @@
 #define OPERATEOBJECT_H
 
 #include <QDialog>
-#include "../../OffsetStruct/CommonFile/DataStructure.h"
+#include"../../offset2D/ToolTrajectoryAlg/CommonFile/DataStructure.h"
 #include "../../ViewWindow/OccHeader.h"
 
 namespace Ui {

@@ -24,8 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     myOccView = new OccView(this);
     _mainwind = this;
-    //myOccView->myView->SetProj(V3d_Zpos);
-    myOccView->myView->SetProj(V3d_XposYnegZpos);
+    myOccView->myView->SetProj(V3d_Zpos);
+    //myOccView->myView->SetProj(V3d_XposYnegZpos);
     ///myOccView->myView
     setCentralWidget(myOccView);
     createActions();
@@ -41,13 +41,15 @@ MainWindow::MainWindow(QWidget *parent)
     Quantity_Color black(0,0,0,Quantity_TOC_RGB);///8
     vector<Quantity_Color>colors{green,blue,red,purple,
                 yellow,cyan,orange,brown,black};
-    _colors = colors;
+    _colors = colors;_colors.reserve(1000);
     for(auto& d : _colors){_colors.emplace_back(d);}
     for(auto& d : _colors){_colors.emplace_back(d);}
     for(auto& d : _colors){_colors.emplace_back(d);}
     for(auto& d : _colors){_colors.emplace_back(d);}
     for(auto& d : _colors){_colors.emplace_back(d);}
-
+    for(auto& d : _colors){_colors.emplace_back(d);}
+    for(auto& d : _colors){_colors.emplace_back(d);}
+    //for(auto& d : _colors){_colors.emplace_back(d);}
     _subWind = new WidgetTool(this);
     _subWind->show();
 }

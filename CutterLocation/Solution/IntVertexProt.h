@@ -18,7 +18,7 @@ public:
     {
         Triangle t(p0,p1,p2);
         t.CalNormal();
-        double z = Min_Val;
+        double z = Min_Value;
         double t1 = t.N().X() * (t.P0().X() - p.X());
         double t2 = t.N().Y() * (t.P0().Y() - p.Y());
         z = t.P0().Z() + (t1 + t2) / t.N().Z();
@@ -41,7 +41,7 @@ public:
     static double RoundNoseVertProtZ(const DefTool& T, const ofts::Point& v,
                                      const ofts::Point& p,double d2)
     {
-        double z = Min_Val;
+        double z = Min_Value;
         double sub = T._R_r;
         if (d2 <= sub * sub) {
             z = v.Z();
@@ -87,7 +87,7 @@ public:
     }
     static double VertexProtectZ(const DefTool& T, const ofts::Point& v,
                                  const ofts::Point& p) {
-        double z = Min_Val;
+        double z = Min_Value;
         double d2 = p.DistSquare2D(v);
         if(d2 > T.RR()){
             return z;
@@ -121,7 +121,7 @@ public:
 
     static double TriangleVertProtZ(const DefTool &T, const Triangle &t,
                                     const ofts::Point &p) {
-        double z = Min_Val;
+        double z = Min_Value;
         double z0 = VertexProtectZ(T, t.P0(), p);
         double z1 = VertexProtectZ(T, t.P1(), p);
         double z2 = VertexProtectZ(T, t.P2(), p);

@@ -1,0 +1,1756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManipuWidget</class>
+ <widget class="QDialog" name="ManipuWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>889</width>
+    <height>504</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>100</width>
+    <height>100</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>2000</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLineEdit" name="lineEditCutPartName">
+   <property name="geometry">
+    <rect>
+     <x>3</x>
+     <y>460</y>
+     <width>481</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(238, 238, 236);
+font: 10pt &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="text">
+    <string>dir</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labListViewNum">
+   <property name="geometry">
+    <rect>
+     <x>3</x>
+     <y>460</y>
+     <width>165</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>300</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(211, 215, 207);
+font: 10pt &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="text">
+    <string>总数: 当前,剩余</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labRunStatus">
+   <property name="geometry">
+    <rect>
+     <x>3</x>
+     <y>482</y>
+     <width>481</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>300</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(211, 215, 207);
+font: 10pt &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="text">
+    <string>run status!</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>3</x>
+     <y>3</y>
+     <width>481</width>
+     <height>461</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>文件阅览</string>
+   </property>
+   <widget class="QListView" name="listViewListFile">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>25</y>
+      <width>478</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(220, 225, 217);
+font: 10pt &quot;Ubuntu&quot;;</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>325</y>
+     <width>401</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(200, 205, 205);</string>
+   </property>
+   <property name="title">
+    <string>阅览</string>
+   </property>
+   <widget class="QPushButton" name="bntPrePartFile">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>54</y>
+      <width>95</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+font: 13pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>上一零件</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bntNextPartFile">
+    <property name="geometry">
+     <rect>
+      <x>102</x>
+      <y>54</y>
+      <width>95</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+font: 13pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>下一零件</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheBoxVieModel">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>26</y>
+      <width>95</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>显示模型</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheBoxVieProf">
+    <property name="geometry">
+     <rect>
+      <x>102</x>
+      <y>26</y>
+      <width>95</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>显示轮廓</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheBoxVieToolPath">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>26</y>
+      <width>95</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>显示刀路</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cheBoxDisplaySel">
+    <property name="geometry">
+     <rect>
+      <x>201</x>
+      <y>26</y>
+      <width>95</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>显示选择</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>0</y>
+     <width>401</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(200, 205, 205);</string>
+   </property>
+   <property name="title">
+    <string>导入文件</string>
+   </property>
+   <widget class="QPushButton" name="btnReadParts">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>26</y>
+      <width>85</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu</family>
+      <pointsize>11</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;Ubuntu&quot;;
+background-color: rgb(114, 159, 207);</string>
+    </property>
+    <property name="text">
+     <string>读取模型</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bntImportProfData">
+    <property name="geometry">
+     <rect>
+      <x>92</x>
+      <y>26</y>
+      <width>85</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;Ubuntu&quot;;
+background-color: rgb(114, 159, 207);</string>
+    </property>
+    <property name="text">
+     <string>导入轮廓</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bntImportTBData">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>26</y>
+      <width>85</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+background-color: rgb(114, 159, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>导入刀路</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bntImportTPImg">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>26</y>
+      <width>110</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>导入刀路图片</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>55</y>
+     <width>401</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>执行操作</string>
+   </property>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>24</y>
+      <width>401</width>
+      <height>253</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(200, 205, 205);</string>
+    </property>
+    <property name="currentIndex">
+     <number>2</number>
+    </property>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>模型操作</string>
+     </attribute>
+     <widget class="QPushButton" name="buttonTranseformMachCdt">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>3</y>
+        <width>95</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>转换坐标</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdiBlankYExp">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>37</y>
+        <width>55</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>10</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>37</y>
+        <width>42</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>1000</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>y 扩展</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdiBlankXExp">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>37</y>
+        <width>55</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>10</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>37</y>
+        <width>48</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>1000</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 10pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>x 扩展</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>37</y>
+        <width>41</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>1000</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 10pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>毛坯:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnCalBlank">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>68</y>
+        <width>95</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>计算毛坯</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>185</x>
+        <y>68</y>
+        <width>40</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Ubuntu&quot;;
+background-color: rgb(130, 180, 230);</string>
+      </property>
+      <property name="text">
+       <string>层数:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="inputLayerTotal">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>228</x>
+        <y>68</y>
+        <width>63</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>900</width>
+        <height>3000</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="value">
+       <number>5</number>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdiSaveSelPath">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>158</y>
+        <width>291</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 10pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>ContourData</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxBackupCutPart">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>99</y>
+        <width>92</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>备份零件</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdicBackupCutPartDir">
+      <property name="geometry">
+       <rect>
+        <x>98</x>
+        <y>99</y>
+        <width>293</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 10pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>BackupDir</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bntUiSaveSelPair">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>158</y>
+        <width>95</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+background-color: rgb(114, 159, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>存储选择</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdiCanNotCutDir">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>127</y>
+        <width>291</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 10pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>CutFailure</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnCanNotCut">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>127</y>
+        <width>95</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>无法剖分</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxIsSaveCut">
+      <property name="geometry">
+       <rect>
+        <x>198</x>
+        <y>3</y>
+        <width>95</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>保存数据</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxIsBatchCut">
+      <property name="geometry">
+       <rect>
+        <x>295</x>
+        <y>3</y>
+        <width>95</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>剖分所有</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnRemoveCurFile">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>3</y>
+        <width>95</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(245, 121, 0);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>删除文件</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnCutModel">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>186</y>
+        <width>95</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Ubuntu&quot;;
+background-color: rgb(114, 159, 207);</string>
+      </property>
+      <property name="text">
+       <string>执行剖分</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxIsAppendCut">
+      <property name="geometry">
+       <rect>
+        <x>295</x>
+        <y>68</y>
+        <width>95</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>追加数据</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxAutoCalOftVal">
+      <property name="geometry">
+       <rect>
+        <x>258</x>
+        <y>37</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>自动计算行距</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxVieBlank">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>68</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>显示毛坯</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>计算刀路</string>
+     </attribute>
+     <widget class="QSpinBox" name="spiBoxLayIdx">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>332</x>
+        <y>3</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1300</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>3</y>
+        <width>61</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>零件号:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>145</x>
+        <y>3</y>
+        <width>61</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>区域号:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spiBoxAreaIdx">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>207</x>
+        <y>3</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1300</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>287</x>
+        <y>3</y>
+        <width>41</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>10000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>层号:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="inputWitchLayer">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>66</x>
+        <y>3</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1300</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxIsBatchCal">
+      <property name="geometry">
+       <rect>
+        <x>311</x>
+        <y>35</y>
+        <width>85</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>批量计算</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spiBoxOffsetNum">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>125</x>
+        <y>35</y>
+        <width>65</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>900</width>
+        <height>3000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="value">
+       <number>1</number>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxIsTestSel">
+      <property name="geometry">
+       <rect>
+        <x>125</x>
+        <y>128</y>
+        <width>81</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>测试选中</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comBoxMCStrategy">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>35</y>
+        <width>120</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="currentText">
+       <string>区域清除</string>
+      </property>
+      <property name="maxCount">
+       <number>2147483646</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>区域清除</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>模型轮廓</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>轮廓精加工</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="linEdiSave_TP_Dir">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>96</y>
+        <width>324</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 10pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>ContourFinishingToolPathData</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>96</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>1000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>存储路径:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cheBoxCalAllStraTp">
+      <property name="geometry">
+       <rect>
+        <x>193</x>
+        <y>35</y>
+        <width>113</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>计算所有策略</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnCalToolPath">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>305</x>
+        <y>128</y>
+        <width>90</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(114, 159, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>计算刀路</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnAutoCalOffsetVal">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>65</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>自动计算</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdtOffsetValue_3">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>242</x>
+        <y>65</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>130</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>4</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdtOffsetValue_1">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>88</x>
+        <y>65</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>130</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>1.5</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdtOffsetValue_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>65</y>
+        <width>75</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>130</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>65</y>
+        <width>80</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>10000000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>刀路行距:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEdtToolRadius">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>128</y>
+        <width>51</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>130</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>1.5</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>128</y>
+        <width>65</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>10000000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>刀具半径:</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>刀路测试</string>
+     </attribute>
+     <widget class="QPushButton" name="bntScreen">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>3</y>
+        <width>95</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>100000</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>截图</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="tpAutoCheck">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>3</y>
+        <width>111</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>刀路自动检测</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="isCheckAllTP">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>3</y>
+        <width>81</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>检测所有</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>手动操作刀路</string>
+     </attribute>
+     <widget class="QPushButton" name="bntPathSuccess">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>3</y>
+        <width>140</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>成功_跳至下一个</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bntPathFailure">
+      <property name="geometry">
+       <rect>
+        <x>146</x>
+        <y>3</y>
+        <width>140</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(211, 215, 207);
+font: 11pt &quot;Ubuntu&quot;;</string>
+      </property>
+      <property name="text">
+       <string>失败_跳至下一个</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

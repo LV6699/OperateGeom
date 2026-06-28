@@ -39,7 +39,7 @@ endif()
 if(NOT _cmake_targets_defined STREQUAL "")
   string(REPLACE ";" ", " _cmake_targets_defined_text "${_cmake_targets_defined}")
   string(REPLACE ";" ", " _cmake_targets_not_defined_text "${_cmake_targets_not_defined}")
-  message(FATAL_ERROR "Some (but not all) targets in this export set were already defined.\nTargets Defined: ${_cmake_targets_defined_text}\nTargets not yet defined: ${_cmake_targets_not_defined_text}\n")
+  message(FATAL_ERROR "Some (but not all) targets in this export set were already defined./nTargets Defined: ${_cmake_targets_defined_text}/nTargets not yet defined: ${_cmake_targets_not_defined_text}/n")
 endif()
 unset(_cmake_targets_defined)
 unset(_cmake_targets_not_defined)
@@ -58,7 +58,7 @@ add_library(TKService SHARED IMPORTED)
 
 set_target_properties(TKService PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/inc"
-  INTERFACE_LINK_LIBRARIES "TKernel;TKMath;user32.lib;advapi32.lib;advapi32.lib;user32.lib;windowscodecs;C:/Users/lvd/Downloads/freetype-2.5.5-vc14-64/freetype-2.5.5-vc14-64/lib/freetype.lib;winmm.lib"
+  INTERFACE_LINK_LIBRARIES "TKernel;TKMath;user32.lib;advapi32.lib;advapi32.lib;user32.lib;windowscodecs;C:/Users/Administrator/Desktop/Deve/freetype-2.5.5-vc14-64/freetype-2.5.5-vc14-64/lib/freetype.lib;winmm.lib"
 )
 
 # Create imported target TKV3d
@@ -66,7 +66,7 @@ add_library(TKV3d SHARED IMPORTED)
 
 set_target_properties(TKV3d PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/inc"
-  INTERFACE_LINK_LIBRARIES "TKBRep;TKMath;TKernel;TKService;TKShHealing;TKTopAlgo;TKG2d;TKG3d;TKGeomBase;TKMesh;TKGeomAlgo;TKHLR;user32.lib;gdi32.lib;opengl32.lib;C:/Users/lvd/Downloads/freetype-2.5.5-vc14-64/freetype-2.5.5-vc14-64/lib/freetype.lib"
+  INTERFACE_LINK_LIBRARIES "TKBRep;TKMath;TKernel;TKService;TKShHealing;TKTopAlgo;TKG2d;TKG3d;TKGeomBase;TKMesh;TKGeomAlgo;TKHLR;user32.lib;gdi32.lib;opengl32.lib;C:/Users/Administrator/Desktop/Deve/freetype-2.5.5-vc14-64/freetype-2.5.5-vc14-64/lib/freetype.lib"
 )
 
 # Create imported target TKOpenGl
@@ -103,13 +103,13 @@ foreach(_cmake_target IN LISTS _cmake_import_check_targets)
       OR NOT IS_DIRECTORY "${_cmake_import_check_xcframework_for_${_cmake_target}}")
     foreach(_cmake_file IN LISTS "_cmake_import_check_files_for_${_cmake_target}")
       if(NOT EXISTS "${_cmake_file}")
-        message(FATAL_ERROR "The imported target \"${_cmake_target}\" references the file
-   \"${_cmake_file}\"
+        message(FATAL_ERROR "The imported target /"${_cmake_target}/" references the file
+   /"${_cmake_file}/"
 but this file does not exist.  Possible reasons include:
 * The file was deleted, renamed, or moved to another location.
 * An install or uninstall procedure did not complete successfully.
 * The installation package was faulty and contained
-   \"${CMAKE_CURRENT_LIST_FILE}\"
+   /"${CMAKE_CURRENT_LIST_FILE}/"
 but not all the files it references.
 ")
       endif()

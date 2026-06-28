@@ -154,22 +154,22 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
             rels.push_back(ClRelItem(ClRelType::OftTriangle,t,i,z));
         }
         {
-            double z0 = Min_Val,z1 = Min_Val,z2 = Min_Val;
+            double z0 = Min_Value,z1 = Min_Value,z2 = Min_Value;
             z0 = ivp::VertexProtectZ(T,t.P0(),p);
             z1 = ivp::VertexProtectZ(T,t.P1(),p);
             z2 = ivp::VertexProtectZ(T,t.P2(),p);
-            if(z0 != Min_Val){
+            if(z0 != Min_Value){
                 rels.push_back(ClRelItem(ClRelType::PtProtect,t.P0(),i,z0));
             }
-            if(z1 != Min_Val){
+            if(z1 != Min_Value){
                 rels.push_back(ClRelItem(ClRelType::PtProtect,t.P1(),i,z1));
             }
-            if(z2 != Min_Val){
+            if(z2 != Min_Value){
                 rels.push_back(ClRelItem(ClRelType::PtProtect,t.P2(),i,z2));
             }
         }
         {
-            double z0 = Min_Val,z1 = Min_Val,z2 = Min_Val;
+            double z0 = Min_Value,z1 = Min_Value,z2 = Min_Value;
             if(t.IsInE0Range(p,T.R()+PreErr_10)){
                 auto pro = BaseCalc::GetProjPoint(p, t.P0(), t.P1());
                 z0 = edgp.EdgeProtectCase(T, pro, t.P0(), t.P1(), p,z0,i);
@@ -182,13 +182,13 @@ void GetPtAllLocation(const MeshMap& m,const Point& p,
                 auto pro = BaseCalc::GetProjPoint(p, t.P2(), t.P0());
                 z2 = edgp.EdgeProtectCase(T, pro,t.P2(), t.P0(), p,z2,i);
             }
-            if(z0 != Min_Val){
+            if(z0 != Min_Value){
                 rels.push_back(ClRelItem(ClRelType::EdgeProtecct,t.P0(),t.P1(),i,z0));
             }
-            if(z1 != Min_Val){
+            if(z1 != Min_Value){
                 rels.push_back(ClRelItem(ClRelType::EdgeProtecct,t.P1(),t.P2(),i,z1));
             }
-            if(z2 != Min_Val){
+            if(z2 != Min_Value){
                 rels.push_back(ClRelItem(ClRelType::EdgeProtecct,t.P2(),t.P0(),i,z2));
             }
 

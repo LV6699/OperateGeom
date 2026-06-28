@@ -2,7 +2,6 @@
 #define MODELSTRUCT_H
 
 #include<array>
-#include "TranStruct.h"
 #include "OperaParam.h"
 
 namespace grm{

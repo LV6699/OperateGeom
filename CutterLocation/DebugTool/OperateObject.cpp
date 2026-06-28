@@ -2,6 +2,7 @@
 #include "ui_OperateObject.h"
 #include<StdSelect_BRepOwner.hxx>
 #include "WidgetTool.h"
+#include "CreateTool.h"
 #include"../Common/ViewTool.h"
 #include "../../OperateView/DisplayGeom.h"
 #include "../../OperateView/GeomToShape.h"
@@ -123,15 +124,15 @@ void OperateObject::FindTrianges()
     if(_isPoint){return;}
     WidgetTool().DisplayOperItem(_opeItem._sel_ts);
     WidgetTool().DisplayOperItem(_opeItem._sel_clts);
-    _opeItem._sel_ts = ViewObj::ViewItem();
-    _opeItem._sel_clts = ViewObj::ViewItem();
+    _opeItem._sel_ts = grm::ViewItem();
+    _opeItem._sel_clts = grm::ViewItem();
     DisplayGeom dg;GeomToShape gts;Handle(AIS_Shape) a;
 
     bool hasFind = false;
     bool isorigin = false;
     grm::Triangle clt,tri;
-    const auto& sp = _selObj.StarPt();
-    const auto& ep = _selObj.EndPt();
+    const auto& sp = _selObj.GetSp();
+    const auto& ep = _selObj.GetEp();
     for(size_t i = 0;i < _meshMap._trisCl.size();++i) {
         const auto& t = _meshMap._trisCl[i];
         if(t.IsVertex(sp) && t.IsVertex(ep)){
@@ -157,8 +158,8 @@ void OperateObject::FindTrianges()
     if(!hasFind){std::cout<<"No data found!"<<endl;return;}
     TopoDS_Shape shape = ViewTool::TriangleToShape(clt);
     TopoDS_Shape shape1 = ViewTool::TriangleToShape(tri);
-    _opeItem._sel_ts = ViewObj::ViewItem(shape,_colors[6],2);
-    _opeItem._sel_clts = ViewObj::ViewItem(shape1,_colors[4],1);
+    _opeItem._sel_ts = grm::ViewItem(shape,_colors[6],2);
+    _opeItem._sel_clts = grm::ViewItem(shape1,_colors[4],1);
 
     WidgetTool().DisplayOperItem(_opeItem._sel_ts);
     WidgetTool().DisplayOperItem(_opeItem._sel_clts);
@@ -170,8 +171,8 @@ void OperateObject::FindDiscreteEdge()
     
     size_t id = 0;
     bool hasFind = false;
-    const auto& sp = _selObj.StarPt();
-    const auto& ep = _selObj.EndPt();
+    const auto& sp = _selObj.GetSp();
+    const auto& ep = _selObj.GetEp();
     const auto& edges = _meshMap.GetTEdges();
 
     for (size_t i = 0; i < edges.size(); i++) {
@@ -192,7 +193,7 @@ void OperateObject::FindDiscreteEdge()
     }
     if(!hasFind){std::cout<<"No data found!"<<endl;return;}
     auto shape = ViewTool::SegmentToShape(edges[id]._p0,edges[id]._p1);
-    _opeItem._oriEdge = ViewObj::ViewItem(shape,_colors[1],2);
+    _opeItem._oriEdge = grm::ViewItem(shape,_colors[1],2);
     WidgetTool().DisplayOperItem(_opeItem._sel_ts);
 }
 
@@ -212,7 +213,7 @@ void OperateObject::FindIntBasePoint(const ofts::Point& p)
     ///查找偏置面相交信息
     GeomToShape gts;DisplayGeom dg;
     WidgetTool().DisplayOperItem(_opeItem._int_clts);
-    _opeItem._int_clts = ViewObj::ViewItem();
+    _opeItem._int_clts = grm::ViewItem();
     bool hasFind = false;
 
     vector<grm::Triangle>ts;
@@ -231,13 +232,15 @@ void OperateObject::FindIntBasePoint(const ofts::Point& p)
     }
     TopoDS_Shape shape;
     gts.ShapesToShape(shapes,shape);
-    _opeItem._int_clts = ViewObj::ViewItem(shape,_colors[5],2);
+    _opeItem._int_clts = grm::ViewItem(shape,_colors[5],2);
     WidgetTool().DisplayOperItem(_opeItem._int_clts);
 
 }
 
 void OperateObject::GetSelPointIndex()
 {
+    auto& item = _meshMap._tool._item;
+    //WidgetTool().EreaseOperItem(item);
     for (size_t i = 0;i < _meshMap._clPts.size();++i) {
         const auto& ps = _meshMap._clPts[i];
         for (size_t j = 0;j < ps.size();++j) {
@@ -245,6 +248,10 @@ void OperateObject::GetSelPointIndex()
                 const auto& p = ps[j];
                 std::cout<<"刀位点:("<<p.X()<<","<<p.Y()<<","
                         <<p.Z()<<"),索引:"<<i<<","<<j<<std::endl;
+                WidgetTool().EreasOperItem(item);
+                auto& tool = _meshMap._tool;
+                auto tshape = CreateTool().GetToolShape(p,tool);
+                item = grm::ViewItem(tshape,_colors[4],1);
                 return;
             }
         }

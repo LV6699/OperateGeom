@@ -5,18 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
+    //               "name": "编译并运行程序",
+    //   "type": "cppdbg",
+    //   "request": "launch",
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",
+            "cwd": "C:/Users/Administrator/Desktop/build/Debug",
             //"program": "${command:cmake.launchTargetPath}",
             //"program": "C://Users//ld//Desktop//build//CamView//build_///CAMViewer.exe",
-            "program": "//app.exe",
+            "program": "C:/Users/Administrator/Desktop/build/Debug/GeomOperate.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
+            //"cwd": "${fileDirname}",
             "environment": [],
             "console": "externalTerminal",
-            "preLaunchTask": "Run VS Vars All"
+             "externalConsole": true,
+            "preLaunchTask": "Run VS Vars All",
+            
         },
         {
             "name": "(Windows) Attach",

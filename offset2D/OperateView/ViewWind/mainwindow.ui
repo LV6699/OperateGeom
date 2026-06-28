@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="occQt.qrc">
+    <normaloff>:/Resources/lamp.png</normaloff>:/Resources/lamp.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionPan"/>
+    <addaction name="actionRotate"/>
+    <addaction name="separator"/>
+    <addaction name="actionReset"/>
+    <addaction name="actionFitAll"/>
+   </widget>
+   <addaction name="menuView"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionPan">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="occQt.qrc">
+     <normaloff>:/Resources/Pan.png</normaloff>:/Resources/Pan.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pan</string>
+   </property>
+  </action>
+  <action name="actionRotate">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="occQt.qrc">
+     <normaloff>:/Resources/Rotate.png</normaloff>:/Resources/Rotate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rotate</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="icon">
+    <iconset resource="occQt.qrc">
+     <normaloff>:/Resources/Home.png</normaloff>:/Resources/Home.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionFitAll">
+   <property name="icon">
+    <iconset resource="occQt.qrc">
+     <normaloff>:/Resources/FitAll.png</normaloff>:/Resources/FitAll.png</iconset>
+   </property>
+   <property name="text">
+    <string>FitAll</string>
+   </property>
+  </action>
+  <action name="actImportModel">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="导入模型" resource="occQt.qrc">
+     <normaloff>:/Resources/exportFile.jpg</normaloff>:/Resources/exportFile.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>导入模型</string>
+   </property>
+   <property name="toolTip">
+    <string>导入模型</string>
+   </property>
+  </action>
+  <action name="actSteepFlat">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="陡峭浅滩" resource="occQt.qrc">
+     <normaloff>:/Resources/steepFlat.png</normaloff>:/Resources/steepFlat.png</iconset>
+   </property>
+   <property name="text">
+    <string>陡峭浅滩</string>
+   </property>
+   <property name="toolTip">
+    <string>陡峭浅滩</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="occQt.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -121,16 +121,16 @@ public:
                 p.IsSameCoord3D(_p2, e);
     }
     bool IsInE0Range(const ofts::Point &p, double e) const {
-        return pnum::IsInRange(p.X(), _eLim0._minx, _eLim0._maxx, e) &&
-                pnum::IsInRange(p.Y(), _eLim0._miny, _eLim0._maxy, e);
+        return pnums::IsInRange(p.X(), _eLim0._minx, _eLim0._maxx, e) &&
+                pnums::IsInRange(p.Y(), _eLim0._miny, _eLim0._maxy, e);
     }
     bool IsInE1Range(const ofts::Point &p, double e) const {
-        return pnum::IsInRange(p.X(), _eLim1._minx, _eLim1._maxx, e) &&
-                pnum::IsInRange(p.Y(), _eLim1._miny, _eLim1._maxy, e);
+        return pnums::IsInRange(p.X(), _eLim1._minx, _eLim1._maxx, e) &&
+                pnums::IsInRange(p.Y(), _eLim1._miny, _eLim1._maxy, e);
     }
     bool IsInE2Range(const ofts::Point &p, double e) const {
-        return pnum::IsInRange(p.X(), _eLim2._minx, _eLim2._maxx, e) &&
-                pnum::IsInRange(p.Y(), _eLim2._miny, _eLim2._maxy, e);
+        return pnums::IsInRange(p.X(), _eLim2._minx, _eLim2._maxx, e) &&
+                pnums::IsInRange(p.Y(), _eLim2._miny, _eLim2._maxy, e);
     }
     size_t Id() const { return _id._id; }
     size_t OriId() const { return _id._oid; }
@@ -302,7 +302,7 @@ public:
     const ClRelType &Type() const { return _type; }
     const size_t &Id() const { return _id; }
     const double &Z() const { return _z; }
-    const ViewObj::ViewItem &ViewObj() const { return _vieItem; }
+    const grm::ViewItem &ViewObj() const { return _vieItem; }
 
 public:
     Triangle _t;     /// 偏置三角形
@@ -311,8 +311,8 @@ public:
     ofts::Point _ep;  /// 计算边保护面的边终点
     ClRelType _type; /// 刀位点来源类型
     size_t _id = -1;
-    double _z = Min_Val;
-    ViewObj::ViewItem _vieItem;
+    double _z = Min_Value;
+    grm::ViewItem _vieItem;
 };
 
 } // namespace grm

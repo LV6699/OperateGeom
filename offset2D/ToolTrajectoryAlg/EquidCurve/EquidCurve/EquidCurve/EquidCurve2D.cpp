@@ -1,0 +1,1 @@
+#include "EquidCurve2D.h"

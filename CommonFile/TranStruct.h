@@ -1,7 +1,7 @@
 #ifndef TRANSTRUCT_H
 #define TRANSTRUCT_H
 
-#include"../OffsetStruct/CommonFile/DataStructure.h"
+#include"../offset2D/ToolTrajectoryAlg/CommonFile/DataStructure.h"
 #include"../ViewWindow/OccHeader.h"
 
 namespace Trans {

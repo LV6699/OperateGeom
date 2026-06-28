@@ -5,7 +5,8 @@
 //#include"../CommonFile/ModelStruct.h"
 //#include"../ViewWindow/MainWindow.h"
 #include"../ViewWindow/OccHeader.h"
-#include"../OffsetStruct/CommonFile/DataStructure.h"
+#include"../offset2D/ToolTrajectoryAlg/CommonFile/DataStructure.h"
+
 //#include"../CutterLocation/Solution/CutLocateZ.h"
 
 class DisplayGeom

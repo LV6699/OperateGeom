@@ -2,7 +2,8 @@
 #define GEOMTOSHAPE_H
 
 #include "../ViewWindow/OccHeader.h"
-#include "../OffsetStruct/CommonFile/DataStructure.h"
+//#include "../OffsetStruct/CommonFile/DataStructure.h"
+#include"../offset2D/ToolTrajectoryAlg/CommonFile/DataStructure.h"
 //#include"../ViewWindow/MainWindow.h"
 //#include"../CutterLocation/Solution/CutLocateZ.h"
 
@@ -30,22 +31,22 @@ public:
                     TopoDS_Shape &shape)
     {
         auto arc = arc_;
-        arc.ChoiceSetRadius(PreErr5_2);
+        arc.OptInitR(PreErr5_2);
         const ofts::Point& sp = arc._arcSp;
         const ofts::Point& ep = arc._arcEp;
         const ofts::Point& cp = arc._arcCp;
         if(sp.IsSameCoord3D(ep,PreErr5_8) ||
                 sp.IsSameCoord3D(cp,PreErr5_8))
             return;
-        const OffsetEnum::RotDir& rot = arc._arcRot;
+        //const OffsetEnum::RotDir& rot = arc._arcRot;
         const double& r = arc._arcR;
         gp_Pnt sp_ = ToOccPt(sp);
         gp_Pnt ep_ = ToOccPt(ep);
         gp_Pnt cp_ = ToOccPt(cp);
-        bool isCW = rot == CLOCKWISE ? true : false;
+        //bool isCW = rot == CLOCKWISE ? true : false;
 #if 1
         gp_Circ circle(gp_Ax2(cp_, gp_Dir(0, 0, 1)), r);
-        if(isCW){
+        if(arc.IsCW()){
             std::swap(sp_, ep_);
         }
         GC_MakeArcOfCircle arcMaker(circle, sp_, ep_, true);
@@ -90,7 +91,7 @@ public:
     void ElementToShape(const ofts::DefElem& ele,
                         TopoDS_Shape &shape)
     {
-        switch (ele.ElemeType()) {
+        switch (ele.Type()) {
         case OffsetEnum::LINETYPE:
             SegmentToShape(ele._segment._segSp,ele._segment._segEp,shape);break;
         case OffsetEnum::ARCTYPE:

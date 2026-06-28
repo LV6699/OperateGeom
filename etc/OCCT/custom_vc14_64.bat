@@ -7,9 +7,9 @@ if /I "%VCVER%" == "vc14" (
     rem set environment variables used by OCCT
     set CSF_FPE=0
 
-    set "TCL_DIR=C:/Users/lvd/Downloads/tcltk-86-64/tcltk-86-64/bin"
-    set "TK_DIR=C:/Users/lvd/Downloads/tcltk-86-64/tcltk-86-64/bin"
-    set "FREETYPE_DIR=C:/Users/lvd/Downloads/freetype-2.5.5-vc14-64/freetype-2.5.5-vc14-64/bin"
+    set "TCL_DIR=C:/Users/Administrator/Desktop/Deve/tcltk-86-64/bin"
+    set "TK_DIR=C:/Users/Administrator/Desktop/Deve/tcltk-86-64/bin"
+    set "FREETYPE_DIR=C:/Users/Administrator/Desktop/Deve/freetype-2.5.5-vc14-64/freetype-2.5.5-vc14-64/bin"
     set "FREEIMAGE_DIR="
     set "EGL_DIR="
     set "GLES2_DIR="

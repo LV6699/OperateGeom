@@ -14,7 +14,7 @@ public:
 
     static double ProtectFaceZ(const Triangle& t,const ofts::Point& p)
     {
-        double z = Min_Val;
+        double z = Min_Value;
         double t1 = t.N().X() * (t.P0().X() - p.X());
         double t2 = t.N().Y() * (t.P0().Y() - p.Y());
         z = t.P0().Z() + (t1 + t2) / t.N().Z();

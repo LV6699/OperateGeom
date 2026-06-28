@@ -10,7 +10,7 @@ void ExicuteCalc::LineTriangleClInt(const ofts::Point& p)
         if(!t.IsInRange(p) || t.N().Z() < PreErr_8){continue;}
         ts_.push_back(t);
     }
-    double z = Min_Val;
+    double z = Min_Value;
     for(size_t i = 0;i < ts_.size();++i){
         const auto& t = ts_[i];
         double z_ = cl.ProtectFaceZ(t,p);

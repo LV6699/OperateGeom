@@ -1,12 +1,60 @@
 #ifndef OPERAPARAM_H
 #define OPERAPARAM_H
 
+#include "TranStruct.h"
+
 namespace grm {
+enum class ItemType{
+    Model = 0,
+    TrisEdge,
+    ModTris,
+    ClTris,
+    PtProt,
+    EdgeProt,
+    XEdge,
+    YEdge,
+    ClPts,
+    SelPoint,
+    SelEdge,
+    SelTria
+};
+class ViewItem{
+public:
+    ViewItem(){}
+    ViewItem(const TopoDS_Shape& s,Quantity_Color c =
+            Quantity_Color (0.1,0.1,0.1,Quantity_TOC_RGB),
+             double w = 1) : _shape(s){
+        if(s.IsNull()){return;}
+        _ashape = new AIS_Shape(s);
+        _ashape->SetColor(c);
+        _ashape->SetWidth(w);
+        _hasInitial = true;
+    }
+    ViewItem(const TopoDS_Shape& s,ItemType type,Quantity_Color c =
+            Quantity_Color (0.1,0.1,0.1,Quantity_TOC_RGB),
+             double w = 1) : _shape(s),_type(type){
+        if(s.IsNull()){return;}
+        _ashape = new AIS_Shape(s);
+        _ashape->SetColor(c);
+        _ashape->SetWidth(w);
+        _hasInitial = true;
+    }
+    void SetHasDisplay(){_hasDisplay = !_hasDisplay;}
+
+public:
+    TopoDS_Shape _shape;
+    Handle(AIS_Shape) _ashape;
+    bool _hasDisplay = false;
+    bool _hasInitial = false;
+    Handle(AIS_Shape) _aShape = nullptr;
+    Handle(AIS_TextLabel) _texAspe = nullptr;
+    ItemType _type;
+};
 
 enum class ToolType {
   PlaneEnd = 0,  /// 平底刀
-  BallNoseEnd,   /// 圆笔刀
-  RoundNoseEnd,  /// 球刀
+  BallNoseEnd,   /// 球刀
+  RoundNoseEnd,  /// 圆笔刀
   TaperEnd,      /// 锥度平底刀
   TaperBall,     /// 锥度球铣刀
   V_Cutter       /// v刀
@@ -32,6 +80,7 @@ class DefTool {
   double CR() const { return _cr; }
   double RadSub() const { return _R - _cr; }
   double RR() const { return _RR; }
+  
   ToolType _type;
   double _R = 0;         //最大半径
   double _cr = 0;        //边角半径
@@ -53,8 +102,10 @@ class DefTool {
   
   double _br_up_h = 0;     //底边半径对应上部高度
   double _br_down_h = 0;   //底边半径对应下部高度
+  double _lenth = 20;
   
   std::shared_ptr<DefTool>_subTool = nullptr;
+  ViewItem _item;
 
 };
 
